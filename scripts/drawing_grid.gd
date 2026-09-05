@@ -1,6 +1,8 @@
+class_name DrawingGrid
 extends Control
 
-const GRID_SIZE : int = 16
+var grid_width : int = 16
+var grid_height : int = 16
 const CELL_SIZE : int = 16
 var active_colour : Color = Color(1,0,0)
 var is_painting : bool = false
@@ -19,7 +21,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("M1"):
 		is_painting = true
 		
-		var cell_under_mouse : TextureButton = get_cell_at_mouse_pos(get_viewport().get_mouse_position())
+		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
 		# Check if there is a cell under the mouse and if cell already painted with active colour
 		if cell_under_mouse and !cell_under_mouse.modulate.is_equal_approx(active_colour):
 			cell_under_mouse.modulate = active_colour
@@ -30,9 +32,9 @@ func _process(delta: float) -> void:
 
 ## Generate grid of cells
 func _generate_grid() -> void:
-	grid.columns = GRID_SIZE
+	grid.columns = grid_width
 	
-	for i in range(GRID_SIZE * GRID_SIZE):
+	for i in range(grid_width * grid_height):
 		var cell = TextureButton.new()
 		
 		# Default grid cell properties
@@ -40,12 +42,12 @@ func _generate_grid() -> void:
 		cell.stretch_mode = TextureButton.STRETCH_SCALE
 		cell.ignore_texture_size = true
 		cell.texture_normal = cell_texture
-		cell.modulate = Color.WHITE
+		cell.modulate = Color.TRANSPARENT
 		
 		grid.add_child(cell)
 
 ## Get the cell under the mouse position
-func get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
+func _get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
 	# Find the cell by position
 	var grid_buttons = grid.get_children()
 	for i in range(grid_buttons.size()):
@@ -55,3 +57,15 @@ func get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
 		if cell_pos.x <= mouse_pos.x and mouse_pos.x <= cell_pos.x + cell_size.x and cell_pos.y <= mouse_pos.y and mouse_pos.y <= cell_pos.y + cell_size.y:
 			return cell
 	return null
+
+## Returns colour of the cell at given x,y pos
+func get_cell_colour(x : int, y : int) -> Color:
+	return Color.BLACK
+
+## Returns grid width
+func get_width() -> int:
+	return grid_width
+
+## Returns grid height
+func get_height() -> int:
+	return grid_height
