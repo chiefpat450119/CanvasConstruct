@@ -12,15 +12,17 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
-func get_runtime_texture_from_drawing() -> RuntimeTexture:
-	var texture : RuntimeTexture = RuntimeTexture.new()
-	texture.init(drawing_grid.get_width(), drawing_grid.get_height())
-	
+
+## Returns image created from player drawing
+func get_image_from_drawing() -> Image:
+	var height : int = drawing_grid.get_width()
+	var width : int = drawing_grid.get_height()
+	var img : Image = Image.create(width, height, false, Image.FORMAT_RGBAF)
+
 	# Iterate through all pixels of player's drawing and copy over to texture
 	for x in range(drawing_grid.get_width()):
 		for y in range(drawing_grid.get_height()):
 			var cell_colour : Color = drawing_grid.get_cell_colour(x,y)
-			texture.set_pixel(x, y, cell_colour)
+			img.set_pixel(x, y, cell_colour)
 	
-	return texture
+	return img

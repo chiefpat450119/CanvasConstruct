@@ -42,7 +42,7 @@ func _generate_grid() -> void:
 		cell.stretch_mode = TextureButton.STRETCH_SCALE
 		cell.ignore_texture_size = true
 		cell.texture_normal = cell_texture
-		cell.modulate = Color.TRANSPARENT
+		cell.modulate = Color.WHITE
 		
 		grid.add_child(cell)
 
