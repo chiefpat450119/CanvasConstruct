@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://2pog75maiemt" path="res://icon.svg" id="1_vq1je"]
 [ext_resource type="Texture2D" uid="uid://7neacd2vq15o" path="res://assets/arm_placeholder.png" id="2_22h0l"]
 [ext_resource type="Texture2D" uid="uid://cxcvs1y6pba4f" path="res://assets/hatchet_placeholder.png" id="3_f5os7"]
-[ext_resource type="Script" path="res://scenes/bosses/orc_boss.gd" id="4_first_boss"]
+[ext_resource type="Script" uid="uid://255brsxevtyf" path="res://scenes/bosses/orc_boss.gd" id="4_first_boss"]
 
 [node name="OrcBoss" type="Node2D" unique_id=378128887]
 script = ExtResource("4_first_boss")
