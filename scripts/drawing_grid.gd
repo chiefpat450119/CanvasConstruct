@@ -4,6 +4,7 @@ extends Control
 var grid_width : int = 16
 var grid_height : int = 16
 const CELL_SIZE : int = 16
+const PAINTED_META : StringName = &"is_painted"
 var active_colour : Color = Color(1,0,0)
 var is_painting : bool = false
 
@@ -23,8 +24,12 @@ func _process(delta: float) -> void:
 		
 		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
 		# Check if there is a cell under the mouse and if cell already painted with active colour
-		if cell_under_mouse and !cell_under_mouse.modulate.is_equal_approx(active_colour):
+		if cell_under_mouse and (
+			!cell_under_mouse.get_meta(PAINTED_META, false)
+			or !cell_under_mouse.modulate.is_equal_approx(active_colour)
+		):
 			cell_under_mouse.modulate = active_colour
+			cell_under_mouse.set_meta(PAINTED_META, true)
 	
 	# Stop painting
 	if Input.is_action_just_released("M1"):
@@ -43,6 +48,7 @@ func _generate_grid() -> void:
 		cell.ignore_texture_size = true
 		cell.texture_normal = cell_texture
 		cell.modulate = Color.WHITE
+		cell.set_meta(PAINTED_META, false)
 		
 		grid.add_child(cell)
 
@@ -70,10 +76,10 @@ func _get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
 ## Returns colour of the cell at given x,y pos
 func get_cell_colour(x : int, y : int) -> Color:
 	var cell : TextureButton = _get_cell_at_pos(x, y)
-	if cell:
+	if cell and cell.get_meta(PAINTED_META, false):
 		return cell.modulate
 
-	return Color.BLACK
+	return Color.TRANSPARENT
 
 ## Returns grid width
 func get_width() -> int:
