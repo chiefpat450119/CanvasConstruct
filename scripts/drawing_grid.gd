@@ -46,20 +46,33 @@ func _generate_grid() -> void:
 		
 		grid.add_child(cell)
 
+## Get the cell at the given grid position
+func _get_cell_at_pos(x : int, y : int) -> TextureButton:
+	if x < 0 or x >= grid_width or y < 0 or y >= grid_height:
+		return null
+
+	var cell_index : int = y * grid_width + x
+	if cell_index >= grid.get_child_count():
+		return null
+
+	return grid.get_child(cell_index) as TextureButton
+
 ## Get the cell under the mouse position
 func _get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
 	# Find the cell by position
-	var grid_buttons = grid.get_children()
-	for i in range(grid_buttons.size()):
-		var cell = grid_buttons[i]
-		var cell_pos = cell.global_position
-		var cell_size = cell.custom_minimum_size
-		if cell_pos.x <= mouse_pos.x and mouse_pos.x <= cell_pos.x + cell_size.x and cell_pos.y <= mouse_pos.y and mouse_pos.y <= cell_pos.y + cell_size.y:
-			return cell
+	for y in range(grid_height):
+		for x in range(grid_width):
+			var cell : TextureButton = _get_cell_at_pos(x, y)
+			if cell and cell.get_global_rect().has_point(mouse_pos):
+				return cell
 	return null
 
 ## Returns colour of the cell at given x,y pos
 func get_cell_colour(x : int, y : int) -> Color:
+	var cell : TextureButton = _get_cell_at_pos(x, y)
+	if cell:
+		return cell.modulate
+
 	return Color.BLACK
 
 ## Returns grid width

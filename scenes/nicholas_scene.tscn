@@ -10,7 +10,8 @@ runtime_texture = NodePath("RuntimeTexture")
 drawing_system = NodePath("CanvasLayer/DrawingSystem")
 
 [node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("3_h2h0g")]
-scale = Vector2(50, 50)
+position = Vector2(830, 251)
+scale = Vector2(3, 3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1724405638]
 
