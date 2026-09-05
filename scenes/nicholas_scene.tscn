@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ddnn4v4rcoq6i"]
+
+[ext_resource type="Script" uid="uid://dgsnsndroae37" path="res://scenes/nicholas_test.gd" id="1_0fl8x"]
+[ext_resource type="PackedScene" uid="uid://dbtek7gt8a7cl" path="res://scenes/drawing_sysem/drawing_system.tscn" id="2_vyj2j"]
+[ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="3_h2h0g"]
+
+[node name="NicholasScene" type="Node" unique_id=888442273 node_paths=PackedStringArray("runtime_texture", "drawing_system")]
+script = ExtResource("1_0fl8x")
+runtime_texture = NodePath("RuntimeTexture")
+drawing_system = NodePath("CanvasLayer/DrawingSystem")
+
+[node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("3_h2h0g")]
+position = Vector2(830, 251)
+scale = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1724405638]
+
+[node name="DrawingSystem" parent="CanvasLayer" unique_id=949485309 instance=ExtResource("2_vyj2j")]
