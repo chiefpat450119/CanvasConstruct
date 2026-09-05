@@ -18,6 +18,7 @@ func set_pixel(x: int, y: int, color: Color):
 func set_pixels(points: Array[Vector2i], color: Color):
 	for p in points:
 		img.set_pixelv(p, color)
+	texture.update(img)
 
 func get_pixel(x: int, y: int) -> Color:
 	return img.get_pixel(x, y)
