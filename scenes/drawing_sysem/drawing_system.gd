@@ -16,3 +16,6 @@ func get_image_from_drawing() -> Image:
 			img.set_pixel(x, y, cell_colour)
 	
 	return img
+
+func start_drawing_phase():
+	drawing_grid.init(16, 16) # stub
