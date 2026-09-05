@@ -9,6 +9,13 @@ var visible_pixels: Array[Vector2i]
 
 @export var sprite2d: Sprite2D
 
+func init_from_image(image: Image):
+	_img = image
+	_texture = ImageTexture.create_from_image(_img)
+	_width = image.get_width()
+	_height = image.get_height()
+	sprite2d.texture = _texture
+
 func init(w: int, h: int):
 	_img = Image.create(w, h, false, Image.FORMAT_RGBAF)
 	_texture = ImageTexture.create_from_image(_img)
