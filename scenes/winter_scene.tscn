@@ -2,13 +2,21 @@
 
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="1_5wiub"]
 [ext_resource type="Script" uid="uid://4mxgkil30x7u" path="res://scenes/test.gd" id="1_mp8nl"]
+[ext_resource type="Script" uid="uid://nvftkgkx11in" path="res://scripts/damagable_component.gd" id="3_nmbhd"]
 
-[node name="WinterScene" type="Node2D" unique_id=947792938 node_paths=PackedStringArray("texture")]
+[node name="WinterScene" type="Node2D" unique_id=947792938 node_paths=PackedStringArray("texture", "dmg")]
 script = ExtResource("1_mp8nl")
 texture = NodePath("RuntimeTexture")
+dmg = NodePath("DamagableComponent")
 
 [node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("1_5wiub")]
+texture_filter = 1
 position = Vector2(526, 281)
-scale = Vector2(50, 50)
+scale = Vector2(3, 3)
+
+[node name="DamagableComponent" type="Node" parent="." unique_id=1300237361 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_nmbhd")
+visuals = NodePath("../RuntimeTexture")
+metadata/_custom_type_script = "uid://nvftkgkx11in"
 
 [editable path="RuntimeTexture"]

@@ -1,3 +1,4 @@
+class_name DamagableComponent
 extends Node
 
 const _NEIGHBOR_OFFSETS: Array[Vector2i] = [
@@ -10,20 +11,37 @@ const _NEIGHBOR_OFFSETS: Array[Vector2i] = [
 @export var visuals: RuntimeTexture
 
 # dmg should be a percentage (0 - 1)
-# of how much percentage of the texture is destroyed
+# of how much percentage of total texture is destroyed
 func damage(dmg: float) -> void:
 	if visuals == null or visuals.visible_pixels.is_empty():
 		return
 
-	var remove_pixels := roundi(clampf(dmg, 0.0, 1.0) * visuals.visible_pixels.size())
+	var remove_pixels := roundi(clampf(dmg, 0.0, 1.0) * visuals.get_width() * visuals.get_height())
 	if remove_pixels == 0:
 		return
 
-	var random_index := randi_range(0, visuals.visible_pixels.size() - 1)
+	var edge_indices := _get_edge_indices(visuals.visible_pixels)
+	var random_index: int = edge_indices.pick_random()
 	var selected_pixels := _select_indices(
 		visuals.visible_pixels, random_index, remove_pixels
 	)
 	visuals.set_pixels(selected_pixels, Color.TRANSPARENT)
+
+
+func _get_edge_indices(pixels: Array[Vector2i]) -> Array[int]:
+	var edge_indices: Array[int] = []
+	var available: Dictionary = {}
+	for pixel in pixels:
+		available[pixel] = true
+
+	for index in pixels.size():
+		var pixel := pixels[index]
+		for offset in _NEIGHBOR_OFFSETS:
+			if not available.has(pixel + offset):
+				edge_indices.append(index)
+				break
+
+	return edge_indices
 
 
 func _select_indices(pixels: Array[Vector2i], start: int, amount: int) -> Array[Vector2i]:
@@ -42,12 +60,11 @@ func _select_indices(pixels: Array[Vector2i], start: int, amount: int) -> Array[
 	var frontier: Array[Vector2i] = [start_pos]
 	var visited: Dictionary = {}
 	visited[start_pos] = true
-	var frontier_index := 0
 
 	while selected.size() < target_amount:
 		# Damage may have divided the remaining pixels into separate components. If
 		# this component is exhausted, continue from the closest remaining pixel.
-		if frontier_index >= frontier.size():
+		if frontier.is_empty():
 			var closest_pixel := Vector2i.ZERO
 			var closest_distance := 0
 			var found_pixel := false
@@ -68,8 +85,12 @@ func _select_indices(pixels: Array[Vector2i], start: int, amount: int) -> Array[
 			visited[closest_pixel] = true
 			frontier.append(closest_pixel)
 
-		var current_pixel := frontier[frontier_index]
-		frontier_index += 1
+		# Growing from a random edge pixel avoids the uniform distance rings that
+		# produce a diamond-shaped chunk while keeping the damage connected.
+		var random_frontier_index := randi_range(0, frontier.size() - 1)
+		var current_pixel := frontier[random_frontier_index]
+		frontier[random_frontier_index] = frontier.back()
+		frontier.pop_back()
 		selected.append(current_pixel)
 
 		for offset in _NEIGHBOR_OFFSETS:
