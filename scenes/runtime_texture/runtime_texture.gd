@@ -3,6 +3,8 @@ extends Node
 
 var _img: Image
 var _texture: ImageTexture
+var _width: int
+var _height: int
 var visible_pixels: Array[Vector2i]
 
 @export var sprite2d: Sprite2D
@@ -10,6 +12,8 @@ var visible_pixels: Array[Vector2i]
 func init(w: int, h: int):
 	_img = Image.create(w, h, false, Image.FORMAT_RGBAF)
 	_texture = ImageTexture.create_from_image(_img)
+	_width = w
+	_height = h
 	sprite2d.texture = _texture
 
 func set_pixel(x: int, y: int, color: Color):
@@ -35,3 +39,9 @@ func _update_visible_pixels(points: Array[Vector2i], color: Color) -> void:
 		for point in points:
 			if not visible_pixels.has(point):
 				visible_pixels.append(point)
+
+func get_width() -> int:
+	return _width
+
+func get_height() -> int:
+	return _height
