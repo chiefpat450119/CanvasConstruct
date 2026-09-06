@@ -8,6 +8,23 @@
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="6_mvmjb"]
 [ext_resource type="Script" uid="uid://clq5r8xjv2n7m" path="res://scenes/drawing_phase/drawing_ui_anim.gd" id="7_drawing_anim"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2x1o"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.03529412, 0.03529412, 0.03529412, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.92941177, 0.49803922, 0.80784315, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ek0"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 50
@@ -20,6 +37,23 @@ expand_margin_top = 5.0
 expand_margin_right = 20.0
 expand_margin_bottom = 5.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_content_frame"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.96254605, 0.96254593, 0.96254593, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 10
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42j7w"]
 load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54aae.ctex"
 
@@ -27,7 +61,7 @@ load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54
 font = ExtResource("6_mvmjb")
 font_size = 32
 
-[node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button", "ui_anim")]
+[node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid_frame", "reference_art_frame", "drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button", "ui_anim")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,19 +69,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s7vdd")
-drawing_grid = NodePath("Drawing Grid")
-reference_art = NodePath("Reference Image")
-reference_art_grid_lines = NodePath("Reference Image/Grid Lines")
+drawing_grid_frame = NodePath("Drawing Grid Frame")
+reference_art_frame = NodePath("Reference Image Frame")
+drawing_grid = NodePath("Drawing Grid Frame/Drawing Grid")
+reference_art = NodePath("Reference Image Frame/Reference Image")
+reference_art_grid_lines = NodePath("Reference Image Frame/Reference Image/Grid Lines")
 timer_label = NodePath("Timer")
 finish_button = NodePath("Finish Button")
 ui_anim = NodePath("DrawingUIAnim")
 
-[node name="Drawing Grid" type="GridContainer" parent="." unique_id=251566916 node_paths=PackedStringArray("grid")]
+[node name="Drawing Grid Frame" type="PanelContainer" parent="." unique_id=58162763]
 layout_mode = 0
-offset_left = 325.0
-offset_top = 324.0
-offset_right = 325.0
-offset_bottom = 324.0
+offset_left = 313.0
+offset_top = 312.0
+offset_right = 337.0
+offset_bottom = 336.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_t2x1o")
+
+[node name="Drawing Grid" type="GridContainer" parent="Drawing Grid Frame" unique_id=251566916 node_paths=PackedStringArray("grid")]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 2
@@ -75,17 +117,21 @@ label_settings = ExtResource("4_63o16")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Reference Image" type="TextureRect" parent="." unique_id=1581316438]
-texture_filter = 1
+[node name="Reference Image Frame" type="PanelContainer" parent="." unique_id=431344068]
 layout_mode = 0
-offset_left = 847.0
-offset_top = 61.0
-offset_right = 1030.0
-offset_bottom = 609.0
+offset_left = 835.0
+offset_top = 49.0
+offset_right = 1042.0
+offset_bottom = 621.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_content_frame")
+
+[node name="Reference Image" type="TextureRect" parent="Reference Image Frame" unique_id=1581316438]
+texture_filter = 1
+layout_mode = 2
 texture = SubResource("CompressedTexture2D_42j7w")
 expand_mode = 1
 
-[node name="Grid Lines" type="Control" parent="Reference Image" unique_id=1873141673]
+[node name="Grid Lines" type="Control" parent="Reference Image Frame/Reference Image" unique_id=1873141673]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -95,7 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_t2x1o")
 
-[node name="ColorRect" type="ColorRect" parent="Reference Image" unique_id=732323307]
+[node name="ColorRect" type="ColorRect" parent="Reference Image Frame/Reference Image" unique_id=732323307]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -134,11 +180,11 @@ grow_vertical = 2
 text = "Drawing Phase"
 label_settings = SubResource("LabelSettings_t2x1o")
 
-[node name="DrawingUIAnim" type="Node" parent="." node_paths=PackedStringArray("phase_banner", "timer", "drawing_grid", "reference_art", "finish_button")]
+[node name="DrawingUIAnim" type="Node" parent="." unique_id=10217759 node_paths=PackedStringArray("phase_banner", "timer", "drawing_grid", "reference_art", "finish_button")]
 script = ExtResource("7_drawing_anim")
-play_on_ready = false
 phase_banner = NodePath("../ColorRect")
 timer = NodePath("../Timer")
-drawing_grid = NodePath("../Drawing Grid")
-reference_art = NodePath("../Reference Image")
+drawing_grid = NodePath("../Drawing Grid Frame")
+reference_art = NodePath("../Reference Image Frame")
 finish_button = NodePath("../Finish Button")
+play_on_ready = false

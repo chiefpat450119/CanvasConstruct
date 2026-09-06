@@ -8,6 +8,8 @@ const REFERENCE_COLUMN_CENTER_X: float = 0.75
 const CONTENT_CENTER_Y: float = 0.5
 const CONTENT_VERTICAL_OFFSET: float = 80.0
 
+@export var drawing_grid_frame: PanelContainer
+@export var reference_art_frame: PanelContainer
 @export var drawing_grid: DrawingGrid
 @export var reference_art: TextureRect
 @export var reference_art_grid_lines : GridLines
@@ -72,13 +74,15 @@ func _layout_drawing_content() -> void:
 		return
 
 	var drawing_size := drawing_grid.get_combined_minimum_size()
-	drawing_grid.size = drawing_size
 	var reference_scale := minf(
 		drawing_size.x / _reference_image_size.x,
 		drawing_size.y / _reference_image_size.y
 	)
 	var reference_size := _reference_image_size * reference_scale
-	reference_art.size = reference_size
+	var drawing_frame_size := _get_frame_size(drawing_grid_frame, drawing_size)
+	var reference_frame_size := _get_frame_size(reference_art_frame, reference_size)
+	drawing_grid_frame.size = drawing_frame_size
+	reference_art_frame.size = reference_frame_size
 
 	var drawing_center := Vector2(
 		size.x * DRAWING_COLUMN_CENTER_X,
@@ -89,8 +93,17 @@ func _layout_drawing_content() -> void:
 		size.y * CONTENT_CENTER_Y + CONTENT_VERTICAL_OFFSET
 	)
 
-	drawing_grid.position = (drawing_center - drawing_size * 0.5).round()
-	reference_art.position = (reference_center - reference_size * 0.5).round()
+	drawing_grid_frame.position = (
+		drawing_center - drawing_frame_size * 0.5
+	).round()
+	reference_art_frame.position = (
+		reference_center - reference_frame_size * 0.5
+	).round()
+
+
+func _get_frame_size(frame: PanelContainer, content_size: Vector2) -> Vector2:
+	var frame_style := frame.get_theme_stylebox(&"panel")
+	return content_size + frame_style.get_minimum_size()
 
 
 func _get_reference_colour(reference_texture: Texture2D) -> Color:
