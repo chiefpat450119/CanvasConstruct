@@ -128,12 +128,12 @@ emitting = false
 amount = 2
 texture = ExtResource("7_charge")
 emission_shape = 3
-emission_rect_extents = Vector2(20, 1)
+emission_rect_extents = Vector2(15, 1)
 gravity = Vector2(0, 0)
 scale_amount_min = 4.0
 scale_amount_max = 4.0
-anim_speed_min = 10.0
-anim_speed_max = 10.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="Hit VFX 1" type="Sprite2D" parent="." unique_id=1914828567]
 visible = false
