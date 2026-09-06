@@ -19,9 +19,18 @@ func _ready() -> void:
 		combat_ui.attack_requested.connect(_on_attack_requested)
 		combat_ui.defend_requested.connect(_on_defend_requested)
 
-func initialize(boss_scene: PackedScene) -> Error:
+func initialize(boss_scene: PackedScene, player_parts: Array[PlayerPart] = []) -> Error:
 	if boss_scene == null:
 		return ERR_INVALID_PARAMETER
+	if player_parts.size() != 4 or player == null:
+		return ERR_INVALID_PARAMETER
+
+	player.initialize_from_parts(
+		player_parts[0],
+		player_parts[1],
+		player_parts[2],
+		player_parts[3]
+	)
 
 	var boss := boss_scene.instantiate()
 	if boss == null:

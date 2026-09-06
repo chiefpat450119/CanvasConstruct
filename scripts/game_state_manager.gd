@@ -90,5 +90,8 @@ func switch_to_combat_phase() -> void:
 
 
 func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
-	combat_phase_manager.initialize(boss_scenes[next_boss_index])
+	combat_phase_manager.initialize(
+		boss_scenes[next_boss_index],
+		get_current_parts()
+	)
 	next_boss_index += 1
