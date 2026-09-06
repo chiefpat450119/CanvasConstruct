@@ -46,55 +46,25 @@ func _ready() -> void:
 func begin_phase(
 	current_parts: Array[PartResource],
 	available_upgrades: Array[PartResource] = []
-) -> Error:
+) -> void:
 	if _phase_active:
-		return ERR_ALREADY_IN_USE
-	if drawing_ui == null or selection_screen == null:
-		return ERR_UNCONFIGURED
+		return
 
-	var current_parts_by_category: Dictionary[PartCategory, PartResource] = {}
-	var upgrades_by_category: Dictionary[PartCategory, PartResource] = {}
-	var current_parts_error := _map_parts_by_category(
-		current_parts,
-		current_parts_by_category,
-		false
-	)
-	if current_parts_error != OK:
-		return current_parts_error
-
-	var upgrades_error := _map_parts_by_category(
-		available_upgrades,
-		upgrades_by_category,
-		true
-	)
-	if upgrades_error != OK:
-		return upgrades_error
-
-	if current_parts_by_category.size() != PART_CATEGORIES.size():
-		return ERR_INVALID_PARAMETER
-	if not GameStateManagerInstance.can_repair_parts():
-		for category: PartCategory in PART_CATEGORIES:
-			if not upgrades_by_category.has(category):
-				return ERR_UNAVAILABLE
-
-	_current_parts = current_parts_by_category
-	_available_upgrades = upgrades_by_category
+	_current_parts = _map_parts_by_category(current_parts)
+	_available_upgrades = _map_parts_by_category(available_upgrades)
 	_completed_categories.clear()
 	_phase_active = true
 	_set_drawing_screen_active(false)
-	return OK
 
 
-func start_repair(reference_part: PartResource) -> Error:
-	if not can_repair(reference_part):
-		return ERR_UNAVAILABLE
-	return _start_part_drawing(reference_part)
+func start_repair(reference_part: PartResource) -> void:
+	if can_repair(reference_part):
+		_start_part_drawing(reference_part)
 
 
-func start_upgrade(reference_part: PartResource) -> Error:
-	if not can_upgrade(reference_part):
-		return ERR_UNAVAILABLE
-	return _start_part_drawing(reference_part)
+func start_upgrade(reference_part: PartResource) -> void:
+	if can_upgrade(reference_part):
+		_start_part_drawing(reference_part)
 
 
 func can_repair(reference_part: PartResource) -> bool:
@@ -119,8 +89,7 @@ func get_current_parts() -> Array[PartResource]:
 	var parts: Array[PartResource] = []
 	for category: PartCategory in PART_CATEGORIES:
 		var part := _current_parts.get(category) as PartResource
-		if part != null:
-			parts.append(part)
+		parts.append(part)
 	return parts
 
 
@@ -136,8 +105,7 @@ func get_remaining_parts() -> Array[PartResource]:
 	for category: PartCategory in PART_CATEGORIES:
 		if not _completed_categories.has(category):
 			var part := _current_parts.get(category) as PartResource
-			if part != null:
-				parts.append(part)
+			parts.append(part)
 	return parts
 
 
@@ -175,26 +143,20 @@ func get_active_reference_image() -> Texture2D:
 
 
 func get_drawing_time_left() -> float:
-	if _drawing_timer == null or _drawing_timer.is_stopped():
+	if _drawing_timer.is_stopped():
 		return 0.0
 	return _drawing_timer.time_left
 
 
-func _start_part_drawing(reference_part: PartResource) -> Error:
+func _start_part_drawing(reference_part: PartResource) -> void:
 	var reference_image := reference_part.reference_image
 	var category := _get_part_category(reference_part)
 	var duration := _get_drawing_duration(category)
 	_ensure_timer()
 	_drawing_timer.start(duration)
 	_set_drawing_screen_active(true)
-	var setup_error: Error = drawing_ui.setup_drawing(reference_image, _drawing_timer)
-	if setup_error != OK:
-		_drawing_timer.stop()
-		_set_drawing_screen_active(false)
-		return setup_error
-
+	drawing_ui.setup_drawing(reference_image, _drawing_timer)
 	_active_reference_part = reference_part
-	return OK
 
 
 func _complete_part_drawing() -> void:
@@ -236,12 +198,11 @@ func _ensure_timer() -> void:
 
 func _set_drawing_screen_active(is_active: bool) -> void:
 	_set_screen_enabled(drawing_ui, is_active)
-	_set_screen_enabled(selection_screen, not is_active)
+	if selection_screen != null:
+		_set_screen_enabled(selection_screen, not is_active)
 
 
 func _set_screen_enabled(screen: CanvasItem, is_enabled: bool) -> void:
-	if screen == null:
-		return
 	screen.visible = is_enabled
 	screen.process_mode = (
 		Node.PROCESS_MODE_INHERIT if is_enabled else Node.PROCESS_MODE_DISABLED
@@ -249,21 +210,13 @@ func _set_screen_enabled(screen: CanvasItem, is_enabled: bool) -> void:
 
 
 func _map_parts_by_category(
-	parts: Array[PartResource],
-	destination: Dictionary[PartCategory, PartResource],
-	allow_null: bool
-) -> Error:
+	parts: Array[PartResource]
+) -> Dictionary[PartCategory, PartResource]:
+	var parts_by_category: Dictionary[PartCategory, PartResource] = {}
 	for part: PartResource in parts:
-		if part == null:
-			if allow_null:
-				continue
-			return ERR_INVALID_PARAMETER
-
-		var category := _get_part_category(part)
-		if category < 0 or destination.has(category):
-			return ERR_INVALID_PARAMETER
-		destination[category] = part
-	return OK
+		if part != null:
+			parts_by_category[_get_part_category(part)] = part
+	return parts_by_category
 
 
 func _get_part_category(part: PartResource) -> PartCategory:
