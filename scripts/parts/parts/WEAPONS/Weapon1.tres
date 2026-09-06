@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AtkResource" format=3 uid="uid://d1unxddwo7k2p"]
+
+[ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_oyyvt"]
+[ext_resource type="Script" uid="uid://sy0a0f1hqyk2" path="res://scripts/parts/atk_resource.gd" id="2_ap6ct"]
+[ext_resource type="Texture2D" uid="uid://qemg4n1xj7rn" path="res://scripts/parts/parts/WEAPONS/LOP WEAPON1.png" id="2_fbqku"]
+
+[resource]
+script = ExtResource("2_ap6ct")
+attack_damage = 10.0
+display_name = "Sword"
+description = "An ordinary blade made of pixels"
+reference_image = ExtResource("2_fbqku")
+metadata/_custom_type_script = "uid://sy0a0f1hqyk2"
