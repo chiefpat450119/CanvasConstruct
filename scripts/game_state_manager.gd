@@ -18,6 +18,7 @@ enum PartCategory {
 @export_file("*.tscn") var combat_phase_scene_path := "res://scenes/combat_phase/combat_phase.tscn"
 @export_file("*.tscn") var victory_scene_path := "res://scenes/victory/victory.tscn"
 @export_file("*.tscn") var defeat_scene_path := "res://scenes/defeat/defeat.tscn"
+@export_file("*.tscn") var cutscene_scene_path := "res://scenes/intro_cutscene/intro_cutscene.tscn"
 
 var next_boss_index: int = 0
 var current_head_part: PlayerPart = null
@@ -107,6 +108,8 @@ func get_current_parts() -> Array[PlayerPart]:
 	]
 	return parts
 
+func switch_to_cutscene() -> void:
+	get_tree().change_scene_to_file(cutscene_scene_path)
 
 func switch_to_drawing_phase() -> void:
 	get_tree().change_scene_to_file(drawing_phase_scene_path)
