@@ -298,6 +298,9 @@ expand_margin_bottom = 10.0
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4hql7"]
 load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc26e.ctex"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wx6tj"]
+bg_color = Color(0, 0.6689455, 0.7972163, 1)
+
 [node name="NicholasScene" type="Node" unique_id=888442273 node_paths=PackedStringArray("runtime_texture", "drawing_grid")]
 script = ExtResource("1_4hql7")
 runtime_texture = NodePath("RuntimeTexture")
@@ -452,6 +455,7 @@ value = 80.0
 rounded = true
 
 [node name="Build UI" type="Control" parent="CanvasLayer" unique_id=1991768620]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1108,3 +1112,61 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 45
 text = "FIGHT"
+
+[node name="Repair or Upgrade UI" type="Control" parent="CanvasLayer" unique_id=1417044420]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Repair or Upgrade UI" unique_id=27729306]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -170.0
+offset_right = 194.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Repair or Upgrade UI/Panel" unique_id=1502496885]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -140.0
+offset_right = 149.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Repair" type="Button" parent="CanvasLayer/Repair or Upgrade UI/Panel/HBoxContainer" unique_id=829976253]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_wx6tj")
+text = "REPAIR"
+
+[node name="Label" type="Label" parent="CanvasLayer/Repair or Upgrade UI/Panel/HBoxContainer" unique_id=1198525050]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "OR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrade" type="Button" parent="CanvasLayer/Repair or Upgrade UI/Panel/HBoxContainer" unique_id=811763789]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_wx6tj")
+text = "UPGRADE
+"
