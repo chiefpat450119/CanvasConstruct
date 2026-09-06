@@ -110,7 +110,7 @@ func _start_next_move() -> void:
 	_current_move = choose_next_move()
 
 	if _current_move == null:
-		_move_timer = 0.1
+		_move_timer = _current_move.cooldown
 		return
 
 	print("Boss selected move: %s" % _current_move.move_id)

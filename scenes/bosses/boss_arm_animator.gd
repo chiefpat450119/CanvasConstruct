@@ -4,6 +4,7 @@ extends Node
 @export var boss: BossBase
 @export var left_arm: Sprite2D
 @export var right_arm: Sprite2D
+@export var animation_player : AnimationPlayer
 
 var _left_arm_rest_rotation: float
 var _right_arm_rest_rotation: float
@@ -16,11 +17,14 @@ func _ready() -> void:
 
 	boss.move_started.connect(_on_move_started)
 	boss.move_executed.connect(_on_move_executed)
+	animation_player.play("orc_idle")
 
 
 func _on_move_started(move: BossMove) -> void:
 	if move.move_id == &"special_attack":
 		_wind_up_special()
+	if move.move_id == &"base_attack":
+		_wind_up_base_attack()
 
 
 func _on_move_executed(move: BossMove) -> void:
@@ -32,33 +36,19 @@ func _on_move_executed(move: BossMove) -> void:
 
 
 func _wind_up_special() -> void:
-	_tween_arms(
-		_left_arm_rest_rotation - deg_to_rad(55.0),
-		_right_arm_rest_rotation + deg_to_rad(55.0),
-		0.35
-	)
+	animation_player.play("orc_lift_axe_special")
 
+func _wind_up_base_attack() -> void:
+	animation_player.play("orc_lift_axe")
 
 func _swing_left_arm() -> void:
-	_tween_arms(
-		_left_arm_rest_rotation + deg_to_rad(100.0),
-		right_arm.rotation,
-		0.18
-	)
-	_arm_tween.set_parallel(false)
-	_arm_tween.tween_property(left_arm, "rotation", _left_arm_rest_rotation, 0.22)
+	animation_player.queue("orc_swing_axe")
+	animation_player.queue("orc_idle")
 
 
 func _swing_both_arms() -> void:
-	_tween_arms(
-		_left_arm_rest_rotation + deg_to_rad(115.0),
-		_right_arm_rest_rotation - deg_to_rad(115.0),
-		0.2
-	)
-	_arm_tween.set_parallel(false)
-	_arm_tween.tween_property(left_arm, "rotation", _left_arm_rest_rotation, 0.25)
-	_arm_tween.set_parallel()
-	_arm_tween.parallel().tween_property(right_arm, "rotation", _right_arm_rest_rotation, 0.25)
+	animation_player.play("orc_swing_axe_special")
+	animation_player.queue("orc_idle")
 
 
 func _tween_arms(left_rotation: float, right_rotation: float, duration: float) -> void:

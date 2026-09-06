@@ -11,8 +11,8 @@ player = NodePath("Player")
 combat_ui = NodePath("CombatUI")
 
 [node name="BossContainer" type="Node2D" parent="." unique_id=126644774]
-position = Vector2(697, 258)
-scale = Vector2(0.4, 0.4)
+position = Vector2(844, 304)
+scale = Vector2(3, 3)
 
 [node name="CombatUI" parent="." unique_id=1513656037 instance=ExtResource("2_hc5ws")]
 
