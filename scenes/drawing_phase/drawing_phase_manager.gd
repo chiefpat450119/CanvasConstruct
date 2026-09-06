@@ -90,6 +90,9 @@ func _initialize_part_previews() -> void:
 			_get_next_part(weapon_category)
 		)
 	)
+	selection_ui.set_fight_button_visible(
+		GameStateManagerInstance.has_all_player_parts()
+	)
 
 
 func _get_preview_texture(current_part: PlayerPart, fallback_part: PartResource) -> Texture2D:
@@ -201,9 +204,6 @@ func _on_drawing_finished() -> void:
 	selection_ui.set_part_similarity(_selected_category, similarity)
 	selection_ui.disable_part(_selected_category)
 	_show_only(selection_ui)
-	if not GameStateManagerInstance.has_completed_drawing_phase and GameStateManagerInstance.has_all_player_parts():
-		GameStateManagerInstance.mark_drawing_phase_completed()
-		GameStateManagerInstance.switch_to_combat_phase()
 
 
 func _show_only(active_ui: CanvasItem) -> void:

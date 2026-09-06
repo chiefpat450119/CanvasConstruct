@@ -14,7 +14,7 @@ const CONTENT_VERTICAL_OFFSET: float = 60.0
 @export var reference_art: TextureRect
 @export var reference_art_grid_lines : GridLines
 @export var timer_label: Label
-@export var finish_button: Button
+@export var finish_button: BaseButton
 @export var ui_anim: DrawingUIAnim
 
 var _drawing_timer: Timer

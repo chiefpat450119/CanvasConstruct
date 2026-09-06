@@ -5,7 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="3_mvmjb"]
 [ext_resource type="Script" uid="uid://wruokad4nqnb" path="res://scripts/grid_lines.gd" id="4_t2x1o"]
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="6_mvmjb"]
+[ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="7_agvlj"]
 [ext_resource type="Script" uid="uid://clq5r8xjv2n7m" path="res://scenes/drawing_phase/drawing_ui_anim.gd" id="7_drawing_anim"]
+[ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="8_77x44"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="9_vxr02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2x1o"]
 content_margin_left = 32.0
@@ -68,6 +71,9 @@ load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54
 [sub_resource type="LabelSettings" id="LabelSettings_t2x1o"]
 font = ExtResource("6_mvmjb")
 font_size = 32
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w5bij"]
+load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc26e.ctex"
 
 [node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid_frame", "reference_art_frame", "drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button", "ui_anim")]
 layout_mode = 3
@@ -170,14 +176,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.03610091, 0.03610091, 0.03610091, 1)
 
-[node name="Finish Button" type="Button" parent="." unique_id=1921390986]
-layout_mode = 0
-offset_left = 925.0
-offset_top = 567.0
-offset_right = 1125.0
-offset_bottom = 627.0
-text = "Finish"
-
 [node name="ColorRect" type="ColorRect" parent="." unique_id=31174071]
 layout_mode = 1
 anchors_preset = 10
@@ -205,5 +203,46 @@ phase_banner = NodePath("../ColorRect")
 timer = NodePath("../Timer")
 drawing_grid = NodePath("../Drawing Grid Frame")
 reference_art = NodePath("../Reference Image Frame")
-finish_button = NodePath("../Finish Button")
+finish_button = NodePath("")
 play_on_ready = false
+
+[node name="Finish Button" type="TextureButton" parent="." unique_id=1988163918]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -81.0
+offset_right = 102.022705
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("7_agvlj")
+texture_hover = SubResource("CompressedTexture2D_w5bij")
+texture_focused = SubResource("CompressedTexture2D_w5bij")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Finish Button" unique_id=784412987]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.51135
+offset_top = -24.0
+offset_right = 64.48865
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "FINISH"
+label_settings = ExtResource("8_77x44")
+
+[node name="InteractionEffects" type="Node" parent="Finish Button" unique_id=1152520146 node_paths=PackedStringArray("target_control")]
+script = ExtResource("9_vxr02")
+target_control = NodePath("..")
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"

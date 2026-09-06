@@ -37,6 +37,11 @@ func set_part_previews(
 	_set_part_preview(weapon_ui, weapon_texture)
 
 
+func set_fight_button_visible(is_visible: bool) -> void:
+	if fight_button != null:
+		fight_button.visible = is_visible
+
+
 func disable_part(category: GameStateManager.PartCategory) -> void:
 	var part := _get_part_ui(category)
 	if part != null:
