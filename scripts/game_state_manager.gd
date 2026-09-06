@@ -8,7 +8,6 @@ enum PartCategory {
 	WEAPON,
 }
 
-@export var has_completed_drawing_phase: bool = false
 @export var boss_scenes: Array[PackedScene] = [
 	preload("res://scenes/bosses/orc_boss.tscn"),
 	preload("res://scenes/bosses/orc_boss.tscn"),
@@ -32,16 +31,7 @@ var _next_part_indices: Dictionary = {
 }
 
 
-func can_repair_parts() -> bool:
-	return has_completed_drawing_phase
-
-
-func mark_drawing_phase_completed() -> void:
-	has_completed_drawing_phase = true
-
-
 func reset_run() -> void:
-	has_completed_drawing_phase = false
 	next_boss_index = 0
 	current_head_part = null
 	current_atk_part = null
@@ -117,10 +107,10 @@ func switch_to_combat_phase() -> void:
 	scene_tree.change_scene_to_file(combat_phase_scene_path)
 	await scene_tree.scene_changed
 	var combat_phase := scene_tree.current_scene as CombatPhaseManager
-	initialize_combat_phase(combat_phase)
+	_initialize_combat_phase(combat_phase)
 
 
-func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
+func _initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
 	var result := combat_phase_manager.initialize(
 		boss_scenes[next_boss_index],
 		get_current_parts()

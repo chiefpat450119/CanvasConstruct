@@ -59,7 +59,6 @@ func upgrade_selected_part() -> void:
 func fight() -> void:
 	if not GameStateManagerInstance.has_all_player_parts():
 		return
-	GameStateManagerInstance.mark_drawing_phase_completed()
 	GameStateManagerInstance.switch_to_combat_phase()
 
 
@@ -201,8 +200,7 @@ func _on_drawing_finished() -> void:
 	selection_ui.set_part_similarity(_selected_category, similarity)
 	selection_ui.disable_part(_selected_category)
 	_show_only(selection_ui)
-	if not GameStateManagerInstance.has_completed_drawing_phase and GameStateManagerInstance.has_all_player_parts():
-		GameStateManagerInstance.mark_drawing_phase_completed()
+	if GameStateManagerInstance.next_boss_index == 0 and GameStateManagerInstance.has_all_player_parts():
 		GameStateManagerInstance.switch_to_combat_phase()
 
 
