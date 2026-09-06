@@ -15,6 +15,15 @@ func _ready() -> void:
 	defend_button.pressed.connect(defend_requested.emit)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"attack"):
+		attack_requested.emit()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed(&"block"):
+		defend_requested.emit()
+		get_viewport().set_input_as_handled()
+
+
 func bind_combatant(player: Player, boss: BossBase) -> void:
 	player.health_changed.connect(_on_player_health_changed)
 	boss.health_changed.connect(_on_boss_health_changed)
