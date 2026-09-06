@@ -15,6 +15,12 @@ extends Control
 @export var defense_preview: TextureRect
 @export var weapon_preview: TextureRect
 
+@export_group("Part Similarities")
+@export var head_similarity_label: Label
+@export var torso_similarity_label: Label
+@export var defense_similarity_label: Label
+@export var weapon_similarity_label: Label
+
 @export_group("Action Buttons")
 @export var repair_button: Button
 @export var upgrade_button: Button
@@ -51,6 +57,15 @@ func disable_part(category: GameStateManager.PartCategory) -> void:
 		button.disabled = true
 
 
+func set_part_similarity(
+	category: GameStateManager.PartCategory,
+	similarity: float
+) -> void:
+	var label := _get_similarity_label(category)
+	if label != null:
+		label.text = "%d%%" % roundi(clampf(similarity, 0.0, 1.0) * 100.0)
+
+
 func _get_part_button(category: GameStateManager.PartCategory) -> Button:
 	match category:
 		GameStateManager.PartCategory.HEAD:
@@ -61,6 +76,20 @@ func _get_part_button(category: GameStateManager.PartCategory) -> Button:
 			return defense_button
 		GameStateManager.PartCategory.WEAPON:
 			return weapon_button
+
+	return null
+
+
+func _get_similarity_label(category: GameStateManager.PartCategory) -> Label:
+	match category:
+		GameStateManager.PartCategory.HEAD:
+			return head_similarity_label
+		GameStateManager.PartCategory.TORSO:
+			return torso_similarity_label
+		GameStateManager.PartCategory.DEFENSE:
+			return defense_similarity_label
+		GameStateManager.PartCategory.WEAPON:
+			return weapon_similarity_label
 
 	return null
 

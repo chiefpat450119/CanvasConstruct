@@ -173,11 +173,16 @@ func _get_next_part(category: GameStateManager.PartCategory) -> PartResource:
 
 func _on_drawing_timer_timeout() -> void:
 	var drawing := drawing_ui.stop_drawing()
+	var similarity := TextureCompare.compare(
+		drawing,
+		_active_reference_part.reference_image
+	)
 	GameStateManagerInstance.set_current_part(
 		PlayerPart.new(_active_reference_part, drawing)
 	)
 	_active_reference_part = null
 	_initialize_part_previews()
+	selection_ui.set_part_similarity(_selected_category, similarity)
 	selection_ui.disable_part(_selected_category)
 	_show_only(selection_ui)
 

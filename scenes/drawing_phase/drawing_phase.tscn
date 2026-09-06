@@ -251,14 +251,14 @@ head_parts = Array[ExtResource("2_s5jpx")]([ExtResource("3_kpsfv")])
 torso_parts = Array[ExtResource("4_lsrqs")]([ExtResource("5_gxu5u")])
 atk_parts = Array[ExtResource("6_42j7w")]([ExtResource("7_q0n2y"), ExtResource("8_m3kao"), ExtResource("9_a2c3f")])
 def_parts = Array[ExtResource("10_oa1ag")]([ExtResource("11_884ma"), ExtResource("12_wsftw"), ExtResource("13_6v5j0")])
-head_drawing_time = 5.0
+head_drawing_time = 100.0
 torso_drawing_time = 8.0
 defense_drawing_time = 5.0
 weapon_drawing_time = 5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
 
-[node name="Selection UI" type="Control" parent="CanvasLayer" unique_id=201594146 node_paths=PackedStringArray("drawing_phase_manager", "head_button", "torso_button", "defense_button", "weapon_button", "head_preview", "torso_preview", "defense_preview", "weapon_preview", "repair_button", "upgrade_button")]
+[node name="Selection UI" type="Control" parent="CanvasLayer" unique_id=201594146 node_paths=PackedStringArray("drawing_phase_manager", "head_button", "torso_button", "defense_button", "weapon_button", "head_preview", "torso_preview", "defense_preview", "weapon_preview", "head_similarity_label", "torso_similarity_label", "defense_similarity_label", "weapon_similarity_label", "repair_button", "upgrade_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -277,6 +277,10 @@ head_preview = NodePath("Head/Art")
 torso_preview = NodePath("Torso/Art")
 defense_preview = NodePath("Defense/Art")
 weapon_preview = NodePath("Weapon/Art")
+head_similarity_label = NodePath("Head/Completion Number/Number")
+torso_similarity_label = NodePath("Torso/Completion Number/Number")
+defense_similarity_label = NodePath("Defense/Completion Number/Number")
+weapon_similarity_label = NodePath("Weapon/Completion Number/Number")
 repair_button = NodePath("../Repair or Upgrade UI/Panel/HBoxContainer/Repair")
 upgrade_button = NodePath("../Repair or Upgrade UI/Panel/HBoxContainer/Upgrade")
 
@@ -411,7 +415,7 @@ offset_right = 30.0
 offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
-text = "83%"
+text = "0%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -563,7 +567,7 @@ offset_right = 30.0
 offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
-text = "83%"
+text = "0%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -713,7 +717,7 @@ offset_right = 30.0
 offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
-text = "83%"
+text = "0%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -866,7 +870,7 @@ offset_right = 30.0
 offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
-text = "83%"
+text = "0%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
