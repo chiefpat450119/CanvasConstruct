@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_7r2cd"]
 [ext_resource type="Script" uid="uid://db3smkhmbb6ft" path="res://scripts/parts/torso_resource.gd" id="2_dnwvw"]
-[ext_resource type="Texture2D" uid="uid://cimthbnjqrbbo" path="res://scripts/parts/parts/TORSO/LOP TORSO.png" id="2_j34vy"]
+[ext_resource type="Texture2D" uid="uid://b240sdtcmg0np" path="res://scripts/parts/parts/TORSO/LOP TORSO orange.png" id="2_j34vy"]
 
 [resource]
 script = ExtResource("2_dnwvw")
