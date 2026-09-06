@@ -17,8 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://dwplekdaggb5" path="res://scenes/drawing_phase/drawing_ui.tscn" id="15_ffy6i"]
 [ext_resource type="PackedScene" uid="uid://bna2mm0mkpj4f" path="res://scenes/drawing_phase/repair_or_upgrade_ui.tscn" id="16_ffy6i"]
 
-[node name="DrawingPhase" type="Node2D" unique_id=166329689]
+[node name="DrawingPhase" type="Node2D" unique_id=166329689 node_paths=PackedStringArray("selection_ui", "repair_or_upgrade_ui", "drawing_ui")]
 script = ExtResource("1_2tvul")
+selection_ui = NodePath("CanvasLayer/Selection UI")
+repair_or_upgrade_ui = NodePath("CanvasLayer/Repair or Upgrade UI")
+drawing_ui = NodePath("CanvasLayer/Drawing UI")
 head_parts = Array[ExtResource("2_s5jpx")]([ExtResource("3_kpsfv")])
 torso_parts = Array[ExtResource("4_lsrqs")]([ExtResource("5_gxu5u")])
 atk_parts = Array[ExtResource("6_42j7w")]([ExtResource("7_q0n2y"), ExtResource("8_m3kao"), ExtResource("9_a2c3f")])
@@ -30,10 +33,9 @@ weapon_drawing_time = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
 
-[node name="Selection UI" parent="CanvasLayer" unique_id=984169342 instance=ExtResource("14_vgkyh")]
+[node name="Selection UI" parent="CanvasLayer" unique_id=984169342 node_paths=PackedStringArray("drawing_phase_manager") instance=ExtResource("14_vgkyh")]
+drawing_phase_manager = NodePath("../..")
 
 [node name="Drawing UI" parent="CanvasLayer" unique_id=315890107 instance=ExtResource("15_ffy6i")]
-visible = false
 
 [node name="Repair or Upgrade UI" parent="CanvasLayer" unique_id=105352 instance=ExtResource("16_ffy6i")]
-visible = false
