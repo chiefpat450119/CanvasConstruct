@@ -19,8 +19,7 @@ script = ExtResource("1_script")
 win_sfx = ExtResource("7_win_sfx")
 
 [node name="UiBackground" parent="." unique_id=1544384068 instance=ExtResource("2_cb2ca")]
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1884180848]
 layout_mode = 1

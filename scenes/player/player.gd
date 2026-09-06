@@ -59,7 +59,7 @@ func attack(target: BossBase) -> void:
 
 
 func defend() -> void:
-	if is_dead or _defend_cooldown_timer > 0.0 or player_stats == null:
+	if is_dead or is_defending or _defend_cooldown_timer > 0.0 or player_stats == null:
 		return
 
 	is_defending = true
@@ -67,6 +67,23 @@ func defend() -> void:
 	action_started.emit(&"defend")
 	AudioManager.play_SFX(defend_sfx, -10)
 	_play_defend_animation()
+
+
+func get_attack_cooldown_remaining_ratio() -> float:
+	var cooldown_duration := attack_cooldown
+	if player_stats != null:
+		cooldown_duration = maxf(cooldown_duration, player_stats.get_head_cooldown())
+	if is_zero_approx(cooldown_duration):
+		return 0.0
+	return clampf(_attack_cooldown_timer / cooldown_duration, 0.0, 1.0)
+
+
+func get_defend_cooldown_remaining_ratio() -> float:
+	if is_defending:
+		return 1.0
+	if is_zero_approx(defend_cooldown):
+		return 0.0
+	return clampf(_defend_cooldown_timer / defend_cooldown, 0.0, 1.0)
 
 
 func take_damage(amount: int) -> void:
