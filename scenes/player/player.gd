@@ -22,12 +22,6 @@ var is_dead := false
 var _defense_timer := 0.0
 var _attack_cooldown_timer := 0.0
 var _defend_cooldown_timer := 0.0
-var _weapon_rest_position: Vector2
-var _shield_rest_position: Vector2
-
-func _ready() -> void:
-	_weapon_rest_position = $Attack.position
-	_shield_rest_position = $Def.position
 
 
 func _process(delta: float) -> void:
@@ -52,22 +46,35 @@ func attack(target: BossBase) -> void:
 
 	_attack_cooldown_timer = maxf(attack_cooldown, player_stats.get_head_cooldown())
 	action_started.emit(&"attack")
-	_play_attack_animation()
 	AudioManager.play_SFX(attack_sfx, -10)
 	target.take_damage(player_stats.get_weapon_damage())
 
 
 func defend() -> void:
-	if is_defending:
-		return
-	if is_dead or _defend_cooldown_timer > 0.0 or player_stats == null:
+	if is_dead or is_defending or _defend_cooldown_timer > 0.0 or player_stats == null:
 		return
 
 	is_defending = true
 	_defense_timer = DEFENSE_DURATION
 	action_started.emit(&"defend")
 	AudioManager.play_SFX(defend_sfx, -10)
-	_play_defend_animation()
+
+
+func get_attack_cooldown_remaining_ratio() -> float:
+	var cooldown_duration := attack_cooldown
+	if player_stats != null:
+		cooldown_duration = maxf(cooldown_duration, player_stats.get_head_cooldown())
+	if is_zero_approx(cooldown_duration):
+		return 0.0
+	return clampf(_attack_cooldown_timer / cooldown_duration, 0.0, 1.0)
+
+
+func get_defend_cooldown_remaining_ratio() -> float:
+	if is_defending:
+		return 1.0
+	if is_zero_approx(defend_cooldown):
+		return 0.0
+	return clampf(_defend_cooldown_timer / defend_cooldown, 0.0, 1.0)
 
 
 func take_damage(amount: int) -> void:
@@ -158,20 +165,3 @@ func _check_for_death() -> void:
 	print("Player died.")
 	AudioManager.play_SFX(death_sfx, -10)
 	died.emit()
-
-
-func _play_attack_animation() -> void:
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property($Attack, "position", _weapon_rest_position + Vector2(18.0, 0.0), 0.12)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($Attack, "position", _weapon_rest_position, 0.16)
-
-
-func _play_defend_animation() -> void:
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property($Def, "position", _shield_rest_position + Vector2(10.0, -12.0), 0.12)
-	tween.tween_interval(DEFENSE_DURATION)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($Def, "position", _shield_rest_position, 0.16)

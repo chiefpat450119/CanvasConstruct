@@ -92,11 +92,13 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="CombatUI" type="CanvasLayer" unique_id=1513656037 node_paths=PackedStringArray("attack_button", "defend_button", "player_health_bar", "boss_health_bar")]
+[node name="CombatUI" type="CanvasLayer" unique_id=1513656037 node_paths=PackedStringArray("attack_button", "defend_button", "attack_cooldown_overlay", "defend_cooldown_overlay", "player_health_bar", "boss_health_bar")]
 layer = -1
 script = ExtResource("1_lmxbf")
 attack_button = NodePath("Control/Buttons/Attack Button")
 defend_button = NodePath("Control/Buttons/Defend Button")
+attack_cooldown_overlay = NodePath("Control/Buttons/Attack Button/Cooldown Overlay")
+defend_cooldown_overlay = NodePath("Control/Buttons/Defend Button/Cooldown Overlay")
 player_health_bar = NodePath("Control/Health Bars/Player Health Bar")
 boss_health_bar = NodePath("Control/Health Bars/Boss Health Bar")
 
@@ -145,10 +147,26 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_g7ptn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ot056")
 theme_override_styles/hover = SubResource("StyleBoxFlat_h3w2q")
-text = "V"
+text = "F"
 icon = ExtResource("1_e4x4p")
 icon_alignment = 1
 vertical_icon_alignment = 0
+
+[node name="Cooldown Overlay" type="TextureProgressBar" parent="Control/Buttons/Attack Button"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_top = 5.0
+offset_right = 38.0
+offset_bottom = 80.0
+grow_horizontal = 2
+mouse_filter = 2
+fill_mode = 4
+radial_initial_angle = 270.0
+texture_progress = ExtResource("1_e4x4p")
+tint_progress = Color(0.035, 0.035, 0.05, 0.8)
+value = 0.0
 
 [node name="Defend Button" type="Button" parent="Control/Buttons" unique_id=1849619388]
 layout_mode = 2
@@ -159,10 +177,26 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_g7ptn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ot056")
 theme_override_styles/hover = SubResource("StyleBoxFlat_h3w2q")
-text = "B"
+text = "J"
 icon = ExtResource("2_lmxbf")
 icon_alignment = 1
 vertical_icon_alignment = 0
+
+[node name="Cooldown Overlay" type="TextureProgressBar" parent="Control/Buttons/Defend Button"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_top = 5.0
+offset_right = 38.0
+offset_bottom = 80.0
+grow_horizontal = 2
+mouse_filter = 2
+fill_mode = 4
+radial_initial_angle = 270.0
+texture_progress = ExtResource("2_lmxbf")
+tint_progress = Color(0.035, 0.035, 0.05, 0.8)
+value = 0.0
 
 [node name="Health Bars" type="HBoxContainer" parent="Control" unique_id=1284611411]
 layout_mode = 1
