@@ -28,8 +28,7 @@ script = ExtResource("1_script")
 
 [node name="UiBackground" parent="." unique_id=1544384068 instance=ExtResource("2_eq47o")]
 material = SubResource("ShaderMaterial_ei3t7")
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
 
 [node name="Tutorial" type="TextureButton" parent="." unique_id=1186654965]
 layout_mode = 0
