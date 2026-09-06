@@ -23,12 +23,6 @@ var is_dead := false
 var _defense_timer := 0.0
 var _attack_cooldown_timer := 0.0
 var _defend_cooldown_timer := 0.0
-var _weapon_rest_position: Vector2
-var _shield_rest_position: Vector2
-
-func _ready() -> void:
-	_weapon_rest_position = $Attack.position
-	_shield_rest_position = $Def.position
 
 
 func _process(delta: float) -> void:
@@ -53,7 +47,6 @@ func attack(target: BossBase) -> void:
 
 	_attack_cooldown_timer = maxf(attack_cooldown, player_stats.get_head_cooldown())
 	action_started.emit(&"attack")
-	_play_attack_animation()
 	AudioManager.play_SFX(attack_sfx, -10)
 	target.take_damage(player_stats.get_weapon_damage())
 
@@ -66,7 +59,6 @@ func defend() -> void:
 	_defense_timer = DEFENSE_DURATION
 	action_started.emit(&"defend")
 	AudioManager.play_SFX(defend_sfx, -10)
-	_play_defend_animation()
 
 
 func take_damage(amount: int) -> void:
@@ -158,20 +150,3 @@ func _check_for_death() -> void:
 	print("Player died.")
 	AudioManager.play_SFX(death_sfx, -10)
 	died.emit()
-
-
-func _play_attack_animation() -> void:
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property($Attack, "position", _weapon_rest_position + Vector2(18.0, 0.0), 0.12)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($Attack, "position", _weapon_rest_position, 0.16)
-
-
-func _play_defend_animation() -> void:
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property($Def, "position", _shield_rest_position + Vector2(10.0, -12.0), 0.12)
-	tween.tween_interval(DEFENSE_DURATION)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($Def, "position", _shield_rest_position, 0.16)
