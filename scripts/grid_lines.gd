@@ -1,26 +1,44 @@
 class_name GridLines
-extends GridContainer
+extends Control
 
-@export var cell_texture : Texture2D
+const LINE_WIDTH_RATIO: float = 0.12
 
-## Create grid lines from given width and height
+var _grid_width: int = 0
+var _grid_height: int = 0
+
+
+func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	resized.connect(queue_redraw)
+
+
+## Configure the number of reference-image cells drawn by the overlay.
 func init(width: int, height: int) -> void:
-	# Clear previous grid lines
-	for child: Node in get_children():
-		child.free()
-	
-	columns = width
-	
-	for _index: int in range(width * height):
-		var cell := TextureButton.new()
-		
-		# Default grid cell properties
-		cell.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		cell.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		cell.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		cell.ignore_texture_size = true
-		cell.texture_normal = cell_texture
-		cell.modulate = Color(1.0, 1.0, 1.0, 1.0)
-		
-		add_child(cell)
+	_grid_width = width
+	_grid_height = height
+	queue_redraw()
+
+
+func _draw() -> void:
+	if _grid_width <= 0 or _grid_height <= 0 or size.x <= 0.0 or size.y <= 0.0:
+		return
+
+	var cell_size := Vector2(size.x / _grid_width, size.y / _grid_height)
+	var line_width := maxf(1.0, roundf(minf(cell_size.x, cell_size.y) * LINE_WIDTH_RATIO))
+	var half_line_width := line_width * 0.5
+
+	for column: int in range(_grid_width + 1):
+		var x := roundf(cell_size.x * column)
+		if column == 0:
+			x = half_line_width
+		elif column == _grid_width:
+			x = size.x - half_line_width
+		draw_line(Vector2(x, 0.0), Vector2(x, size.y), Color.BLACK, line_width, false)
+
+	for row: int in range(_grid_height + 1):
+		var y := roundf(cell_size.y * row)
+		if row == 0:
+			y = half_line_width
+		elif row == _grid_height:
+			y = size.y - half_line_width
+		draw_line(Vector2(0.0, y), Vector2(size.x, y), Color.BLACK, line_width, false)
