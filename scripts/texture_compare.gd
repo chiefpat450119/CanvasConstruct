@@ -48,4 +48,4 @@ static func compare(drawing: Image, reference: Texture2D) -> float:
 			float(incorrectly_filled_pixel_count) / empty_pixel_count
 		)
 
-	return correct_percentage - incorrect_percentage
+	return correct_percentage - incorrect_percentage / 2.0
