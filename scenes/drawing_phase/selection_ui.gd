@@ -10,10 +10,10 @@ extends Control
 @export var weapon_button: Button
 
 @export_group("Part Previews")
-@export var head_preview: TextureRect
-@export var torso_preview: TextureRect
-@export var defense_preview: TextureRect
-@export var weapon_preview: TextureRect
+@export var head_preview: Button
+@export var torso_preview: Button
+@export var defense_preview: Button
+@export var weapon_preview: Button
 
 @export_group("Part Similarities")
 @export var head_similarity_label: Label
@@ -109,9 +109,9 @@ func _connect_action_button(button: BaseButton, action: Callable) -> void:
 		button.pressed.connect(action)
 
 
-func _set_part_preview(preview: TextureRect, texture: Texture2D) -> void:
+func _set_part_preview(preview: Button, texture: Texture2D) -> void:
 	if preview == null:
 		return
 
-	preview.texture = texture
+	preview.icon = texture
 	preview.visible = texture != null
