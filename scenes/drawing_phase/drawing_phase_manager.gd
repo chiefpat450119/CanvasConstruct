@@ -13,23 +13,8 @@ enum PartCategory {
 	TORSO,
 }
 
-signal phase_started
-signal reference_image_changed(reference_image: Texture2D)
-signal part_drawing_started(
-	reference_part: PartResource,
-	action: DrawingAction,
-	duration_seconds: float
-)
-signal part_drawing_completed(
-	drawing: Image,
-	reference_part: PartResource,
-	action: DrawingAction
-)
 signal phase_completed
 
-const DEFAULT_DRAWING_GRID_SCENE := preload(
-	"res://scenes/drawing_grid/drawing_grid.tscn"
-)
 const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.HEAD,
 	PartCategory.ATK,
@@ -37,8 +22,9 @@ const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.TORSO,
 ]
 
-@export var drawing_grid_scene: PackedScene = DEFAULT_DRAWING_GRID_SCENE
-@export var drawing_grid_parent: Node
+@export var drawing_grid: DrawingGrid
+@export var drawing_screen: CanvasItem
+@export var selection_screen: CanvasItem
 
 @export_group("Drawing Times")
 @export_range(0.1, 120.0, 0.1, "or_greater", "suffix:s")
@@ -55,13 +41,13 @@ var _available_upgrades: Dictionary[PartCategory, PartResource] = {}
 var _completed_categories: Dictionary[PartCategory, bool] = {}
 var _active_reference_part: PartResource
 var _active_action: DrawingAction
-var _active_drawing_grid: DrawingGrid
 var _drawing_timer: Timer
 var _phase_active: bool = false
 
 
 func _ready() -> void:
 	_ensure_timer()
+	_set_drawing_screen_active(false)
 
 
 func begin_phase(
@@ -70,7 +56,7 @@ func begin_phase(
 ) -> Error:
 	if _phase_active:
 		return ERR_ALREADY_IN_USE
-	if drawing_grid_scene == null:
+	if drawing_grid == null or drawing_screen == null or selection_screen == null:
 		return ERR_UNCONFIGURED
 
 	var current_parts_by_category: Dictionary[PartCategory, PartResource] = {}
@@ -102,7 +88,7 @@ func begin_phase(
 	_available_upgrades = upgrades_by_category
 	_completed_categories.clear()
 	_phase_active = true
-	phase_started.emit()
+	_set_drawing_screen_active(false)
 	return OK
 
 
@@ -172,7 +158,7 @@ func is_phase_active() -> bool:
 
 
 func is_drawing_part() -> bool:
-	return _active_drawing_grid != null
+	return _active_reference_part != null
 
 
 func can_leave_current_drawing() -> bool:
@@ -180,7 +166,9 @@ func can_leave_current_drawing() -> bool:
 
 
 func get_active_drawing_grid() -> DrawingGrid:
-	return _active_drawing_grid
+	if not is_drawing_part():
+		return null
+	return drawing_grid
 
 
 func get_active_reference_part() -> PartResource:
@@ -212,20 +200,12 @@ func _start_part_drawing(
 	if reference_width <= 0 or reference_height <= 0:
 		return ERR_INVALID_DATA
 
-	var instance := drawing_grid_scene.instantiate()
-	if not instance is DrawingGrid:
-		instance.free()
-		return ERR_CANT_CREATE
-
 	var category := _get_part_category(reference_part)
-	var drawing_grid := instance as DrawingGrid
-	var parent: Node = drawing_grid_parent if drawing_grid_parent != null else self
-	parent.add_child(drawing_grid)
+	_set_drawing_screen_active(true)
 	drawing_grid.init(reference_width, reference_height)
 
 	_active_reference_part = reference_part
 	_active_action = action
-	_active_drawing_grid = drawing_grid
 	_ensure_timer()
 
 	var duration := _get_drawing_duration(category)
@@ -236,10 +216,10 @@ func _start_part_drawing(
 
 
 func _complete_part_drawing() -> void:
-	if _active_drawing_grid == null:
+	if not is_drawing_part():
 		return
 
-	var drawing := _active_drawing_grid.get_image_from_drawing()
+	var drawing := drawing_grid.get_image_from_drawing()
 	var reference_part := _active_reference_part
 	var action := _active_action
 	var category := _get_part_category(reference_part)
@@ -250,9 +230,8 @@ func _complete_part_drawing() -> void:
 		_phase_active = false
 		GameStateManagerInstance.mark_drawing_phase_completed()
 
-	_active_drawing_grid.queue_free()
-	_active_drawing_grid = null
 	_active_reference_part = null
+	_set_drawing_screen_active(false)
 	reference_image_changed.emit(null)
 	part_drawing_completed.emit(drawing, reference_part, action)
 
@@ -275,6 +254,20 @@ func _ensure_timer() -> void:
 	_drawing_timer.one_shot = true
 	_drawing_timer.timeout.connect(_complete_part_drawing)
 	add_child(_drawing_timer)
+
+
+func _set_drawing_screen_active(is_active: bool) -> void:
+	_set_screen_enabled(drawing_screen, is_active)
+	_set_screen_enabled(selection_screen, not is_active)
+
+
+func _set_screen_enabled(screen: CanvasItem, is_enabled: bool) -> void:
+	if screen == null:
+		return
+	screen.visible = is_enabled
+	screen.process_mode = (
+		Node.PROCESS_MODE_INHERIT if is_enabled else Node.PROCESS_MODE_DISABLED
+	)
 
 
 func _map_parts_by_category(
