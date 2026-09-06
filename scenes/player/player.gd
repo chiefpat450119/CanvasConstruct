@@ -59,6 +59,8 @@ func attack(target: BossBase) -> void:
 
 
 func defend() -> void:
+	if is_defending:
+		return
 	if is_dead or _defend_cooldown_timer > 0.0 or player_stats == null:
 		return
 
