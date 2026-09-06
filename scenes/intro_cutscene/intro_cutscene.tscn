@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://crqbstgk4osn5"]
+
+[ext_resource type="Script" uid="uid://d4le7dok3jhoe" path="res://scenes/intro_cutscene/intro_cutscene.gd" id="1_w1p3s"]
+[ext_resource type="Texture2D" uid="uid://capafihqvxw58" path="res://assets/intro_cutscene/LOP INTRO 2 BORDER.png" id="1_yx7aj"]
+[ext_resource type="Texture2D" uid="uid://bc4y7xtc4jj02" path="res://assets/intro_cutscene/LOP INTRO 1 BORDER.png" id="2_w1p3s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c35f"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_wc3su"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LopSceneOne:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LopSceneTwo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xodu5"]
+resource_name = "cutscene"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LopSceneOne:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 2.2333333),
+"transitions": PackedFloat32Array(1.5157169, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LopSceneTwo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8orh5"]
+_data = {
+&"RESET": SubResource("Animation_wc3su"),
+&"cutscene": SubResource("Animation_xodu5")
+}
+
+[node name="IntroCutscene" type="Control" unique_id=697255212]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1p3s")
+
+[node name="Panel" type="Panel" parent="." unique_id=564576937]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1c35f")
+
+[node name="LopSceneTwo" type="TextureRect" parent="." unique_id=1435711162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yx7aj")
+expand_mode = 2
+
+[node name="LopSceneOne" type="TextureRect" parent="." unique_id=1609274387]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_w1p3s")
+expand_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1105124019]
+libraries/ = SubResource("AnimationLibrary_8orh5")
