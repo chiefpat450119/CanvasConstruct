@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://r20n6wg14sic"]
+
+[ext_resource type="Script" uid="uid://bfn4augafm12y" path="res://scenes/tutorial_menu/tutorial_menu.gd" id="1_ap5e0"]
+
+[node name="TutorialMenu" type="Control" unique_id=1185766356 node_paths=PackedStringArray("display", "prev_button", "next_button", "back_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ap5e0")
+tutorial_images = ["res://assets/tutorial_images/the_seals_three.jpg", "res://assets/tutorial_images/seal_guy.jpg", "res://assets/tutorial_images/da_baby.webp"]
+display = NodePath("TextureRect")
+prev_button = NodePath("PrevButton")
+next_button = NodePath("NextButton")
+back_button = NodePath("BackButton")
+
+[node name="BackgroundImage" type="Panel" parent="." unique_id=1976504124]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1466770142]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -216.0
+offset_right = 384.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 3
+
+[node name="PrevButton" type="Button" parent="." unique_id=1627593695]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -103.0
+offset_right = 107.0
+grow_vertical = 0
+disabled = true
+text = "<-"
+
+[node name="NextButton" type="Button" parent="." unique_id=403456211]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -103.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "->"
+
+[node name="BackButton" type="Button" parent="." unique_id=47006483]
+layout_mode = 0
+offset_right = 107.0
+offset_bottom = 103.0
+text = "<-"
+
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_pressed"]
