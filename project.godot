@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameStateManagerInstance="*uid://rdbtgjt55h81"
-AudioManager="*uid://bfnjfh6r5eevj"
 
 [display]
 

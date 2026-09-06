@@ -38,6 +38,10 @@ func set_pixels(points: Array[Vector2i], color: Color):
 func get_pixel(x: int, y: int) -> Color:
 	return _img.get_pixel(x, y)
 
+
+func get_texture() -> Texture2D:
+	return _texture
+
 func _update_visible_pixels(points: Array[Vector2i], color: Color) -> void:
 	if color.a == 0.0:
 		for point in points:

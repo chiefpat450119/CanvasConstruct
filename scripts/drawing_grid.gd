@@ -64,6 +64,24 @@ func init(width: int, height: int) -> void:
 	_generate_grid()
 
 
+## Fills cells from the non-transparent pixels in an existing drawing.
+func fill_from_drawing(drawing: Image) -> void:
+	var fill_width := mini(_grid_width, drawing.get_width())
+	var fill_height := mini(_grid_height, drawing.get_height())
+	for y: int in range(fill_height):
+		for x: int in range(fill_width):
+			var colour := drawing.get_pixel(x, y)
+			if colour.a <= 0.0:
+				continue
+
+			var cell := _get_cell_at_pos(x, y)
+			if cell == null:
+				continue
+
+			cell.modulate = colour
+			cell.set_meta(PAINTED_META, true)
+
+
 ## Returns an image created from the player's drawing.
 func get_image_from_drawing() -> Image:
 	var image := Image.create(
