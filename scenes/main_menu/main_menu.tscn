@@ -24,6 +24,7 @@ start = NodePath("VBoxContainer/Start")
 tutorial = NodePath("VBoxContainer/Tutorial")
 
 [node name="UiBackground" parent="." unique_id=1544384068 instance=ExtResource("2_ob46e")]
+z_index = -5
 layout_mode = 1
 metadata/_edit_group_ = true
 

@@ -35,6 +35,7 @@ weapon_drawing_time = 30.0
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
 
 [node name="UiBackground" parent="CanvasLayer" unique_id=1544384068 instance=ExtResource("15_yrk3h")]
+z_index = -5
 
 [node name="Selection UI" parent="CanvasLayer" unique_id=984169342 node_paths=PackedStringArray("drawing_phase_manager") instance=ExtResource("14_vgkyh")]
 drawing_phase_manager = NodePath("../..")

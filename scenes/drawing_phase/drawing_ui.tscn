@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://bwngggxjc32pn" path="res://scenes/drawing_phase/drawing_ui.gd" id="1_s7vdd"]
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="2_63o16"]
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="3_mvmjb"]
+[ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="4_63o16"]
 [ext_resource type="Script" uid="uid://wruokad4nqnb" path="res://scripts/grid_lines.gd" id="4_t2x1o"]
+[ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="6_mvmjb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ek0"]
 bg_color = Color(0, 0, 0, 1)
@@ -20,6 +22,10 @@ expand_margin_bottom = 5.0
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42j7w"]
 load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54aae.ctex"
 
+[sub_resource type="LabelSettings" id="LabelSettings_t2x1o"]
+font = ExtResource("6_mvmjb")
+font_size = 32
+
 [node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -28,31 +34,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s7vdd")
-drawing_grid = NodePath("MarginContainer/HBoxContainer/Drawing Grid")
-reference_art = NodePath("MarginContainer/HBoxContainer/Reference Image")
-reference_art_grid_lines = NodePath("MarginContainer/HBoxContainer/Reference Image/Grid Lines")
-timer_label = NodePath("MarginContainer/HBoxContainer/Timer")
+drawing_grid = NodePath("Drawing Grid")
+reference_art = NodePath("Reference Image")
+reference_art_grid_lines = NodePath("Reference Image/Grid Lines")
+timer_label = NodePath("Timer")
 finish_button = NodePath("Finish Button")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2036774289]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=172215418]
-layout_mode = 2
-theme_override_constants/separation = 100
-alignment = 1
-
-[node name="Drawing Grid" type="GridContainer" parent="MarginContainer/HBoxContainer" unique_id=251566916 node_paths=PackedStringArray("grid")]
-layout_mode = 2
+[node name="Drawing Grid" type="GridContainer" parent="." unique_id=251566916 node_paths=PackedStringArray("grid")]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 324.0
+offset_right = 325.0
+offset_bottom = 324.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 2
@@ -61,22 +54,36 @@ script = ExtResource("2_63o16")
 grid = NodePath(".")
 cell_texture = ExtResource("3_mvmjb")
 
-[node name="Timer" type="Label" parent="MarginContainer/HBoxContainer" unique_id=456408500]
-layout_mode = 2
+[node name="Timer" type="Label" parent="." unique_id=456408500]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.5
+offset_top = 90.0
+offset_right = 59.5
+offset_bottom = 231.0
+grow_horizontal = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_o1ek0")
 text = "Time
 99"
+label_settings = ExtResource("4_63o16")
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Reference Image" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1581316438]
+[node name="Reference Image" type="TextureRect" parent="." unique_id=1581316438]
 texture_filter = 1
-layout_mode = 2
+layout_mode = 0
+offset_left = 847.0
+offset_top = 61.0
+offset_right = 1030.0
+offset_bottom = 609.0
 texture = SubResource("CompressedTexture2D_42j7w")
-expand_mode = 3
+expand_mode = 1
 
-[node name="Grid Lines" type="Control" parent="MarginContainer/HBoxContainer/Reference Image" unique_id=1873141673]
+[node name="Grid Lines" type="Control" parent="Reference Image" unique_id=1873141673]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -86,6 +93,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_t2x1o")
 
+[node name="ColorRect" type="ColorRect" parent="Reference Image" unique_id=732323307]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03610091, 0.03610091, 0.03610091, 1)
+
 [node name="Finish Button" type="Button" parent="." unique_id=1921390986]
 layout_mode = 0
 offset_left = 925.0
@@ -93,3 +110,24 @@ offset_top = 567.0
 offset_right = 1125.0
 offset_bottom = 627.0
 text = "Finish"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=31174071]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1487165075]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -24.0
+offset_right = 183.0
+offset_bottom = 19.0
+grow_vertical = 2
+text = "Drawing Phase"
+label_settings = SubResource("LabelSettings_t2x1o")
