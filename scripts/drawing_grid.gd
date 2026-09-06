@@ -65,10 +65,7 @@ func init(width: int, height: int) -> void:
 
 
 ## Fills cells from the non-transparent pixels in an existing drawing.
-func fill_from_drawing(drawing: RuntimeTexture) -> void:
-	if not is_instance_valid(drawing):
-		return
-
+func fill_from_drawing(drawing: Image) -> void:
 	var fill_width := mini(_grid_width, drawing.get_width())
 	var fill_height := mini(_grid_height, drawing.get_height())
 	for y: int in range(fill_height):

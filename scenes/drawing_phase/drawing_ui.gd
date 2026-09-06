@@ -11,7 +11,7 @@ var _drawing_timer: Timer
 func setup_drawing(
 	reference_image: Texture2D,
 	drawing_timer: Timer = null,
-	initial_drawing: RuntimeTexture = null
+	initial_drawing: Image = null
 ) -> void:
 	var reference_width := reference_image.get_width()
 	var reference_height := reference_image.get_height()

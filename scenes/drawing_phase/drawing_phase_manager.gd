@@ -84,7 +84,7 @@ func _initialize_part_previews() -> void:
 
 func _get_preview_texture(current_part: PlayerPart, fallback_part: PartResource) -> Texture2D:
 	if current_part != null and is_instance_valid(current_part.drawing):
-		var current_texture := current_part.drawing.get_texture()
+		var current_texture := ImageTexture.create_from_image(current_part.drawing)
 		if current_texture != null:
 			return current_texture
 
@@ -113,7 +113,7 @@ func _start_next_drawing(category: GameStateManager.PartCategory) -> void:
 
 func _start_drawing(
 	reference_part: PartResource,
-	initial_drawing: RuntimeTexture = null
+	initial_drawing: Image = null
 ) -> bool:
 	if drawing_ui == null:
 		push_error("DrawingPhaseManager needs a DrawingUI.")

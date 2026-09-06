@@ -3,11 +3,11 @@ extends RefCounted
 
 
 var reference_part: PartResource
-var drawing: RuntimeTexture
+var drawing: Image
 
 
-func _init(resource: PartResource, texture: RuntimeTexture) -> void:
+func _init(resource: PartResource, texture: Image) -> void:
 	assert(resource != null, "A player part requires a PartResource.")
-	assert(texture != null, "A player part requires a RuntimeTexture.")
+	assert(texture != null, "A player part requires a Image.")
 	reference_part = resource
 	drawing = texture
