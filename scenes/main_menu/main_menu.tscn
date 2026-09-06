@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://df2uu25ktdk6e" path="res://assets/UI/main_menu/MAIN_LOGO.png" id="2_0ebjn"]
 [ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="2_ob46e"]
 [ext_resource type="Texture2D" uid="uid://df6i3ydlgjwqs" path="res://assets/UI/utils/button_background.png" id="3_uqeha"]
+[ext_resource type="Script" uid="uid://ca75efdclraqy" path="res://scripts/texture_button_SFX_player.gd" id="4_4xg86"]
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="4_5seab"]
 [ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="4_wem23"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="5_3ovsr"]
@@ -46,6 +47,7 @@ theme_override_constants/separation = 20
 [node name="Start" type="TextureButton" parent="VBoxContainer" unique_id=1307722484]
 layout_mode = 2
 texture_normal = ExtResource("3_uqeha")
+script = ExtResource("4_4xg86")
 
 [node name="Label" type="Label" parent="VBoxContainer/Start" unique_id=1522136818]
 layout_mode = 1
@@ -70,6 +72,7 @@ target_control = NodePath("..")
 [node name="Tutorial" type="TextureButton" parent="VBoxContainer" unique_id=2094143936]
 layout_mode = 2
 texture_normal = ExtResource("3_uqeha")
+script = ExtResource("4_4xg86")
 
 [node name="Label" type="Label" parent="VBoxContainer/Tutorial" unique_id=251902960]
 layout_mode = 1

@@ -6,6 +6,7 @@ extends Control
 
 
 func _ready():
+	AudioManager.play_build_music()
 	start.pressed.connect(_on_start_pressed)
 	tutorial.pressed.connect(_on_tutorial_pressed)
 

@@ -51,6 +51,8 @@ func play_drawing_music():
 	_fade_out()
 
 func _fade_out():
+	if next_bg_song == bg_music_player.stream:
+		return
 	var tween := create_tween()
 	tween.tween_property(bg_music_player, "volume_db", -30.0, 1)
 	tween.tween_callback(_fade_in)

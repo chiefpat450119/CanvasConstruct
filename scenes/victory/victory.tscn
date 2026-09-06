@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dtwqkhlmujnm2" path="res://assets/UI/winloss/WIN_ICON.png" id="2_esff4"]
 [ext_resource type="Texture2D" uid="uid://df6i3ydlgjwqs" path="res://assets/UI/utils/button_background.png" id="4_gtdts"]
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="5_6pxnt"]
+[ext_resource type="Script" uid="uid://ca75efdclraqy" path="res://scripts/texture_button_SFX_player.gd" id="6_6pxnt"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="6_r4uje"]
 [ext_resource type="AudioStream" uid="uid://be61j77ujbmio" path="res://assets/SFX/win_sfx.wav" id="7_win_sfx"]
 
@@ -49,6 +50,7 @@ offset_bottom = -115.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("4_gtdts")
+script = ExtResource("6_6pxnt")
 
 [node name="Label" type="Label" parent="Start" unique_id=700239695]
 layout_mode = 1
