@@ -29,6 +29,7 @@ func _ready() -> void:
 	_drawing_timer = Timer.new()
 	_drawing_timer.one_shot = true
 	_drawing_timer.timeout.connect(_on_drawing_timer_timeout)
+	drawing_ui.finish_requested.connect(_on_drawing_finished)
 	add_child(_drawing_timer)
 
 	_initialize_part_previews()
@@ -51,7 +52,15 @@ func repair_selected_part() -> void:
 
 
 func upgrade_selected_part() -> void:
-	_start_next_drawing(_selected_category)
+	# TODO: Let the player choose and draw a replacement upgraded part.
+	pass
+
+
+func fight() -> void:
+	if not GameStateManagerInstance.has_all_player_parts():
+		return
+	GameStateManagerInstance.mark_drawing_phase_completed()
+	GameStateManagerInstance.switch_to_combat_phase()
 
 
 func _initialize_part_previews() -> void:
@@ -172,6 +181,13 @@ func _get_next_part(category: GameStateManager.PartCategory) -> PartResource:
 
 
 func _on_drawing_timer_timeout() -> void:
+	_on_drawing_finished()
+
+
+func _on_drawing_finished() -> void:
+	if _active_reference_part == null:
+		return
+	_drawing_timer.stop()
 	var drawing := drawing_ui.stop_drawing()
 	var similarity := TextureCompare.compare(
 		drawing,
@@ -185,6 +201,9 @@ func _on_drawing_timer_timeout() -> void:
 	selection_ui.set_part_similarity(_selected_category, similarity)
 	selection_ui.disable_part(_selected_category)
 	_show_only(selection_ui)
+	if not GameStateManagerInstance.has_completed_drawing_phase and GameStateManagerInstance.has_all_player_parts():
+		GameStateManagerInstance.mark_drawing_phase_completed()
+		GameStateManagerInstance.switch_to_combat_phase()
 
 
 func _show_only(active_ui: CanvasItem) -> void:

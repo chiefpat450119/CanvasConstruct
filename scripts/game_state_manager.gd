@@ -9,9 +9,15 @@ enum PartCategory {
 }
 
 @export var has_completed_drawing_phase: bool = false
-@export var boss_scenes: Array[PackedScene] = []
+@export var boss_scenes: Array[PackedScene] = [
+	preload("res://scenes/bosses/orc_boss.tscn"),
+	preload("res://scenes/bosses/orc_boss.tscn"),
+	preload("res://scenes/bosses/orc_boss.tscn"),
+]
 @export_file("*.tscn") var drawing_phase_scene_path := "res://scenes/drawing_phase/drawing_phase.tscn"
 @export_file("*.tscn") var combat_phase_scene_path := "res://scenes/combat_phase/combat_phase.tscn"
+@export_file("*.tscn") var victory_scene_path := "res://scenes/victory/victory.tscn"
+@export_file("*.tscn") var defeat_scene_path := "res://scenes/defeat/defeat.tscn"
 
 var next_boss_index: int = 0
 var current_head_part: PlayerPart = null
@@ -32,6 +38,31 @@ func can_repair_parts() -> bool:
 
 func mark_drawing_phase_completed() -> void:
 	has_completed_drawing_phase = true
+
+
+func reset_run() -> void:
+	has_completed_drawing_phase = false
+	next_boss_index = 0
+	current_head_part = null
+	current_atk_part = null
+	current_def_part = null
+	current_torso_part = null
+	for category in _next_part_indices:
+		_next_part_indices[category] = 0
+
+
+func has_all_player_parts() -> bool:
+	return current_head_part != null and current_atk_part != null and current_def_part != null and current_torso_part != null
+
+
+func update_current_part_drawings(drawings: Array[Image]) -> void:
+	if drawings.size() != 4 or not has_all_player_parts():
+		return
+
+	current_head_part.drawing = drawings[0]
+	current_atk_part.drawing = drawings[1]
+	current_def_part.drawing = drawings[2]
+	current_torso_part.drawing = drawings[3]
 
 
 func set_current_part(part: PlayerPart) -> void:
@@ -90,8 +121,26 @@ func switch_to_combat_phase() -> void:
 
 
 func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
-	combat_phase_manager.initialize(
+	var result := combat_phase_manager.initialize(
 		boss_scenes[next_boss_index],
 		get_current_parts()
 	)
+	if result != OK:
+		push_error("Could not initialize combat phase: %s" % error_string(result))
+		return
+
+	combat_phase_manager.victory.connect(_on_combat_victory.bind(combat_phase_manager))
+	combat_phase_manager.defeat.connect(_on_combat_defeat)
 	next_boss_index += 1
+
+
+func _on_combat_victory(combat_phase_manager: CombatPhaseManager) -> void:
+	update_current_part_drawings(combat_phase_manager.get_player_drawings())
+	if next_boss_index >= 3:
+		get_tree().change_scene_to_file(victory_scene_path)
+	else:
+		switch_to_drawing_phase()
+
+
+func _on_combat_defeat() -> void:
+	get_tree().change_scene_to_file(defeat_scene_path)

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cdnujgtoapsk4"]
 
 [ext_resource type="Script" uid="uid://djhq78c0wf0vl" path="res://scenes/main_menu/main_menu.gd" id="1_fsom3"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1c35f"]
+[ext_resource type="Texture2D" uid="uid://df2uu25ktdk6e" path="res://assets/UI/main_menu/MAIN_LOGO.png" id="2_0ebjn"]
+[ext_resource type="PackedScene" uid="uid://d3ko0q7uix0mk" path="res://scenes/test/scrolling_background.tscn" id="4_wem23"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c35f"]
 bg_color = Color(0, 0, 0, 1)
@@ -36,14 +36,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fsom3")
 
-[node name="BackgroundImage" type="Panel" parent="." unique_id=269209500]
+[node name="ScrollingBackground" parent="." unique_id=482453548 instance=ExtResource("4_wem23")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_1c35f")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=502310290]
 layout_mode = 1
@@ -53,9 +47,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -163.5
-offset_top = -94.0
+offset_top = 61.0
 offset_right = 163.5
-offset_bottom = 94.0
+offset_bottom = 249.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -79,6 +73,18 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
 text = "How to Play"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2111576268]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -308.0
+offset_top = 86.0
+offset_right = 308.0
+offset_bottom = 319.0
+grow_horizontal = 2
+texture = ExtResource("2_0ebjn")
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_pressed"]

@@ -1,12 +1,19 @@
 class_name DrawingUI
 extends Control
 
+signal finish_requested
+
 @export var drawing_grid: DrawingGrid
 @export var reference_art: TextureRect
 @export var reference_art_grid_lines : GridLines
 @export var timer_label: Label
+@export var finish_button: Button
 
 var _drawing_timer: Timer
+
+
+func _ready() -> void:
+	finish_button.pressed.connect(finish_requested.emit)
 
 
 func setup_drawing(

@@ -121,6 +121,15 @@ func initialize_from_parts(
 	)
 
 
+func get_part_drawings() -> Array[Image]:
+	return [
+		$Head.get_image(),
+		$Attack.get_image(),
+		$Def.get_image(),
+		$Torso.get_image(),
+	]
+
+
 func _get_similarity(part: PlayerPart) -> float:
 	return clampf(TextureCompare.compare(part.drawing, part.reference_part.reference_image), 0.0, 1.0)
 
