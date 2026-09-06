@@ -18,6 +18,10 @@ func setup_drawing(
 	reference_art.texture = reference_image
 	drawing_grid.active_colour = _get_reference_colour(reference_image)
 	drawing_grid.init(reference_width, reference_height)
+	drawing_grid.size.x = reference_art.size.x
+	drawing_grid.size.y = reference_art.size.y
+	print("x: " + str(reference_art.size.x))
+	print("y: " + str(reference_art.size.y))
 	if is_instance_valid(initial_drawing):
 		drawing_grid.fill_from_drawing(initial_drawing)
 	_drawing_timer = drawing_timer

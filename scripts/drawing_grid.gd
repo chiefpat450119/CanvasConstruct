@@ -106,8 +106,9 @@ func _generate_grid() -> void:
 		var cell := TextureButton.new()
 		
 		# Default grid cell properties
-		cell.custom_minimum_size = Vector2(CELL_SIZE, CELL_SIZE)
-		cell.stretch_mode = TextureButton.STRETCH_SCALE
+		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		cell.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		cell.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 		cell.ignore_texture_size = true
 		cell.texture_normal = cell_texture
 		cell.modulate = Color.WHITE

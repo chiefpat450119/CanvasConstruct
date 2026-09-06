@@ -309,9 +309,9 @@ bg_color = Color(0, 0.6689455, 0.7972163, 1)
 
 [node name="NicholasScene" type="Node" unique_id=888442273 node_paths=PackedStringArray("runtime_texture", "drawing_grid")]
 script = ExtResource("1_4hql7")
+test_sfx = ExtResource("2_wx6tj")
 runtime_texture = NodePath("RuntimeTexture")
 drawing_grid = NodePath("CanvasLayer/Drawing UI/MarginContainer/HBoxContainer/Drawing Grid")
-test_sfx = ExtResource("2_wx6tj")
 
 [node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("2_035bn")]
 position = Vector2(830, 251)
@@ -331,7 +331,6 @@ texture = ExtResource("4_66pva")
 stretch_mode = 1
 
 [node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=1925897617]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

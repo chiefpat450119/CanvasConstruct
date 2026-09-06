@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://dx37n32wlkmo2" path="res://scenes/drawing_phase/selection_ui.gd" id="3_selection"]
 [ext_resource type="Texture2D" uid="uid://dq4rcpcu2pirn" path="res://assets/UI/build_phase/COMP_HEAD_ICON.png" id="4_ct7ox"]
 [ext_resource type="Script" uid="uid://db3smkhmbb6ft" path="res://scripts/parts/torso_resource.gd" id="4_lsrqs"]
-[ext_resource type="Texture2D" uid="uid://cteaab7d4wmyk" path="res://assets/components/weapons/LOP WEAPON1.png" id="4_o71rv"]
 [ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_gxu5u"]
 [ext_resource type="Texture2D" uid="uid://b54d53spdo1xg" path="res://assets/UI/build_phase/XPERC_COMP_ICON.png" id="5_s5jpx"]
 [ext_resource type="Script" uid="uid://sy0a0f1hqyk2" path="res://scripts/parts/atk_resource.gd" id="6_42j7w"]
@@ -31,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://b3fmmtpsftnu7" path="res://assets/UI/build_phase/COMP_ATTACK_LABLE.png" id="13_m3kao"]
 [ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="14_a2c3f"]
 [ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="15_oa1ag"]
+[ext_resource type="Texture2D" uid="uid://b60gyemxyqhry" path="res://assets/components/shield/LOP SHIELD3.png" id="31_a2c3f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -259,6 +259,7 @@ weapon_drawing_time = 15.0
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
 
 [node name="Selection UI" type="Control" parent="CanvasLayer" unique_id=201594146 node_paths=PackedStringArray("drawing_phase_manager", "head_button", "torso_button", "defense_button", "weapon_button", "head_preview", "torso_preview", "defense_preview", "weapon_preview", "head_similarity_label", "torso_similarity_label", "defense_similarity_label", "weapon_similarity_label", "repair_button", "upgrade_button")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -934,39 +935,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_63f3k")
-drawing_grid = NodePath("MarginContainer/HBoxContainer/Drawing Grid")
-reference_art = NodePath("MarginContainer/HBoxContainer/Reference Image")
-timer_label = NodePath("MarginContainer/HBoxContainer/Timer")
+drawing_grid = NodePath("Drawing Grid")
+reference_art = NodePath("Reference Image")
+timer_label = NodePath("Timer")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Drawing UI" unique_id=686340685]
+[node name="Drawing Grid" type="GridContainer" parent="CanvasLayer/Drawing UI" unique_id=279116057 node_paths=PackedStringArray("grid")]
+custom_maximum_size = Vector2(300, 548)
+propagate_maximum_size = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.101128474
+anchor_top = 0.07716049
+anchor_right = 0.36154515
+anchor_bottom = 0.9228395
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Drawing UI/MarginContainer" unique_id=1269778142]
-layout_mode = 2
-theme_override_constants/separation = 100
-alignment = 1
-
-[node name="Drawing Grid" type="GridContainer" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=279116057 node_paths=PackedStringArray("grid")]
-layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/h_separation = 2
-theme_override_constants/v_separation = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
 script = ExtResource("2_oictx")
 grid = NodePath(".")
 cell_texture = ExtResource("3_63f3k")
 
-[node name="Timer" type="Label" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=1078551396]
-layout_mode = 2
+[node name="Timer" type="Label" parent="CanvasLayer/Drawing UI" unique_id=1078551396]
+layout_mode = 0
+offset_left = 516.5
+offset_top = 50.0
+offset_right = 635.5
+offset_bottom = 191.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_o1ek0")
@@ -974,13 +971,23 @@ text = "Time
 99"
 horizontal_alignment = 1
 
-[node name="Reference Image" type="TextureRect" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=1881189463]
+[node name="Reference Image" type="TextureRect" parent="CanvasLayer/Drawing UI" unique_id=1881189463]
 texture_filter = 1
-layout_mode = 2
-texture = ExtResource("4_o71rv")
-expand_mode = 3
+custom_minimum_size = Vector2(-1, -1)
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 0
+anchor_left = 0.63845485
+anchor_top = 0.07716049
+anchor_right = 0.89887154
+anchor_bottom = 0.9228395
+size_flags_horizontal = 3
+texture = ExtResource("31_a2c3f")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Repair or Upgrade UI" type="Control" parent="CanvasLayer" unique_id=1778247371]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
