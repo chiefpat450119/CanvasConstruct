@@ -10,6 +10,12 @@ signal died
 @export_range(0.0, 10.0, 0.1, "or_greater") var attack_cooldown: float = 0.5
 @export_range(0.0, 10.0, 0.1, "or_greater") var defend_cooldown: float = 1.0
 
+@export_group("SFX")
+@export var attack_sfx: AudioStream
+@export var damage_sfx: AudioStream
+@export var death_sfx: AudioStream
+@export var defend_sfx: AudioStream
+
 const DEFENSE_DURATION := 1.0
 
 var is_defending := false
@@ -50,6 +56,7 @@ func attack(target: BossBase) -> void:
 	_attack_cooldown_timer = maxf(attack_cooldown, player_stats.get_head_cooldown())
 	action_started.emit(&"attack")
 	_play_attack_animation()
+	AudioManager.play_SFX(attack_sfx, -10)
 	target.take_damage(player_stats.get_weapon_damage())
 
 
@@ -60,6 +67,7 @@ func defend() -> void:
 	is_defending = true
 	_defense_timer = DEFENSE_DURATION
 	action_started.emit(&"defend")
+	AudioManager.play_SFX(defend_sfx, -10)
 	_play_defend_animation()
 
 
@@ -69,6 +77,7 @@ func take_damage(amount: int) -> void:
 		damage = maxi(0, damage - roundi(player_stats.get_shield_defense()))
 
 	player_stats.take_damage(damage)
+	AudioManager.play_SFX(damage_sfx, -10)
 	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
 	_check_for_death()
 
@@ -145,6 +154,7 @@ func _check_for_death() -> void:
 	is_dead = true
 	is_defending = false
 	print("Player died.")
+	AudioManager.play_SFX(death_sfx, -10)
 	died.emit()
 
 
