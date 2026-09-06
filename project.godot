@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Summer Summit 2026"
+run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
-run/main_scene="res://scenes/main_menu/main_menu.tscn"
 
 [autoload]
 
 GameStateManagerInstance="*uid://rdbtgjt55h81"
+AudioManager="*uid://bfnjfh6r5eevj"
 
 [display]
 
