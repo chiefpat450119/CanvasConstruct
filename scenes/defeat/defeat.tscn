@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="3_g21tw"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="4_eq47o"]
 [ext_resource type="Texture2D" uid="uid://qk8krg7vkti6" path="res://assets/UI/winloss/LOSE_ICON.png" id="5_1f8du"]
+[ext_resource type="Script" uid="uid://ca75efdclraqy" path="res://scripts/texture_button_SFX_player.gd" id="5_ei3t7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ei3t7"]
 shader = ExtResource("3_g21tw")
@@ -37,6 +38,7 @@ offset_top = 458.0
 offset_right = 718.0
 offset_bottom = 546.0
 texture_normal = ExtResource("2_1f8du")
+script = ExtResource("5_ei3t7")
 
 [node name="Label" type="Label" parent="Tutorial" unique_id=538078429]
 layout_mode = 1

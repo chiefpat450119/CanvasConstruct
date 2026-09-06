@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="7_agvlj"]
 [ext_resource type="Script" uid="uid://clq5r8xjv2n7m" path="res://scenes/drawing_phase/drawing_ui_anim.gd" id="7_drawing_anim"]
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="8_77x44"]
+[ext_resource type="Script" uid="uid://ca75efdclraqy" path="res://scripts/texture_button_SFX_player.gd" id="8_vxr02"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="9_vxr02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2x1o"]
@@ -197,13 +198,12 @@ grow_vertical = 2
 text = "Drawing Phase"
 label_settings = SubResource("LabelSettings_t2x1o")
 
-[node name="DrawingUIAnim" type="Node" parent="." unique_id=10217759 node_paths=PackedStringArray("phase_banner", "timer", "drawing_grid", "reference_art", "finish_button")]
+[node name="DrawingUIAnim" type="Node" parent="." unique_id=10217759 node_paths=PackedStringArray("phase_banner", "timer", "drawing_grid", "reference_art")]
 script = ExtResource("7_drawing_anim")
 phase_banner = NodePath("../ColorRect")
 timer = NodePath("../Timer")
 drawing_grid = NodePath("../Drawing Grid Frame")
 reference_art = NodePath("../Reference Image Frame")
-finish_button = NodePath("")
 play_on_ready = false
 
 [node name="Finish Button" type="TextureButton" parent="." unique_id=1988163918]
@@ -224,6 +224,7 @@ texture_hover = SubResource("CompressedTexture2D_w5bij")
 texture_focused = SubResource("CompressedTexture2D_w5bij")
 ignore_texture_size = true
 stretch_mode = 0
+script = ExtResource("8_vxr02")
 
 [node name="Label" type="Label" parent="Finish Button" unique_id=784412987]
 layout_mode = 1
