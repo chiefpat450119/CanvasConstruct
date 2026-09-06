@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://i63x718ytbjn" path="res://scenes/combat_phase/combat_ui.gd" id="1_lmxbf"]
 [ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="2_5e1av"]
 [ext_resource type="Texture2D" uid="uid://bptfgjs57p6o1" path="res://assets/UI/battle_phase/COMP_DEFENSE_ICON.png" id="2_lmxbf"]
+[ext_resource type="Texture2D" uid="uid://tbnc0acwnsjh" path="res://assets/UI/battle_phase/backdrop.png" id="2_vfj6x"]
 [ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="4_o6co2"]
 [ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="6_vxmlv"]
 [ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="7_anrlg"]
@@ -109,6 +110,16 @@ grow_vertical = 2
 
 [node name="UiBackground" parent="Control" unique_id=1544384068 instance=ExtResource("2_5e1av")]
 layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1151142263]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vfj6x")
 
 [node name="Buttons" type="HBoxContainer" parent="Control" unique_id=2085455874]
 layout_mode = 1
@@ -229,7 +240,7 @@ offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_uwk22")
-text = "BOSS NAME"
+text = "BIG BAD BOSS"
 label_settings = ExtResource("6_vxmlv")
 
 [editable path="Control/Health Bars/Player Health Bar/UiBackground"]
