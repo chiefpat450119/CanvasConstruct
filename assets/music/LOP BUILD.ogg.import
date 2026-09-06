@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://df63v8bv24pwp"
+path="res://.godot/imported/LOP BUILD.ogg-71b33365d605cc52e56706fde915512a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/LOP BUILD.ogg"
+dest_files=["res://.godot/imported/LOP BUILD.ogg-71b33365d605cc52e56706fde915512a.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

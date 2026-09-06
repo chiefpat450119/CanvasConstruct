@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dstm62janr5ug"
+path="res://.godot/imported/LOP COMBAT.ogg-999bd46feb4b8534ee24c84c1e6e91d4.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/LOP COMBAT.ogg"
+dest_files=["res://.godot/imported/LOP COMBAT.ogg-999bd46feb4b8534ee24c84c1e6e91d4.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
