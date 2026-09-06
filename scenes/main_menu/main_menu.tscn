@@ -2,30 +2,8 @@
 
 [ext_resource type="Script" uid="uid://djhq78c0wf0vl" path="res://scenes/main_menu/main_menu.gd" id="1_fsom3"]
 [ext_resource type="Texture2D" uid="uid://df2uu25ktdk6e" path="res://assets/UI/main_menu/MAIN_LOGO.png" id="2_0ebjn"]
+[ext_resource type="Texture2D" uid="uid://b2qimo8bbw14o" path="res://assets/UI/main_menu/FIGHT_ICON.png" id="3_uqeha"]
 [ext_resource type="PackedScene" uid="uid://d3ko0q7uix0mk" path="res://scenes/test/scrolling_background.tscn" id="4_wem23"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c35f"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsom3"]
-bg_color = Color(0, 0.3948369, 0.6325011, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ebjn"]
-bg_color = Color(2.0407439e-05, 0.58216786, 0.9142944, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fsom3"]
 
 [node name="MainMenu" type="Control" unique_id=897672444]
 layout_mode = 3
@@ -54,25 +32,47 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1216723448]
+[node name="StartButton" type="TextureButton" parent="VBoxContainer" unique_id=1413600349]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_1c35f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
-text = "Start"
+texture_normal = ExtResource("3_uqeha")
+texture_hover = ExtResource("3_uqeha")
+stretch_mode = 3
 
-[node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1543310843]
+[node name="Label" type="Label" parent="VBoxContainer/StartButton" unique_id=603967805]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "START"
+horizontal_alignment = 1
+
+[node name="TutorialButton" type="TextureButton" parent="VBoxContainer" unique_id=442325736]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_uqeha")
+texture_hover = ExtResource("3_uqeha")
+
+[node name="Label" type="Label" parent="VBoxContainer/TutorialButton" unique_id=71453489]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -11.5
+offset_right = 54.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_1c35f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
-text = "How to Play"
+text = "HOW TO PLAY"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2111576268]
 layout_mode = 1
