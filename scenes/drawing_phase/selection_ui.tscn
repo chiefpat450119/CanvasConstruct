@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dx37n32wlkmo2" path="res://scenes/drawing_phase/selection_ui.gd" id="1_wwyqb"]
 [ext_resource type="Texture2D" uid="uid://duitaui6xsh0" path="res://assets/UI/build_phase/COMP_HEAD_LABLE.png" id="2_pmq32"]
 [ext_resource type="Texture2D" uid="uid://dq4rcpcu2pirn" path="res://assets/UI/build_phase/COMP_HEAD_ICON.png" id="3_1g0n4"]
+[ext_resource type="Script" uid="uid://xqt0rrx2lhxa" path="res://scripts/button_SFX_player.gd" id="3_3b531"]
 [ext_resource type="Texture2D" uid="uid://b54d53spdo1xg" path="res://assets/UI/build_phase/XPERC_COMP_ICON.png" id="4_r2dvy"]
 [ext_resource type="LabelSettings" uid="uid://dverhrljleb0m" path="res://assets/UI/fonts/small_info.tres" id="5_1g0n4"]
 [ext_resource type="Texture2D" uid="uid://dnxydv8supesu" path="res://assets/UI/build_phase/COMP_TORSO_LABLE.png" id="5_g14as"]
@@ -17,13 +18,14 @@
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="12_pmq32"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="15_g14as"]
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="16_dckcs"]
+[ext_resource type="Script" uid="uid://ca75efdclraqy" path="res://scripts/texture_button_SFX_player.gd" id="17_0mrsc"]
 [ext_resource type="Script" uid="uid://dj2a6looo4068" path="res://scenes/drawing_phase/selection_ui_anim.gd" id="17_selection_anim"]
 [ext_resource type="Script" uid="uid://cadwc52d0c3ei" path="res://scenes/drawing_phase/part_ui.gd" id="18_part_ui"]
 [ext_resource type="Texture2D" uid="uid://de03mfq7o405b" path="res://assets/UI/build_phase/TOTAL_COMPLETION_UI_FRONT.png" id="20_cmnqg"]
 [ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="21_8t5x5"]
 [ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="22_gj7ov"]
 [ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="23_d64h6"]
-[ext_resource type="Script" path="res://scenes/drawing_phase/total_progress_bar.gd" id="24_total_progress"]
+[ext_resource type="Script" uid="uid://csoeoqghwwb78" path="res://scenes/drawing_phase/total_progress_bar.gd" id="24_total_progress"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -163,6 +165,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_884ma")
 theme_override_styles/focus = SubResource("StyleBoxFlat_884ma")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("3_3b531")
 
 [node name="Description Bar" type="TextureRect" parent="Head" unique_id=32125894]
 layout_mode = 1
@@ -317,6 +320,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_1olcv")
 theme_override_styles/focus = SubResource("StyleBoxFlat_1olcv")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("3_3b531")
 
 [node name="Description Bar" type="TextureRect" parent="Defense" unique_id=850731017]
 layout_mode = 1
@@ -474,6 +478,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_8vcty")
 theme_override_styles/focus = SubResource("StyleBoxFlat_8vcty")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("3_3b531")
 
 [node name="Description Bar" type="TextureRect" parent="Weapon" unique_id=1000592703]
 layout_mode = 1
@@ -629,6 +634,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_rtoy8")
 theme_override_styles/focus = SubResource("StyleBoxFlat_rtoy8")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("3_3b531")
 
 [node name="Description Bar" type="TextureRect" parent="Torso" unique_id=2011803175]
 layout_mode = 1
@@ -763,6 +769,7 @@ texture_hover = SubResource("CompressedTexture2D_dnu3j")
 texture_focused = SubResource("CompressedTexture2D_dnu3j")
 ignore_texture_size = true
 stretch_mode = 0
+script = ExtResource("17_0mrsc")
 
 [node name="Label" type="Label" parent="Fight Button" unique_id=1144196817]
 layout_mode = 1
