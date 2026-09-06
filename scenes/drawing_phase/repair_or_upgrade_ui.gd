@@ -2,8 +2,8 @@ class_name RepairOrUpgradeUI
 extends Control
 
 @export var drawing_phase_manager: DrawingPhaseManager
-@export var repair_button: Button
-@export var upgrade_button: Button
+@export var repair_button: BaseButton
+@export var upgrade_button: BaseButton
 
 
 func _ready() -> void:
@@ -15,6 +15,6 @@ func _ready() -> void:
 	_connect_action_button(upgrade_button, drawing_phase_manager.upgrade_selected_part)
 
 
-func _connect_action_button(button: Button, action: Callable) -> void:
+func _connect_action_button(button: BaseButton, action: Callable) -> void:
 	if button != null:
 		button.pressed.connect(action)

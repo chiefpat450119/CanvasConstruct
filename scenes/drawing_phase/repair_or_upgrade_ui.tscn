@@ -19,8 +19,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nscei")
-repair_button = NodePath("")
-upgrade_button = NodePath("")
+repair_button = NodePath("TextureRect/Repair")
+upgrade_button = NodePath("TextureRect/Upgrade")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=152824103]
 layout_mode = 1
