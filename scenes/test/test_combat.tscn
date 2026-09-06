@@ -3,12 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://dty1pdgxikmir" path="res://scenes/combat_phase/combat_phase.tscn" id="1_e0f5m"]
 [ext_resource type="Script" uid="uid://bxsxbuerqnt7k" path="res://scenes/test/test_combat.gd" id="1_test"]
 [ext_resource type="Resource" uid="uid://cdtuyou11qgur" path="res://scripts/parts/parts/HEAD/Head.tres" id="2_head"]
+[ext_resource type="PackedScene" uid="uid://dd6b127nd3xy6" path="res://scenes/bosses/deeno/deeno_boss.tscn" id="2_y7kx6"]
 [ext_resource type="Resource" uid="uid://d0r0iiyncgqvm" path="res://scripts/parts/parts/WEAPONS/Weapon3.tres" id="3_weapon"]
 [ext_resource type="Resource" uid="uid://b7gfhkcgvyxsf" path="res://scripts/parts/parts/BLOCK/Def1.tres" id="4_defense"]
 [ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_torso"]
 
 [node name="TestCombat" type="Node2D" unique_id=370905193]
 script = ExtResource("1_test")
+boss_scene = ExtResource("2_y7kx6")
 head_part = ExtResource("2_head")
 weapon_part = ExtResource("3_weapon")
 defense_part = ExtResource("4_defense")

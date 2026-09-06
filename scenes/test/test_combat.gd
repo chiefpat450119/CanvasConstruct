@@ -1,6 +1,6 @@
 extends Node2D
 
-const ORC_BOSS_SCENE := preload("res://scenes/bosses/orc_boss.tscn")
+@export var boss_scene: PackedScene
 
 @export var head_part: HeadResource
 @export var weapon_part: AtkResource
@@ -15,4 +15,4 @@ func _ready() -> void:
 		PlayerPart.new(defense_part, defense_part.reference_image.get_image()),
 		PlayerPart.new(torso_part, torso_part.reference_image.get_image()),
 	]
-	$CombatPhase.initialize(ORC_BOSS_SCENE, player_parts)
+	$CombatPhase.initialize(boss_scene, player_parts)

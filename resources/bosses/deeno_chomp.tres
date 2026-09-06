@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackMove" format=3 uid="uid://ba1fxvg2wd27v"]
+
+[ext_resource type="Script" uid="uid://fl1srntylnld" path="res://scenes/bosses/attack_move.gd" id="1_attack"]
+
+[resource]
+script = ExtResource("1_attack")
+damage = 15
+move_id = &"chomp"
+windup = 1.5

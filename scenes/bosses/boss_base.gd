@@ -20,6 +20,7 @@ var _current_move: BossMove
 var _move_timer: float = 0.0
 var _is_winding_up: bool = false
 var _defense_timer: float = 0.0
+var _defense_damage: int = 0
 
 var is_defending: bool:
 	get:
@@ -44,6 +45,8 @@ func _process(delta: float) -> void:
 	if _defense_timer > 0.0:
 		_defense_timer = maxf(0.0, _defense_timer - delta)
 		if _defense_timer == 0.0:
+			_defense_damage = 0
+			print("Boss defense finished.")
 			defense_finished.emit()
 
 	if _move_timer > 0.0:
@@ -74,11 +77,16 @@ func execute_attack(move: AttackMove) -> void:
 	deal_damage_to_target(move.damage)
 
 
-func start_defending(duration: float) -> void:
+func start_defending(duration: float, defense_damage: float = 0.0) -> void:
 	if is_dead:
 		return
 
 	_defense_timer = maxf(0.0, duration)
+	_defense_damage = maxi(0, roundi(defense_damage))
+	print("Boss started defending for %.2f seconds (counter damage: %d)." % [
+		_defense_timer,
+		_defense_damage
+	])
 	defense_started.emit(_defense_timer)
 
 
@@ -94,6 +102,15 @@ func take_damage(amount: float) -> void:
 	if amount <= 0.0 or health <= 0:
 		return
 
+	if is_defending:
+		print("Boss blocked %.1f damage." % amount)
+		if _defense_damage > 0:
+			print("Boss countered for %d damage." % _defense_damage)
+			deal_damage_to_target(_defense_damage)
+		else:
+			print("Boss defense has no counter damage.")
+		return
+
 	health = maxi(0, health - roundi(amount))
 	health_changed.emit(health, _max_health)
 	if health == 0 and not is_dead:
@@ -102,6 +119,7 @@ func take_damage(amount: float) -> void:
 		_move_timer = 0.0
 		_is_winding_up = false
 		_defense_timer = 0.0
+		_defense_damage = 0
 		print("Boss died.")
 		died.emit()
 

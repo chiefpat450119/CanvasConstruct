@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dd6b127nd3xy6"]
+
+[ext_resource type="Texture2D" uid="uid://bb4rgsxsje030" path="res://assets/deeno/deeno headless.png" id="1_3cxa4"]
+[ext_resource type="Script" uid="uid://svmdxm43u824" path="res://scenes/bosses/deeno/deeno_boss.gd" id="1_5tdhq"]
+[ext_resource type="Texture2D" uid="uid://bybm3c1kil2db" path="res://assets/deeno/deeno lower head.png" id="1_0425l"]
+[ext_resource type="Script" uid="uid://4dpromrssh0o" path="res://scenes/bosses/boss_move.gd" id="1_boss_move"]
+[ext_resource type="Texture2D" uid="uid://nrm1ye66hvx3" path="res://assets/deeno/deeno upper head.png" id="2_3cxa4"]
+[ext_resource type="Resource" uid="uid://ba1fxvg2wd27v" path="res://resources/bosses/deeno_chomp.tres" id="3_chomp"]
+[ext_resource type="Resource" uid="uid://cpmq12qcr0g6u" path="res://resources/bosses/deeno_block.tres" id="4_block"]
+[ext_resource type="Resource" uid="uid://5joflu5mnkj4" path="res://resources/bosses/deeno_special_attack.tres" id="5_special"]
+
+[node name="Deeno" type="Node2D" unique_id=939628542]
+script = ExtResource("1_5tdhq")
+health = 200
+moves = Array[ExtResource("1_boss_move")]([ExtResource("3_chomp"), ExtResource("4_block"), ExtResource("5_special")])
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1758785597]
+position = Vector2(1, 22)
+texture = ExtResource("1_3cxa4")
+
+[node name="Head" type="Sprite2D" parent="Body" unique_id=698893268]
+position = Vector2(-1, -22)
+texture = ExtResource("2_3cxa4")
+
+[node name="Jaw" type="Sprite2D" parent="Body/Head" unique_id=1266226774]
+position = Vector2(-12, -1)
+texture = ExtResource("1_0425l")
