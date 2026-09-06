@@ -109,6 +109,7 @@ func _has_current_part(category: GameStateManager.PartCategory) -> bool:
 
 
 func _start_next_drawing(category: GameStateManager.PartCategory) -> void:
+	AudioManager.play_drawing_music()
 	var next_part := _get_next_part(category)
 	if next_part == null:
 		push_warning(
@@ -185,6 +186,7 @@ func _on_drawing_timer_timeout() -> void:
 
 
 func _on_drawing_finished() -> void:
+	AudioManager.play_build_music()
 	if _active_reference_part == null:
 		return
 	_drawing_timer.stop()

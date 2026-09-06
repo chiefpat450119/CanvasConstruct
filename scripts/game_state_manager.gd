@@ -41,6 +41,7 @@ func mark_drawing_phase_completed() -> void:
 
 
 func reset_run() -> void:
+	AudioManager.play_build_music()
 	has_completed_drawing_phase = false
 	next_boss_index = 0
 	current_head_part = null
@@ -109,10 +110,12 @@ func get_current_parts() -> Array[PlayerPart]:
 
 
 func switch_to_drawing_phase() -> void:
+	AudioManager.play_build_music()
 	get_tree().change_scene_to_file(drawing_phase_scene_path)
 
 
 func switch_to_combat_phase() -> void:
+	AudioManager.play_combat_music()
 	var scene_tree := get_tree()
 	scene_tree.change_scene_to_file(combat_phase_scene_path)
 	await scene_tree.scene_changed
