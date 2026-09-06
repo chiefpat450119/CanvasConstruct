@@ -53,8 +53,7 @@ func repair_selected_part() -> void:
 
 
 func upgrade_selected_part() -> void:
-	# TODO: Let the player choose and draw a replacement upgraded part.
-	pass
+	_start_next_drawing(_selected_category)
 
 
 func fight() -> void:
