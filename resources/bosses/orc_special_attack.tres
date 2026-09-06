@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="AttackMove" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AttackMove" format=3 uid="uid://b0mrwslihpaei"]
 
-[ext_resource type="Script" path="res://scenes/bosses/attack_move.gd" id="1_attack"]
+[ext_resource type="Script" uid="uid://fl1srntylnld" path="res://scenes/bosses/attack_move.gd" id="1_attack"]
 
 [resource]
 script = ExtResource("1_attack")
-move_id = &"special_attack"
-cooldown = 1.0
-windup = 4.0
 damage = 40
+move_id = &"special_attack"
+windup = 4.0
