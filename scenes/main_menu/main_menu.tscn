@@ -27,7 +27,7 @@ corner_radius_bottom_left = 24
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fsom3"]
 
-[node name="MainMenu" type="Control" unique_id=897672444]
+[node name="MainMenu" type="Control" unique_id=897672444 node_paths=PackedStringArray("start_button", "tutorial_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +35,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fsom3")
+start_button = NodePath("VBoxContainer/StartButton")
+tutorial_button = NodePath("VBoxContainer/TutorialButton")
 
 [node name="ScrollingBackground" parent="." unique_id=482453548 instance=ExtResource("4_wem23")]
 layout_mode = 1
