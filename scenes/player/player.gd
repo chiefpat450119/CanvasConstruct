@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 
 
 func attack(target: BossBase) -> void:
-	if is_dead or _attack_cooldown_timer > 0.0:
+	if is_dead or is_defending or _attack_cooldown_timer > 0.0:
 		return
 	if not is_instance_valid(target) or target.is_dead or player_stats == null:
 		return
