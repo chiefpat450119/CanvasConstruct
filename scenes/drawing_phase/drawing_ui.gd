@@ -5,6 +5,7 @@ signal finish_requested
 
 @export var drawing_grid: DrawingGrid
 @export var reference_art: TextureRect
+@export var reference_art_grid_lines : GridLines
 @export var timer_label: Label
 @export var finish_button: Button
 
@@ -20,9 +21,13 @@ func setup_drawing(
 	drawing_timer: Timer = null,
 	initial_drawing: Image = null
 ) -> void:
+	# Setup reference iamge
 	var reference_width := reference_image.get_width()
 	var reference_height := reference_image.get_height()
 	reference_art.texture = reference_image
+	reference_art_grid_lines.init(reference_width, reference_height)
+	
+	# Setup drawing area
 	drawing_grid.active_colour = _get_reference_colour(reference_image)
 	drawing_grid.init(reference_width, reference_height)
 	if is_instance_valid(initial_drawing):
