@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cdnujgtoapsk4"]
+
+[ext_resource type="Script" uid="uid://djhq78c0wf0vl" path="res://scenes/main_menu/main_menu.gd" id="1_fsom3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1c35f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c35f"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsom3"]
+bg_color = Color(0, 0.3948369, 0.6325011, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ebjn"]
+bg_color = Color(2.0407439e-05, 0.58216786, 0.9142944, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fsom3"]
+
+[node name="MainMenu" type="Control" unique_id=897672444]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fsom3")
+
+[node name="BackgroundImage" type="Panel" parent="." unique_id=269209500]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1c35f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=502310290]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.5
+offset_top = -94.0
+offset_right = 163.5
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1216723448]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_1c35f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
+text = "Start"
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1543310843]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_1c35f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
+text = "How to Play"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_pressed"]
