@@ -24,6 +24,7 @@ extends Control
 @export_group("Action Buttons")
 @export var repair_button: Button
 @export var upgrade_button: Button
+@export var fight_button: TextureButton
 
 
 func _ready() -> void:
@@ -37,6 +38,7 @@ func _ready() -> void:
 	_connect_part_button(weapon_button, GameStateManager.PartCategory.WEAPON)
 	_connect_action_button(repair_button, drawing_phase_manager.repair_selected_part)
 	_connect_action_button(upgrade_button, drawing_phase_manager.upgrade_selected_part)
+	_connect_action_button(fight_button, drawing_phase_manager.fight)
 
 
 func set_part_previews(
@@ -102,7 +104,7 @@ func _connect_part_button(
 		button.pressed.connect(drawing_phase_manager.select_part.bind(category))
 
 
-func _connect_action_button(button: Button, action: Callable) -> void:
+func _connect_action_button(button: BaseButton, action: Callable) -> void:
 	if button != null:
 		button.pressed.connect(action)
 
