@@ -116,6 +116,8 @@ func _initialize_part_preview(
 		_get_display_reference(current_part, fallback_part),
 		current_part.get_stat_multiplier() if current_part != null else 1.0
 	)
+	if current_part != null:
+		selection_ui.set_part_similarity(category, current_part.get_similarity())
 
 
 func _get_preview_texture(current_part: PlayerPart, fallback_part: PartResource) -> Texture2D:
