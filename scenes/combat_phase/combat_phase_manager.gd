@@ -3,8 +3,25 @@ extends Node2D
 
 @export var boss_container: Node
 @export var boss_spawn_position: Vector2 = Vector2.ZERO
+@export var player: Player
+@export var combat_ui: CombatUI
+@export var boss_scene: PackedScene
+
+signal victory
+signal defeat
 
 var current_boss: Node
+
+func _ready() -> void:
+	if player != null:
+		player.died.connect(_on_player_died)
+
+	if combat_ui != null:
+		combat_ui.attack_requested.connect(_on_attack_requested)
+		combat_ui.defend_requested.connect(_on_defend_requested)
+
+	if boss_scene != null:
+		initialize(boss_scene)
 
 func initialize(boss_scene: PackedScene) -> Error:
 	if boss_scene == null:
@@ -22,6 +39,10 @@ func initialize(boss_scene: PackedScene) -> Error:
 		boss_node_2d.position = boss_spawn_position
 
 	current_boss = boss
+	boss.died.connect(_on_boss_died)
+	boss.set_target(player)
+	if combat_ui != null:
+		combat_ui.bind_combatant(player, boss)
 	return OK
 
 
@@ -31,6 +52,26 @@ func get_current_boss() -> Node:
 
 func clear_boss() -> void:
 	_clear_current_boss()
+	if combat_ui != null:
+		combat_ui.clear_boss()
+
+
+func _on_attack_requested() -> void:
+	if is_instance_valid(current_boss) and player != null:
+		player.attack(current_boss as BossBase)
+
+
+func _on_defend_requested() -> void:
+	if player != null:
+		player.defend()
+
+
+func _on_boss_died() -> void:
+	victory.emit()
+
+
+func _on_player_died() -> void:
+	defeat.emit()
 
 
 func _clear_current_boss() -> void:

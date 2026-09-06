@@ -14,6 +14,11 @@ func init_from_image(image: Image):
 	_texture = ImageTexture.create_from_image(_img)
 	_width = image.get_width()
 	_height = image.get_height()
+	visible_pixels.clear()
+	for y in _height:
+		for x in _width:
+			if _img.get_pixel(x, y).a > 0.0:
+				visible_pixels.append(Vector2i(x, y))
 	sprite2d.texture = _texture
 
 func init(w: int, h: int):

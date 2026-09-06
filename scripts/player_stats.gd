@@ -1,8 +1,8 @@
 class_name PlayerStats
 extends Node
 
-@export var curr_num_pixeles: int = 10
-@export var max_num_pixeles: int = 10
+@export var curr_num_pixeles: int = 100
+@export var max_num_pixeles: int = 100
 @export var death_threshold: float = 0.5
 
 var weapon_part: AtkResource
@@ -36,16 +36,20 @@ func set_multipliers(weapon_multiplier: float, head_multiplier: float, defense_m
 	_torso_chance_multiplier = torso_multiplier
 
 func get_weapon_damage() -> float:
-	var base_weapon_damage: float = weapon_part.get_damage()
-	return base_weapon_damage * _weapon_damage_multiplier
+	if weapon_part == null:
+		return 0.0
+	var base_weapon_damage: float = weapon_part.attack_damage
+	return weapon_part.modify_attack_damage(base_weapon_damage * _weapon_damage_multiplier)
 	
 func get_head_cooldown() -> float:
 	var base_head_cooldown = head_part.get_cooldown()
 	return base_head_cooldown * _head_cooldown_multiplier
 	
 func get_shield_defense() -> float:
-	var base_shield_defense = defense_part.get_defense()
-	return base_shield_defense * _shield_defense_multiplier
+	if defense_part == null:
+		return 0.0
+	var base_shield_defense: float = defense_part.defense
+	return defense_part.modify_defense(base_shield_defense * _shield_defense_multiplier)
 	
 
 func get_torso_chance() -> float:
@@ -54,7 +58,7 @@ func get_torso_chance() -> float:
 	
 	
 func is_dead() -> bool:
-	return curr_num_pixeles < (max_num_pixeles * death_threshold)
+	return curr_num_pixeles <= (max_num_pixeles * death_threshold)
 
 func take_damage(pixel_count: int) -> void:
 	if pixel_count <= 0:
