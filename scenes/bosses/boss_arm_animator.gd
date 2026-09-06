@@ -4,6 +4,7 @@ extends Node
 @export var boss: BossBase
 @export var left_arm: Sprite2D
 @export var right_arm: Sprite2D
+@export var animation_player : AnimationPlayer
 
 var _left_arm_rest_rotation: float
 var _right_arm_rest_rotation: float
@@ -40,13 +41,16 @@ func _wind_up_special() -> void:
 
 
 func _swing_left_arm() -> void:
-	_tween_arms(
-		_left_arm_rest_rotation + deg_to_rad(100.0),
-		right_arm.rotation,
-		0.18
-	)
-	_arm_tween.set_parallel(false)
-	_arm_tween.tween_property(left_arm, "rotation", _left_arm_rest_rotation, 0.22)
+	animation_player.play("orc_lift_axe")
+	animation_player.queue("orc_swing_axe")
+	animation_player.queue("orc_idle")
+	#_tween_arms(
+		#_left_arm_rest_rotation + deg_to_rad(100.0),
+		#right_arm.rotation,
+		#0.18
+	#)
+	#_arm_tween.set_parallel(false)
+	#_arm_tween.tween_property(left_arm, "rotation", _left_arm_rest_rotation, 0.22)
 
 
 func _swing_both_arms() -> void:
