@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bycuks5bvf21n" path="res://scenes/drawing_sysem/drawing_system.gd" id="1_h8u3h"]
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="2_ada7u"]
-[ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/grid cell sprite.png" id="3_dml50"]
+[ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="3_dml50"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h8u3h"]
 load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54aae.ctex"
