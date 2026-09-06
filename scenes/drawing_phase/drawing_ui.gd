@@ -8,11 +8,17 @@ extends Control
 var _drawing_timer: Timer
 
 
-func setup_drawing(reference_image: Texture2D, drawing_timer: Timer = null) -> void:
+func setup_drawing(
+	reference_image: Texture2D,
+	drawing_timer: Timer = null,
+	initial_drawing: RuntimeTexture = null
+) -> void:
 	var reference_width := reference_image.get_width()
 	var reference_height := reference_image.get_height()
 	reference_art.texture = reference_image
 	drawing_grid.init(reference_width, reference_height)
+	if is_instance_valid(initial_drawing):
+		drawing_grid.fill_from_drawing(initial_drawing)
 	_drawing_timer = drawing_timer
 	if _drawing_timer != null:
 		_update_timer_label()

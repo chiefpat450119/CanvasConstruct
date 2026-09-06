@@ -30,7 +30,7 @@ func select_part(category: GameStateManager.PartCategory) -> void:
 
 func repair_selected_part() -> void:
 	var current_part := GameStateManagerInstance.get_current_part(_selected_category)
-	_start_drawing(current_part.reference_part)
+	_start_drawing(current_part.reference_part, current_part.drawing)
 
 
 func upgrade_selected_part() -> void:
@@ -95,7 +95,10 @@ func _start_next_drawing(category: GameStateManager.PartCategory) -> void:
 		GameStateManagerInstance.advance_next_part_index(category)
 
 
-func _start_drawing(reference_part: PartResource) -> bool:
+func _start_drawing(
+	reference_part: PartResource,
+	initial_drawing: RuntimeTexture = null
+) -> bool:
 	if drawing_ui == null:
 		push_error("DrawingPhaseManager needs a DrawingUI.")
 		return false
@@ -103,7 +106,7 @@ func _start_drawing(reference_part: PartResource) -> bool:
 		push_warning("Cannot start drawing without a reference image.")
 		return false
 
-	drawing_ui.setup_drawing(reference_part.reference_image)
+	drawing_ui.setup_drawing(reference_part.reference_image, null, initial_drawing)
 	_show_only(drawing_ui)
 	return true
 
