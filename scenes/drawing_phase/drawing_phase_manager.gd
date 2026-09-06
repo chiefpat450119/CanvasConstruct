@@ -1,21 +1,16 @@
 class_name DrawingPhaseManager
 extends Node
 
-enum PartCategory {
-	HEAD,
-	TORSO,
-	DEFENSE,
-	WEAPON,
-}
-
 @export var selection_ui: SelectionUI
 @export var repair_or_upgrade_ui: CanvasItem
-@export var drawing_ui: CanvasItem
+@export var drawing_ui: DrawingUI
 
 @export var head_parts: Array[HeadResource]
 @export var torso_parts: Array[TorsoResource]
 @export var atk_parts: Array[AtkResource]
 @export var def_parts: Array[DefResource]
+
+var _selected_category: GameStateManager.PartCategory
 
 
 func _ready() -> void:
@@ -23,37 +18,51 @@ func _ready() -> void:
 	_show_only(selection_ui)
 
 
-func select_part(category: PartCategory) -> void:
+func select_part(category: GameStateManager.PartCategory) -> void:
+	_selected_category = category
+
 	if not _has_current_part(category):
-		_show_only(drawing_ui)
+		_start_next_drawing(category)
 		return
 
 	_show_only(repair_or_upgrade_ui)
 
 
-func select_action() -> void:
-	_show_only(drawing_ui)
+func repair_selected_part() -> void:
+	var current_part := GameStateManagerInstance.get_current_part(_selected_category)
+	_start_drawing(current_part.reference_part)
+
+
+func upgrade_selected_part() -> void:
+	_start_next_drawing(_selected_category)
 
 
 func _initialize_part_previews() -> void:
 	if selection_ui == null:
 		return
 
-	var head_fallback: HeadResource = null
-	var torso_fallback: TorsoResource = null
-	var atk_fallback: AtkResource = null
-	var def_fallback: DefResource = null
-
-	head_fallback = head_parts[0]
-	torso_fallback = torso_parts[0]
-	atk_fallback = atk_parts[0]
-	def_fallback = def_parts[0]
+	var head_category := GameStateManager.PartCategory.HEAD
+	var torso_category := GameStateManager.PartCategory.TORSO
+	var defense_category := GameStateManager.PartCategory.DEFENSE
+	var weapon_category := GameStateManager.PartCategory.WEAPON
 
 	selection_ui.set_part_previews(
-		_get_preview_texture(GameStateManagerInstance.current_head_part, head_fallback),
-		_get_preview_texture(GameStateManagerInstance.current_torso_part, torso_fallback),
-		_get_preview_texture(GameStateManagerInstance.current_def_part, def_fallback),
-		_get_preview_texture(GameStateManagerInstance.current_atk_part, atk_fallback)
+		_get_preview_texture(
+			GameStateManagerInstance.current_head_part,
+			_get_next_part(head_category)
+		),
+		_get_preview_texture(
+			GameStateManagerInstance.current_torso_part,
+			_get_next_part(torso_category)
+		),
+		_get_preview_texture(
+			GameStateManagerInstance.current_def_part,
+			_get_next_part(defense_category)
+		),
+		_get_preview_texture(
+			GameStateManagerInstance.current_atk_part,
+			_get_next_part(weapon_category)
+		)
 	)
 
 
@@ -69,18 +78,52 @@ func _get_preview_texture(current_part: PlayerPart, fallback_part: PartResource)
 	return null
 
 
-func _has_current_part(category: PartCategory) -> bool:
-	match category:
-		PartCategory.HEAD:
-			return GameStateManagerInstance.current_head_part != null
-		PartCategory.TORSO:
-			return GameStateManagerInstance.current_torso_part != null
-		PartCategory.DEFENSE:
-			return GameStateManagerInstance.current_def_part != null
-		PartCategory.WEAPON:
-			return GameStateManagerInstance.current_atk_part != null
+func _has_current_part(category: GameStateManager.PartCategory) -> bool:
+	return GameStateManagerInstance.get_current_part(category) != null
 
-	return false
+
+func _start_next_drawing(category: GameStateManager.PartCategory) -> void:
+	var next_part := _get_next_part(category)
+	if next_part == null:
+		push_warning(
+			"No next part is available for category %d at index %d."
+			% [category, GameStateManagerInstance.get_next_part_index(category)]
+		)
+		return
+
+	if _start_drawing(next_part):
+		GameStateManagerInstance.advance_next_part_index(category)
+
+
+func _start_drawing(reference_part: PartResource) -> bool:
+	if drawing_ui == null:
+		push_error("DrawingPhaseManager needs a DrawingUI.")
+		return false
+	if reference_part == null or reference_part.reference_image == null:
+		push_warning("Cannot start drawing without a reference image.")
+		return false
+
+	drawing_ui.setup_drawing(reference_part.reference_image)
+	_show_only(drawing_ui)
+	return true
+
+
+func _get_next_part(category: GameStateManager.PartCategory) -> PartResource:
+	var index := GameStateManagerInstance.get_next_part_index(category)
+	if index < 0:
+		return null
+
+	match category:
+		GameStateManager.PartCategory.HEAD:
+			return head_parts[index] if index < head_parts.size() else null
+		GameStateManager.PartCategory.TORSO:
+			return torso_parts[index] if index < torso_parts.size() else null
+		GameStateManager.PartCategory.DEFENSE:
+			return def_parts[index] if index < def_parts.size() else null
+		GameStateManager.PartCategory.WEAPON:
+			return atk_parts[index] if index < atk_parts.size() else null
+
+	return null
 
 
 func _show_only(active_ui: CanvasItem) -> void:

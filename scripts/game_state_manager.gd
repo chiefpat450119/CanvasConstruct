@@ -1,6 +1,13 @@
 class_name GameStateManager
 extends Node
 
+enum PartCategory {
+	HEAD,
+	TORSO,
+	DEFENSE,
+	WEAPON,
+}
+
 @export var has_completed_drawing_phase: bool = false
 @export var boss_scenes: Array[PackedScene] = []
 @export_file("*.tscn") var drawing_phase_scene_path := "res://scenes/drawing_phase/drawing_phase.tscn"
@@ -11,6 +18,12 @@ var current_head_part: PlayerPart = null
 var current_atk_part: PlayerPart = null
 var current_def_part: PlayerPart = null
 var current_torso_part: PlayerPart = null
+var _next_part_indices: Dictionary = {
+	PartCategory.HEAD: 0,
+	PartCategory.TORSO: 0,
+	PartCategory.DEFENSE: 0,
+	PartCategory.WEAPON: 0,
+}
 
 
 func can_repair_parts() -> bool:
@@ -30,6 +43,28 @@ func set_current_part(part: PlayerPart) -> void:
 		current_def_part = part
 	elif part.reference_part is TorsoResource:
 		current_torso_part = part
+
+
+func get_current_part(category: PartCategory) -> PlayerPart:
+	match category:
+		PartCategory.HEAD:
+			return current_head_part
+		PartCategory.TORSO:
+			return current_torso_part
+		PartCategory.DEFENSE:
+			return current_def_part
+		PartCategory.WEAPON:
+			return current_atk_part
+
+	return null
+
+
+func get_next_part_index(category: PartCategory) -> int:
+	return _next_part_indices.get(category, 0)
+
+
+func advance_next_part_index(category: PartCategory) -> void:
+	_next_part_indices[category] = get_next_part_index(category) + 1
 
 
 func get_current_parts() -> Array[PlayerPart]:

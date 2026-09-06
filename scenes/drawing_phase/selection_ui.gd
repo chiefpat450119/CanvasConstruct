@@ -25,12 +25,12 @@ func _ready() -> void:
 		push_error("SelectionUI needs a DrawingPhaseManager.")
 		return
 
-	_connect_part_button(head_button, DrawingPhaseManager.PartCategory.HEAD)
-	_connect_part_button(torso_button, DrawingPhaseManager.PartCategory.TORSO)
-	_connect_part_button(defense_button, DrawingPhaseManager.PartCategory.DEFENSE)
-	_connect_part_button(weapon_button, DrawingPhaseManager.PartCategory.WEAPON)
-	_connect_action_button(repair_button)
-	_connect_action_button(upgrade_button)
+	_connect_part_button(head_button, GameStateManager.PartCategory.HEAD)
+	_connect_part_button(torso_button, GameStateManager.PartCategory.TORSO)
+	_connect_part_button(defense_button, GameStateManager.PartCategory.DEFENSE)
+	_connect_part_button(weapon_button, GameStateManager.PartCategory.WEAPON)
+	_connect_action_button(repair_button, drawing_phase_manager.repair_selected_part)
+	_connect_action_button(upgrade_button, drawing_phase_manager.upgrade_selected_part)
 
 
 func set_part_previews(
@@ -47,15 +47,15 @@ func set_part_previews(
 
 func _connect_part_button(
 	button: Button,
-	category: DrawingPhaseManager.PartCategory
+	category: GameStateManager.PartCategory
 ) -> void:
 	if button != null:
 		button.pressed.connect(drawing_phase_manager.select_part.bind(category))
 
 
-func _connect_action_button(button: Button) -> void:
+func _connect_action_button(button: Button, action: Callable) -> void:
 	if button != null:
-		button.pressed.connect(drawing_phase_manager.select_action)
+		button.pressed.connect(action)
 
 
 func _set_part_preview(preview: TextureRect, texture: Texture2D) -> void:
