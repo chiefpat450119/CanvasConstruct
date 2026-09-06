@@ -8,7 +8,6 @@ signal move_finished(move: BossMove)
 @export var health: int = 100
 @export var moves: Array[BossMove] = []
 @export var target: Node
-@export var animation_player: AnimationPlayer
 
 var _current_move: BossMove
 var _move_timer: float = 0.0
@@ -16,9 +15,7 @@ var _is_winding_up: bool = false
 
 
 func _ready() -> void:
-	move_started.connect(_on_move_started)
-	move_executed.connect(_on_move_executed)
-	move_finished.connect(_on_move_finished)
+	pass
 
 
 func _process(delta: float) -> void:
@@ -34,7 +31,7 @@ func _process(delta: float) -> void:
 		_is_winding_up = false
 		_execute_current_move()
 
-
+# Base behaviour: just choose the first move in the list. Should be overriden by subclasses
 func choose_next_move() -> BossMove:
 	if moves.is_empty():
 		return null
@@ -49,6 +46,7 @@ func perform_move(move: BossMove) -> void:
 
 func deal_damage_to_target(amount: int) -> void:
 	if amount <= 0 or not is_instance_valid(target):
+		push_warning("BossBase: No valid target to deal damage to.")
 		return
 
 	if target.has_method("take_damage"):
@@ -84,25 +82,3 @@ func _execute_current_move() -> void:
 	move_finished.emit(move)
 	_move_timer = move.cooldown
 	print("Boss cooldown for %s: %.2f seconds" % [move.move_id, move.cooldown])
-
-
-func _on_move_started(move: BossMove) -> void:
-	if move.windup <= 0.0:
-		return
-
-	_play_animation(&"%s_windup" % move.move_id)
-
-
-func _on_move_executed(move: BossMove) -> void:
-	_play_animation(move.move_id)
-
-
-func _on_move_finished(_move: BossMove) -> void:
-	_play_animation(&"idle")
-
-
-func _play_animation(animation_name: StringName) -> void:
-	if animation_player == null or not animation_player.has_animation(animation_name):
-		return
-
-	animation_player.play(animation_name)
