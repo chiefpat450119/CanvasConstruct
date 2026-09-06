@@ -1,11 +1,6 @@
 class_name DrawingPhaseManager
 extends Node
 
-enum DrawingAction {
-	REPAIR,
-	UPGRADE,
-}
-
 enum PartCategory {
 	HEAD,
 	ATK,
@@ -22,8 +17,7 @@ const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.TORSO,
 ]
 
-@export var drawing_grid: DrawingGrid
-@export var drawing_screen: CanvasItem
+@export var drawing_ui: DrawingUI
 @export var selection_screen: CanvasItem
 
 @export_group("Drawing Times")
@@ -40,7 +34,6 @@ var _current_parts: Dictionary[PartCategory, PartResource] = {}
 var _available_upgrades: Dictionary[PartCategory, PartResource] = {}
 var _completed_categories: Dictionary[PartCategory, bool] = {}
 var _active_reference_part: PartResource
-var _active_action: DrawingAction
 var _drawing_timer: Timer
 var _phase_active: bool = false
 
@@ -56,7 +49,7 @@ func begin_phase(
 ) -> Error:
 	if _phase_active:
 		return ERR_ALREADY_IN_USE
-	if drawing_grid == null or drawing_screen == null or selection_screen == null:
+	if drawing_ui == null or selection_screen == null:
 		return ERR_UNCONFIGURED
 
 	var current_parts_by_category: Dictionary[PartCategory, PartResource] = {}
@@ -95,13 +88,13 @@ func begin_phase(
 func start_repair(reference_part: PartResource) -> Error:
 	if not can_repair(reference_part):
 		return ERR_UNAVAILABLE
-	return _start_part_drawing(reference_part, DrawingAction.REPAIR)
+	return _start_part_drawing(reference_part)
 
 
 func start_upgrade(reference_part: PartResource) -> Error:
 	if not can_upgrade(reference_part):
 		return ERR_UNAVAILABLE
-	return _start_part_drawing(reference_part, DrawingAction.UPGRADE)
+	return _start_part_drawing(reference_part)
 
 
 func can_repair(reference_part: PartResource) -> bool:
@@ -168,7 +161,7 @@ func can_leave_current_drawing() -> bool:
 func get_active_drawing_grid() -> DrawingGrid:
 	if not is_drawing_part():
 		return null
-	return drawing_grid
+	return drawing_ui.get_drawing_grid()
 
 
 func get_active_reference_part() -> PartResource:
@@ -187,31 +180,20 @@ func get_drawing_time_left() -> float:
 	return _drawing_timer.time_left
 
 
-func _start_part_drawing(
-	reference_part: PartResource,
-	action: DrawingAction
-) -> Error:
+func _start_part_drawing(reference_part: PartResource) -> Error:
 	var reference_image := reference_part.reference_image
-	if reference_image == null:
-		return ERR_INVALID_DATA
-
-	var reference_width := reference_image.get_width()
-	var reference_height := reference_image.get_height()
-	if reference_width <= 0 or reference_height <= 0:
-		return ERR_INVALID_DATA
-
 	var category := _get_part_category(reference_part)
+	var duration := _get_drawing_duration(category)
+	_ensure_timer()
+	_drawing_timer.start(duration)
 	_set_drawing_screen_active(true)
-	drawing_grid.init(reference_width, reference_height)
+	var setup_error: Error = drawing_ui.setup_drawing(reference_image, _drawing_timer)
+	if setup_error != OK:
+		_drawing_timer.stop()
+		_set_drawing_screen_active(false)
+		return setup_error
 
 	_active_reference_part = reference_part
-	_active_action = action
-	_ensure_timer()
-
-	var duration := _get_drawing_duration(category)
-	_drawing_timer.start(duration)
-	reference_image_changed.emit(reference_part.reference_image)
-	part_drawing_started.emit(reference_part, action, duration)
 	return OK
 
 
@@ -219,10 +201,7 @@ func _complete_part_drawing() -> void:
 	if not is_drawing_part():
 		return
 
-	var drawing := drawing_grid.get_image_from_drawing()
-	var reference_part := _active_reference_part
-	var action := _active_action
-	var category := _get_part_category(reference_part)
+	var category := _get_part_category(_active_reference_part)
 
 	_completed_categories[category] = true
 	var finishes_phase := _completed_categories.size() == PART_CATEGORIES.size()
@@ -231,9 +210,8 @@ func _complete_part_drawing() -> void:
 		GameStateManagerInstance.mark_drawing_phase_completed()
 
 	_active_reference_part = null
+	drawing_ui.stop_drawing()
 	_set_drawing_screen_active(false)
-	reference_image_changed.emit(null)
-	part_drawing_completed.emit(drawing, reference_part, action)
 
 	if finishes_phase:
 		phase_completed.emit()
@@ -257,7 +235,7 @@ func _ensure_timer() -> void:
 
 
 func _set_drawing_screen_active(is_active: bool) -> void:
-	_set_screen_enabled(drawing_screen, is_active)
+	_set_screen_enabled(drawing_ui, is_active)
 	_set_screen_enabled(selection_screen, not is_active)
 
 
