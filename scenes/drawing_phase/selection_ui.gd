@@ -3,23 +3,11 @@ extends Control
 
 @export var drawing_phase_manager: DrawingPhaseManager
 
-@export_group("Part Buttons")
-@export var head_button: Button
-@export var torso_button: Button
-@export var defense_button: Button
-@export var weapon_button: Button
-
-@export_group("Part Previews")
-@export var head_preview: Button
-@export var torso_preview: Button
-@export var defense_preview: Button
-@export var weapon_preview: Button
-
-@export_group("Part Similarities")
-@export var head_similarity_label: Label
-@export var torso_similarity_label: Label
-@export var defense_similarity_label: Label
-@export var weapon_similarity_label: Label
+@export_group("Parts")
+@export var head_ui: PartUI
+@export var torso_ui: PartUI
+@export var defense_ui: PartUI
+@export var weapon_ui: PartUI
 
 @export_group("Action Buttons")
 @export var fight_button: TextureButton
@@ -30,10 +18,10 @@ func _ready() -> void:
 		push_error("SelectionUI needs a DrawingPhaseManager.")
 		return
 
-	_connect_part_button(head_button, GameStateManager.PartCategory.HEAD)
-	_connect_part_button(torso_button, GameStateManager.PartCategory.TORSO)
-	_connect_part_button(defense_button, GameStateManager.PartCategory.DEFENSE)
-	_connect_part_button(weapon_button, GameStateManager.PartCategory.WEAPON)
+	_connect_part(head_ui, GameStateManager.PartCategory.HEAD)
+	_connect_part(torso_ui, GameStateManager.PartCategory.TORSO)
+	_connect_part(defense_ui, GameStateManager.PartCategory.DEFENSE)
+	_connect_part(weapon_ui, GameStateManager.PartCategory.WEAPON)
 	_connect_action_button(fight_button, drawing_phase_manager.fight)
 
 
@@ -43,61 +31,47 @@ func set_part_previews(
 	defense_texture: Texture2D,
 	weapon_texture: Texture2D
 ) -> void:
-	_set_part_preview(head_preview, head_texture)
-	_set_part_preview(torso_preview, torso_texture)
-	_set_part_preview(defense_preview, defense_texture)
-	_set_part_preview(weapon_preview, weapon_texture)
+	_set_part_preview(head_ui, head_texture)
+	_set_part_preview(torso_ui, torso_texture)
+	_set_part_preview(defense_ui, defense_texture)
+	_set_part_preview(weapon_ui, weapon_texture)
 
 
 func disable_part(category: GameStateManager.PartCategory) -> void:
-	var button := _get_part_button(category)
-	if button != null:
-		button.disabled = true
+	var part := _get_part_ui(category)
+	if part != null:
+		part.disable()
 
 
 func set_part_similarity(
 	category: GameStateManager.PartCategory,
 	similarity: float
 ) -> void:
-	var label := _get_similarity_label(category)
-	if label != null:
-		label.text = "%d%%" % roundi(clampf(similarity, 0.0, 1.0) * 100.0)
+	var part := _get_part_ui(category)
+	if part != null:
+		part.set_similarity(similarity)
 
 
-func _get_part_button(category: GameStateManager.PartCategory) -> Button:
+func _get_part_ui(category: GameStateManager.PartCategory) -> PartUI:
 	match category:
 		GameStateManager.PartCategory.HEAD:
-			return head_button
+			return head_ui
 		GameStateManager.PartCategory.TORSO:
-			return torso_button
+			return torso_ui
 		GameStateManager.PartCategory.DEFENSE:
-			return defense_button
+			return defense_ui
 		GameStateManager.PartCategory.WEAPON:
-			return weapon_button
+			return weapon_ui
 
 	return null
 
 
-func _get_similarity_label(category: GameStateManager.PartCategory) -> Label:
-	match category:
-		GameStateManager.PartCategory.HEAD:
-			return head_similarity_label
-		GameStateManager.PartCategory.TORSO:
-			return torso_similarity_label
-		GameStateManager.PartCategory.DEFENSE:
-			return defense_similarity_label
-		GameStateManager.PartCategory.WEAPON:
-			return weapon_similarity_label
-
-	return null
-
-
-func _connect_part_button(
-	button: Button,
+func _connect_part(
+	part: PartUI,
 	category: GameStateManager.PartCategory
 ) -> void:
-	if button != null:
-		button.pressed.connect(drawing_phase_manager.select_part.bind(category))
+	if part != null:
+		part.selected.connect(drawing_phase_manager.select_part.bind(category))
 
 
 func _connect_action_button(button: BaseButton, action: Callable) -> void:
@@ -105,9 +79,6 @@ func _connect_action_button(button: BaseButton, action: Callable) -> void:
 		button.pressed.connect(action)
 
 
-func _set_part_preview(preview: Button, texture: Texture2D) -> void:
-	if preview == null:
-		return
-
-	preview.icon = texture
-	preview.visible = texture != null
+func _set_part_preview(part: PartUI, texture: Texture2D) -> void:
+	if part != null:
+		part.set_preview(texture)

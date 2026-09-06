@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bsx4nlus1sar" path="res://assets/UI/build_phase/COMP_TORSO_ICON.png" id="6_dckcs"]
 [ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="6_r2dvy"]
 [ext_resource type="Texture2D" uid="uid://d21qcuxgwad7g" path="res://assets/UI/build_phase/COMP_DEFENSE_LABLE.png" id="7_3glp3"]
+[ext_resource type="Texture2D" uid="uid://cjxuqo6m3xpa5" path="res://assets/UI/build_phase/LOCK.png" id="7_773tf"]
 [ext_resource type="Texture2D" uid="uid://c71kyhnkf6qtd" path="res://assets/UI/build_phase/COMP_DEFENSE_ICON.png" id="8_773tf"]
 [ext_resource type="Texture2D" uid="uid://b3fmmtpsftnu7" path="res://assets/UI/build_phase/COMP_ATTACK_LABLE.png" id="9_5l06c"]
 [ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="10_cmnqg"]
@@ -16,7 +17,8 @@
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="12_pmq32"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="15_g14as"]
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="16_dckcs"]
-[ext_resource type="Script" path="res://scenes/drawing_phase/selection_ui_anim.gd" id="17_selection_anim"]
+[ext_resource type="Script" uid="uid://dj2a6looo4068" path="res://scenes/drawing_phase/selection_ui_anim.gd" id="17_selection_anim"]
+[ext_resource type="Script" uid="uid://cadwc52d0c3ei" path="res://scenes/drawing_phase/part_ui.gd" id="18_part_ui"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -89,7 +91,7 @@ load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc2
 font = ExtResource("16_dckcs")
 font_size = 32
 
-[node name="Selection UI" type="Control" unique_id=984169342 node_paths=PackedStringArray("head_button", "torso_button", "defense_button", "weapon_button", "head_preview", "torso_preview", "defense_preview", "weapon_preview", "head_similarity_label", "torso_similarity_label", "defense_similarity_label", "weapon_similarity_label", "fight_button")]
+[node name="Selection UI" type="Control" unique_id=984169342 node_paths=PackedStringArray("head_ui", "torso_ui", "defense_ui", "weapon_ui", "fight_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,21 +101,13 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wwyqb")
-head_button = NodePath("Head/Button")
-torso_button = NodePath("Torso/Button")
-defense_button = NodePath("Defense/Button")
-weapon_button = NodePath("Weapon/Button")
-head_preview = NodePath("Head/Button")
-torso_preview = NodePath("Torso/Button")
-defense_preview = NodePath("Defense/Button")
-weapon_preview = NodePath("Weapon/Button")
-head_similarity_label = NodePath("Head/Completion Number/Number")
-torso_similarity_label = NodePath("Torso/Completion Number/Number")
-defense_similarity_label = NodePath("Defense/Completion Number/Number")
-weapon_similarity_label = NodePath("Weapon/Completion Number/Number")
+head_ui = NodePath("Head")
+torso_ui = NodePath("Torso")
+defense_ui = NodePath("Defense")
+weapon_ui = NodePath("Weapon")
 fight_button = NodePath("Fight Button")
 
-[node name="Head" type="Control" parent="." unique_id=1214120400]
+[node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -125,6 +119,10 @@ offset_bottom = 295.00015
 grow_horizontal = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+similarity_label = NodePath("Completion Number/Number")
 
 [node name="Button" type="Button" parent="Head" unique_id=4433000]
 texture_filter = 1
@@ -240,7 +238,19 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Defense" type="Control" parent="." unique_id=1355314869]
+[node name="Lock" type="TextureRect" parent="Head" unique_id=495862793]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -252,6 +262,10 @@ offset_bottom = 107.0
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+similarity_label = NodePath("Completion Number/Number")
 
 [node name="Button" type="Button" parent="Defense" unique_id=1170251323]
 texture_filter = 1
@@ -367,7 +381,7 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Weapon" type="Control" parent="." unique_id=1356265695]
+[node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -382,6 +396,10 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+similarity_label = NodePath("Completion Number/Number")
 
 [node name="Button" type="Button" parent="Weapon" unique_id=339328040]
 texture_filter = 1
@@ -500,7 +518,7 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Torso" type="Control" parent="." unique_id=2135995782]
+[node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -515,6 +533,10 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+similarity_label = NodePath("Completion Number/Number")
 
 [node name="Button" type="Button" parent="Torso" unique_id=1447804980]
 texture_filter = 1
@@ -740,7 +762,7 @@ grow_vertical = 2
 text = "Build Phase"
 label_settings = SubResource("LabelSettings_g14as")
 
-[node name="SelectionUIAnim" type="Node" parent="." node_paths=PackedStringArray("phase_banner", "head", "defense", "weapon", "torso", "fight_button")]
+[node name="SelectionUIAnim" type="Node" parent="." unique_id=1208700181 node_paths=PackedStringArray("phase_banner", "head", "defense", "weapon", "torso", "fight_button")]
 script = ExtResource("17_selection_anim")
 phase_banner = NodePath("../ColorRect")
 head = NodePath("../Head")

@@ -6,7 +6,7 @@ signal finish_requested
 const DRAWING_COLUMN_CENTER_X: float = 0.25
 const REFERENCE_COLUMN_CENTER_X: float = 0.75
 const CONTENT_CENTER_Y: float = 0.5
-const CONTENT_VERTICAL_OFFSET: float = 80.0
+const CONTENT_VERTICAL_OFFSET: float = 60.0
 
 @export var drawing_grid_frame: PanelContainer
 @export var reference_art_frame: PanelContainer
