@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d13vu068wyaf5"]
+
+[ext_resource type="Script" uid="uid://cou6xdw5adavm" path="res://scenes/player/player_renderer.gd" id="1_gfjak"]
+[ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="1_wr5hl"]
+
+[node name="Player" type="Node2D" unique_id=1535422581]
+
+[node name="Torso" parent="." unique_id=1844036065 instance=ExtResource("1_wr5hl")]
+
+[node name="Head" parent="." unique_id=1734064390 instance=ExtResource("1_wr5hl")]
+position = Vector2(0, -17)
+
+[node name="Attack" parent="." unique_id=642698415 instance=ExtResource("1_wr5hl")]
+position = Vector2(27, 0)
+
+[node name="Def" parent="." unique_id=1321508306 instance=ExtResource("1_wr5hl")]
+position = Vector2(-25, 0)
+
+[node name="PlayerRenderer" type="Node2D" parent="." unique_id=864508728 node_paths=PackedStringArray("torso", "head", "atk", "def")]
+script = ExtResource("1_gfjak")
+torso = NodePath("../Torso")
+head = NodePath("../Head")
+atk = NodePath("../Attack")
+def = NodePath("../Def")
+metadata/_custom_type_script = "uid://cou6xdw5adavm"
