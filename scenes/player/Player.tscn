@@ -2,19 +2,40 @@
 
 [ext_resource type="Script" uid="uid://cou6xdw5adavm" path="res://scenes/player/player_renderer.gd" id="1_gfjak"]
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="1_wr5hl"]
+[ext_resource type="Script" uid="uid://bcatuhjh26740" path="res://scripts/player_stats.gd" id="2_stats"]
+[ext_resource type="Script" uid="uid://nvftkgkx11in" path="res://scripts/damagable_component.gd" id="3_damage"]
 
 [node name="Player" type="Node2D" unique_id=1535422581]
 
 [node name="Torso" parent="." unique_id=1844036065 instance=ExtResource("1_wr5hl")]
 
+[node name="TorsoDamage" type="Node" parent="Torso" unique_id=857483314 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
+
 [node name="Head" parent="." unique_id=1734064390 instance=ExtResource("1_wr5hl")]
 position = Vector2(0, -17)
+
+[node name="HeadDamage" type="Node" parent="Head" unique_id=417024503 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
 
 [node name="Attack" parent="." unique_id=642698415 instance=ExtResource("1_wr5hl")]
 position = Vector2(27, 0)
 
+[node name="AttackDamage" type="Node" parent="Attack" unique_id=1045692071 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
+
 [node name="Def" parent="." unique_id=1321508306 instance=ExtResource("1_wr5hl")]
 position = Vector2(-25, 0)
+
+[node name="DefDamage" type="Node" parent="Def" unique_id=1696931459 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
+
+[node name="PlayerStats" type="Node" parent="." unique_id=602553505]
+script = ExtResource("2_stats")
 
 [node name="PlayerRenderer" type="Node2D" parent="." unique_id=864508728 node_paths=PackedStringArray("torso", "head", "atk", "def")]
 script = ExtResource("1_gfjak")

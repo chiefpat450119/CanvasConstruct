@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dk1ix6ettxgaf"]
+
+[ext_resource type="PackedScene" uid="uid://nvh4laj4nt08" path="res://scenes/bosses/orc_boss.tscn" id="1_boss"]
+
+[node name="TestBoss" type="Node2D" unique_id=1476268937]
+
+[node name="OrcBoss" parent="." unique_id=590931191 instance=ExtResource("1_boss")]
+position = Vector2(500, 300)
