@@ -24,9 +24,10 @@ func setup_drawing(
 		_update_timer_label()
 
 
-func stop_drawing() -> void:
+func stop_drawing() -> Image:
 	_drawing_timer = null
 	timer_label.text = "Time\n0"
+	return drawing_grid.get_image_from_drawing()
 
 
 func get_drawing_grid() -> DrawingGrid:

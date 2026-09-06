@@ -22,6 +22,7 @@ var weapon_drawing_time: float = 99.0
 
 var _selected_category: GameStateManager.PartCategory
 var _drawing_timer: Timer
+var _active_reference_part: PartResource
 
 
 func _ready() -> void:
@@ -133,6 +134,7 @@ func _start_drawing(
 		_drawing_timer,
 		initial_drawing
 	)
+	_active_reference_part = reference_part
 	_show_only(drawing_ui)
 	return true
 
@@ -170,7 +172,12 @@ func _get_next_part(category: GameStateManager.PartCategory) -> PartResource:
 
 
 func _on_drawing_timer_timeout() -> void:
-	drawing_ui.stop_drawing()
+	var drawing := drawing_ui.stop_drawing()
+	GameStateManagerInstance.set_current_part(
+		PlayerPart.new(_active_reference_part, drawing)
+	)
+	_active_reference_part = null
+	_initialize_part_previews()
 	selection_ui.disable_part(_selected_category)
 	_show_only(selection_ui)
 

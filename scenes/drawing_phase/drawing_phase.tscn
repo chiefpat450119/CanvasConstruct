@@ -20,7 +20,6 @@
 [ext_resource type="Resource" uid="uid://d1unxddwo7k2p" path="res://scripts/parts/parts/WEAPONS/Weapon1.tres" id="7_q0n2y"]
 [ext_resource type="Texture2D" uid="uid://bsx4nlus1sar" path="res://assets/UI/build_phase/COMP_TORSO_ICON.png" id="8_gxu5u"]
 [ext_resource type="Resource" uid="uid://ckw44nbxhilmb" path="res://scripts/parts/parts/WEAPONS/Weapon2.tres" id="8_m3kao"]
-[ext_resource type="Texture2D" uid="uid://b7y8te67i8r57" path="res://assets/components/shield/LOP SHIELD2.png" id="9_3k65v"]
 [ext_resource type="Resource" uid="uid://d0r0iiyncgqvm" path="res://scripts/parts/parts/WEAPONS/Weapon3.tres" id="9_a2c3f"]
 [ext_resource type="Texture2D" uid="uid://d21qcuxgwad7g" path="res://assets/UI/build_phase/COMP_DEFENSE_LABLE.png" id="10_m40h3"]
 [ext_resource type="Script" uid="uid://du7qxf02c2l8q" path="res://scripts/parts/def_resource.gd" id="10_oa1ag"]
@@ -309,7 +308,6 @@ theme_override_constants/icon_max_width = 120
 theme_override_styles/normal = SubResource("StyleBoxFlat_884ma")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wsftw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6v5j0")
-icon = ExtResource("2_nscei")
 icon_alignment = 1
 expand_icon = true
 
@@ -460,7 +458,6 @@ theme_override_constants/icon_max_width = 250
 theme_override_styles/normal = SubResource("StyleBoxFlat_rtoy8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_n7w3g")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kv1j6")
-icon = ExtResource("6_kpsfv")
 icon_alignment = 1
 expand_icon = true
 
@@ -612,7 +609,6 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1olcv")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_d7fai")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0fxg5")
-icon = ExtResource("9_3k65v")
 icon_alignment = 1
 expand_icon = true
 
@@ -677,7 +673,6 @@ grow_vertical = 0
 texture = ExtResource("11_42j7w")
 
 [node name="Art" type="TextureRect" parent="CanvasLayer/Selection UI/Defense" unique_id=1636340797]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -691,7 +686,6 @@ offset_right = 82.0
 offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_3k65v")
 expand_mode = 1
 stretch_mode = 5
 
@@ -766,7 +760,6 @@ theme_override_constants/icon_max_width = 90
 theme_override_styles/normal = SubResource("StyleBoxFlat_8vcty")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ep37o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jurct")
-icon = ExtResource("12_q0n2y")
 icon_alignment = 1
 expand_icon = true
 
@@ -930,7 +923,6 @@ theme_override_font_sizes/font_size = 45
 text = "FIGHT"
 
 [node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=803939529 node_paths=PackedStringArray("drawing_grid", "reference_art", "timer_label")]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -985,7 +977,6 @@ texture = ExtResource("4_o71rv")
 expand_mode = 3
 
 [node name="Repair or Upgrade UI" type="Control" parent="CanvasLayer" unique_id=1778247371]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
