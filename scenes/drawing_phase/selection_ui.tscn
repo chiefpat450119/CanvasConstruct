@@ -236,12 +236,14 @@ grow_vertical = 2
 rotation = 0.06981317
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_font_sizes/font_size = 30
-text = "100%"
+text = "0%"
 label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Lock" type="TextureRect" parent="Head" unique_id=495862793]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -256,8 +258,6 @@ mouse_filter = 2
 texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
-modulate = Color(0.15, 0.15, 0.15, 1)
-visible = false
 
 [node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
@@ -393,7 +393,9 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Lock" type="TextureRect" parent="Defense"]
+[node name="Lock" type="TextureRect" parent="Defense" unique_id=79138719]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -408,8 +410,6 @@ mouse_filter = 2
 texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
-modulate = Color(0.15, 0.15, 0.15, 1)
-visible = false
 
 [node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
@@ -551,7 +551,9 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Lock" type="TextureRect" parent="Weapon"]
+[node name="Lock" type="TextureRect" parent="Weapon" unique_id=123235610]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -566,8 +568,6 @@ mouse_filter = 2
 texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
-modulate = Color(0.15, 0.15, 0.15, 1)
-visible = false
 
 [node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
@@ -694,19 +694,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -21.0
-offset_right = 30.0
-offset_bottom = 21.0
+offset_left = -30.927818
+offset_top = -20.847527
+offset_right = 29.072182
+offset_bottom = 21.152473
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
-text = "100%"
+text = "0%"
 label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Lock" type="TextureRect" parent="Torso"]
+[node name="Lock" type="TextureRect" parent="Torso" unique_id=2146588545]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -721,8 +723,6 @@ mouse_filter = 2
 texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
-modulate = Color(0.15, 0.15, 0.15, 1)
-visible = false
 
 [node name="Fight Button" type="TextureButton" parent="." unique_id=197246086]
 layout_mode = 1
