@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c01f7sotvckc1"]
+
+[ext_resource type="PackedScene" uid="uid://nvh4laj4nt08" path="res://scenes/bosses/orc_boss.tscn" id="1_aikyt"]
+[ext_resource type="PackedScene" uid="uid://d13vu068wyaf5" path="res://scenes/player/Player.tscn" id="2_tg4ky"]
+
+[node name="TestCombat" type="Node2D" unique_id=370905193]
+
+[node name="OrcBoss" parent="." unique_id=378128887 node_paths=PackedStringArray("target") instance=ExtResource("1_aikyt")]
+position = Vector2(691, 316)
+target = NodePath("../Player")
+
+[node name="Player" parent="." unique_id=1535422581 instance=ExtResource("2_tg4ky")]
+position = Vector2(58, 343)

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HeadResource" format=3 uid="uid://cdtuyou11qgur"]
+
+[ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_vcu2r"]
+[ext_resource type="Texture2D" uid="uid://i8olaw10a6gv" path="res://scripts/parts/parts/HEAD/LOP HEAD.png" id="2_jovy7"]
+[ext_resource type="Script" uid="uid://bvmtfut1xm1d8" path="res://scripts/parts/head_resource.gd" id="2_puar8"]
+
+[resource]
+script = ExtResource("2_puar8")
+cooldown_seconds = 2.0
+display_name = "Head"
+reference_image = ExtResource("2_jovy7")
+metadata/_custom_type_script = "uid://bvmtfut1xm1d8"

@@ -10,22 +10,32 @@ const _NEIGHBOR_OFFSETS: Array[Vector2i] = [
 
 @export var visuals: RuntimeTexture
 
-# dmg should be a percentage (0 - 1)
-# of how much percentage of total texture is destroyed
-func damage(dmg: float) -> void:
-	if visuals == null or visuals.visible_pixels.is_empty():
-		return
+# dmg should be a percentage (0 - 1) of the texture area.
+func damage(dmg: float) -> int:
+	if visuals == null:
+		return 0
 
 	var remove_pixels := roundi(clampf(dmg, 0.0, 1.0) * visuals.get_width() * visuals.get_height())
-	if remove_pixels == 0:
-		return
+	return damage_pixels(remove_pixels)
+
+
+func damage_pixels(pixel_count: int) -> int:
+	if visuals == null or visuals.visible_pixels.is_empty() or pixel_count <= 0:
+		return 0
 
 	var edge_indices := _get_edge_indices(visuals.visible_pixels)
-	var random_index: int = edge_indices.pick_random()
+	if edge_indices.is_empty():
+		return 0
+
 	var selected_pixels := _select_indices(
-		visuals.visible_pixels, random_index, remove_pixels
+		visuals.visible_pixels, edge_indices.pick_random(), pixel_count
 	)
 	visuals.set_pixels(selected_pixels, Color.TRANSPARENT)
+	return selected_pixels.size()
+
+
+func can_receive_damage() -> bool:
+	return visuals != null and not visuals.visible_pixels.is_empty()
 
 
 func _get_edge_indices(pixels: Array[Vector2i]) -> Array[int]:

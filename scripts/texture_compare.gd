@@ -5,7 +5,7 @@ static func _count_visible_pixels(t2: Texture2D) -> int:
 
 	for i in range(t2.get_width()):
 		for j in range(t2.get_height()):
-			 if t2.get_image().get_pixel(i, j).a > 0:
+			if t2.get_image().get_pixel(i, j).a > 0:
 				count += 1
 
 	return count
