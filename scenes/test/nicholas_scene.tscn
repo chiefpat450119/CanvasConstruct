@@ -326,7 +326,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_66pva")
-expand_mode = 1
+stretch_mode = 1
 
 [node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=1925897617]
 visible = false
