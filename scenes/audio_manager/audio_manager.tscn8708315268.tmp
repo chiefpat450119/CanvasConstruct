@@ -18,3 +18,4 @@ drawing_music = ExtResource("5_f1eqd")
 [node name="SFXPlayers" type="Node" parent="." unique_id=1966888353]
 
 [node name="BG Music Player" type="AudioStreamPlayer" parent="." unique_id=600224225]
+autoplay = true

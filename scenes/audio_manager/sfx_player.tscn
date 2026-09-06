@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://jyj4mrxu0v4o" path="res://scenes/audio_manager/sfx_player.gd" id="1_8bwce"]
 
 [node name="SfxPlayer" type="AudioStreamPlayer" unique_id=586406420]
+autoplay = true
 script = ExtResource("1_8bwce")

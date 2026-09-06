@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgsnsndroae37" path="res://scenes/test/nicholas_test.gd" id="1_4hql7"]
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="2_035bn"]
+[ext_resource type="AudioStream" uid="uid://br8fbgknljl7q" path="res://assets/SFX/test_sfx.wav" id="2_wx6tj"]
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="3_wx6tj"]
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="4_yv1o6"]
 [ext_resource type="Texture2D" uid="uid://cteaab7d4wmyk" path="res://assets/components/weapons/LOP WEAPON1.png" id="5_66pva"]
@@ -305,6 +306,7 @@ bg_color = Color(0, 0.6689455, 0.7972163, 1)
 script = ExtResource("1_4hql7")
 runtime_texture = NodePath("RuntimeTexture")
 drawing_grid = NodePath("CanvasLayer/Drawing UI/MarginContainer/HBoxContainer/Drawing Grid")
+test_sfx = ExtResource("2_wx6tj")
 
 [node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("2_035bn")]
 position = Vector2(830, 251)
