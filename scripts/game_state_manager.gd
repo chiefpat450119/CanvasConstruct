@@ -126,8 +126,7 @@ func switch_to_combat_phase() -> void:
 		)
 		UITransition.finish()
 		return
-
-  AudioManager.play_combat_music()
+	AudioManager.play_combat_music()
 	var combat_phase := get_tree().current_scene as CombatPhaseManager
 	if combat_phase == null:
 		push_error("Combat scene root is not a CombatPhaseManager")
