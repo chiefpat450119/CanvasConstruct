@@ -31,10 +31,10 @@ head_parts = Array[ExtResource("2_s5jpx")]([ExtResource("3_kpsfv"), ExtResource(
 torso_parts = Array[ExtResource("4_lsrqs")]([ExtResource("5_gxu5u"), ExtResource("8_ct7ox"), ExtResource("9_s5jpx")])
 atk_parts = Array[ExtResource("6_42j7w")]([ExtResource("7_q0n2y"), ExtResource("8_m3kao"), ExtResource("9_a2c3f")])
 def_parts = Array[ExtResource("10_oa1ag")]([ExtResource("11_884ma"), ExtResource("12_wsftw"), ExtResource("13_6v5j0")])
-head_drawing_time = 20.0
-torso_drawing_time = 30.0
-defense_drawing_time = 20.0
-weapon_drawing_time = 20.0
+head_drawing_time = 30.0
+torso_drawing_time = 50.0
+defense_drawing_time = 30.0
+weapon_drawing_time = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
 
