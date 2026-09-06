@@ -1,29 +1,28 @@
 class_name DrawingGrid
 extends Control
 
-var _grid_width : int = 16
-var _grid_height : int = 16
-const CELL_SIZE : int = 16
-const PAINTED_META : StringName = &"is_painted"
-var active_colour : Color = Color(1,0,0)
-var is_painting : bool = false
-var is_erasing : bool = false
+const CELL_SIZE: int = 16
+const PAINTED_META: StringName = &"is_painted"
 
-@export var grid : GridContainer
-@export var cell_texture : Texture2D
+@export var grid: GridContainer
+@export var cell_texture: Texture2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	init(10,20)
+var active_colour: Color = Color.RED
+var is_painting: bool = false
+var is_erasing: bool = false
+
+var _grid_width: int = 0
+var _grid_height: int = 0
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Start painting
 	if Input.is_action_pressed("M1"):
 		is_painting = true
 		
-		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
+		var cell_under_mouse: TextureButton = _get_cell_at_mouse_pos(
+			get_viewport().get_mouse_position()
+		)
 		# Check if there is a cell under the mouse and if cell already painted with active colour
 		if cell_under_mouse and (
 			!cell_under_mouse.get_meta(PAINTED_META, false)
@@ -40,7 +39,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("M2"):
 		is_erasing = true
 	
-		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
+		var cell_under_mouse: TextureButton = _get_cell_at_mouse_pos(
+			get_viewport().get_mouse_position()
+		)
 		# Check if there is a cell under the mouse and if cell has already been erased
 		if cell_under_mouse and (
 			cell_under_mouse.get_meta(PAINTED_META, false)
@@ -53,17 +54,38 @@ func _process(delta: float) -> void:
 		is_erasing = false
 
 ## Initialize the drawing grid with given width and height
-func init(width : int, height: int):
+func init(width: int, height: int) -> void:
+	assert(width > 0 and height > 0, "Drawing grid dimensions must be positive")
+
 	_grid_width = width
 	_grid_height = height
+	for child: Node in grid.get_children():
+		child.free()
 	_generate_grid()
+
+
+## Returns an image created from the player's drawing.
+func get_image_from_drawing() -> Image:
+	var image := Image.create(
+		_grid_width,
+		_grid_height,
+		false,
+		Image.FORMAT_RGBAF
+	)
+
+	for x: int in range(_grid_width):
+		for y: int in range(_grid_height):
+			image.set_pixel(x, y, get_cell_colour(x, y))
+
+	return image
+
 
 ## Generate grid of cells
 func _generate_grid() -> void:
 	grid.columns = _grid_width
 	
-	for i in range(_grid_width * _grid_height):
-		var cell = TextureButton.new()
+	for _index: int in range(_grid_width * _grid_height):
+		var cell := TextureButton.new()
 		
 		# Default grid cell properties
 		cell.custom_minimum_size = Vector2(CELL_SIZE, CELL_SIZE)
@@ -76,11 +98,11 @@ func _generate_grid() -> void:
 		grid.add_child(cell)
 
 ## Get the cell at the given grid position
-func _get_cell_at_pos(x : int, y : int) -> TextureButton:
+func _get_cell_at_pos(x: int, y: int) -> TextureButton:
 	if x < 0 or x >= _grid_width or y < 0 or y >= _grid_height:
 		return null
 
-	var cell_index : int = y * _grid_width + x
+	var cell_index: int = y * _grid_width + x
 	if cell_index >= grid.get_child_count():
 		return null
 
@@ -91,14 +113,14 @@ func _get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
 	# Find the cell by position
 	for y in range(_grid_height):
 		for x in range(_grid_width):
-			var cell : TextureButton = _get_cell_at_pos(x, y)
+			var cell: TextureButton = _get_cell_at_pos(x, y)
 			if cell and cell.get_global_rect().has_point(mouse_pos):
 				return cell
 	return null
 
 ## Returns colour of the cell at given x,y pos
-func get_cell_colour(x : int, y : int) -> Color:
-	var cell : TextureButton = _get_cell_at_pos(x, y)
+func get_cell_colour(x: int, y: int) -> Color:
+	var cell: TextureButton = _get_cell_at_pos(x, y)
 	if cell and cell.get_meta(PAINTED_META, false):
 		return cell.modulate
 

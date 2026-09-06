@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AtkResource" format=3 uid="uid://d0r0iiyncgqvm"]
+
+[ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_a6jhk"]
+[ext_resource type="Texture2D" uid="uid://dwrt6xt5jtpm4" path="res://scripts/parts/parts/WEAPONS/LOP WEAPON3.png" id="2_a6jhk"]
+[ext_resource type="Script" uid="uid://sy0a0f1hqyk2" path="res://scripts/parts/atk_resource.gd" id="3_0n8ab"]
+
+[resource]
+script = ExtResource("3_0n8ab")
+attack_damage = 20.0
+display_name = "Axe"
+reference_image = ExtResource("2_a6jhk")
+metadata/_custom_type_script = "uid://sy0a0f1hqyk2"
