@@ -2,6 +2,7 @@ class_name InteractionEffects
 extends Node
 
 @export var target_control: Control
+@export var input_control: Control
 @export var center_pivot := true
 
 @export_group("Hover")
@@ -44,6 +45,8 @@ func _ready() -> void:
 		push_error("InteractionEffects needs a target Control.")
 		return
 
+	var event_control := input_control if input_control != null else target_control
+
 	_base_scale = target_control.scale
 	_base_rotation = target_control.rotation
 
@@ -51,16 +54,16 @@ func _ready() -> void:
 		_center_target_pivot()
 		target_control.resized.connect(_center_target_pivot)
 
-	target_control.mouse_entered.connect(_on_mouse_entered)
-	target_control.mouse_exited.connect(_on_mouse_exited)
+	event_control.mouse_entered.connect(_on_mouse_entered)
+	event_control.mouse_exited.connect(_on_mouse_exited)
 
-	if target_control is BaseButton:
+	if event_control is BaseButton:
 		_uses_button_signals = true
-		var button := target_control as BaseButton
+		var button := event_control as BaseButton
 		button.button_down.connect(_on_pressed)
 		button.button_up.connect(_on_released)
 	else:
-		target_control.gui_input.connect(_on_gui_input)
+		event_control.gui_input.connect(_on_gui_input)
 
 	set_process_input(false)
 

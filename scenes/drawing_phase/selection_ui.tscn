@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="10_cmnqg"]
 [ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="11_8t5x5"]
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="12_pmq32"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="15_g14as"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -22,22 +23,6 @@ border_width_top = 20
 border_width_right = 20
 border_width_bottom = 20
 border_color = Color(0.5914206, 0.88408834, 0.6249393, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtoy8"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 20
-border_width_top = 20
-border_width_right = 20
-border_width_bottom = 20
-border_color = Color(0.92863256, 0.7722927, 0.4892547, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -79,6 +64,22 @@ expand_margin_top = 10.0
 expand_margin_right = 10.0
 expand_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtoy8"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.92863256, 0.7722927, 0.4892547, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dnu3j"]
 load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc26e.ctex"
 
@@ -111,12 +112,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -80.20999
-offset_top = 107.13
-offset_right = 133.79016
-offset_bottom = 321.13016
+offset_left = -108.00003
+offset_top = 81.00001
+offset_right = 106.00012
+offset_bottom = 295.00015
 grow_horizontal = 2
 scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Button" type="Button" parent="Head" unique_id=4433000]
 texture_filter = 1
@@ -232,146 +234,18 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Torso" type="Control" parent="." unique_id=2135995782]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -137.41
-offset_top = -325.35
-offset_right = 200.59082
-offset_bottom = -61.350098
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.8, 0.8)
-
-[node name="Button" type="Button" parent="Torso" unique_id=1447804980]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/icon_max_width = 250
-theme_override_styles/normal = SubResource("StyleBoxFlat_rtoy8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_rtoy8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rtoy8")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_rtoy8")
-theme_override_styles/focus = SubResource("StyleBoxFlat_rtoy8")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Description Bar" type="TextureRect" parent="Torso" unique_id=2011803175]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -148.23746
-offset_top = -11.062378
-offset_right = 103.7616
-offset_bottom = 11.437622
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("5_g14as")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Name" type="Label" parent="Torso/Description Bar" unique_id=1876846260]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 168.74994
-offset_top = -9.999985
-offset_right = 322.74994
-offset_bottom = 13.000015
-grow_vertical = 2
-text = "DODGE CHANCE"
-label_settings = ExtResource("5_1g0n4")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Number" type="Label" parent="Torso/Description Bar" unique_id=818802874]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -233.74988
-offset_top = -9.999985
-offset_right = -136.74988
-offset_bottom = 13.000015
-grow_horizontal = 0
-grow_vertical = 2
-text = "60%"
-label_settings = ExtResource("5_1g0n4")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="Torso" unique_id=115690135]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -35.73748
-offset_top = -39.812378
-offset_right = 40.26252
-offset_bottom = 35.187622
-grow_vertical = 0
-rotation = -0.08726646
-scale = Vector2(0.8, 0.8)
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("6_dckcs")
-
-[node name="Completion Number" type="TextureRect" parent="Torso" unique_id=1937484971]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -47.488342
-offset_top = -32.062492
-offset_right = 53.434753
-offset_bottom = 31.937508
-grow_horizontal = 0
-rotation = 0.08726646
-texture = ExtResource("4_r2dvy")
-expand_mode = 1
-
-[node name="Number" type="Label" parent="Torso/Completion Number" unique_id=1899758065]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -21.0
-offset_right = 30.0
-offset_bottom = 21.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "100%"
-label_settings = ExtResource("6_r2dvy")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Defense" type="Control" parent="." unique_id=1355314869]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 222.35
-offset_top = -82.130005
-offset_right = 432.34988
-offset_bottom = 127.869995
+offset_left = 204.0
+offset_top = -103.000015
+offset_right = 413.99988
+offset_bottom = 107.0
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Button" type="Button" parent="Defense" unique_id=1170251323]
 texture_filter = 1
@@ -494,13 +368,14 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -376.24
-offset_top = -133.26
-offset_right = -172.23975
-offset_bottom = 236.74023
+offset_left = -399.0
+offset_top = -177.0
+offset_right = -194.99976
+offset_bottom = 193.00024
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Button" type="Button" parent="Weapon" unique_id=339328040]
 texture_filter = 1
@@ -619,6 +494,136 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Torso" type="Control" parent="." unique_id=2135995782]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -349.0
+offset_right = 168.00085
+offset_bottom = -85.00012
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Button" type="Button" parent="Torso" unique_id=1447804980]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 250
+theme_override_styles/normal = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rtoy8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="Torso" unique_id=2011803175]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -148.23746
+offset_top = -11.062378
+offset_right = 103.7616
+offset_bottom = 11.437622
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_g14as")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Torso/Description Bar" unique_id=1876846260]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 168.74994
+offset_top = -9.999985
+offset_right = 322.74994
+offset_bottom = 13.000015
+grow_vertical = 2
+text = "DODGE CHANCE"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Torso/Description Bar" unique_id=818802874]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -233.74988
+offset_top = -9.999985
+offset_right = -136.74988
+offset_bottom = 13.000015
+grow_horizontal = 0
+grow_vertical = 2
+text = "60%"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Torso" unique_id=115690135]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -35.73748
+offset_top = -39.812378
+offset_right = 40.26252
+offset_bottom = 35.187622
+grow_vertical = 0
+rotation = -0.08726646
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_dckcs")
+
+[node name="Completion Number" type="TextureRect" parent="Torso" unique_id=1937484971]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.488342
+offset_top = -32.062492
+offset_right = 53.434753
+offset_bottom = 31.937508
+grow_horizontal = 0
+rotation = 0.08726646
+texture = ExtResource("4_r2dvy")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="Torso/Completion Number" unique_id=1899758065]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -21.0
+offset_right = 30.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "100%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Fight Button" type="TextureButton" parent="." unique_id=197246086]
 layout_mode = 1
 anchors_preset = 3
@@ -645,12 +650,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -23.5
-offset_top = -11.5
-offset_right = 23.5
-offset_bottom = 11.5
+offset_left = -64.51135
+offset_top = -24.0
+offset_right = 64.48865
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 45
 text = "FIGHT"
 label_settings = ExtResource("12_pmq32")
+
+[node name="InteractionEffects" type="Node" parent="Fight Button" unique_id=1766561997 node_paths=PackedStringArray("target_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("..")
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects" type="Node" parent="." unique_id=1017043264 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Head")
+input_control = NodePath("../Head/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects2" type="Node" parent="." unique_id=763934923 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Torso")
+input_control = NodePath("../Torso/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects3" type="Node" parent="." unique_id=1415109799 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Defense")
+input_control = NodePath("../Defense/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects4" type="Node" parent="." unique_id=340750853 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Weapon")
+input_control = NodePath("../Weapon/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
