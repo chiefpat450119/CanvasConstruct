@@ -7,6 +7,10 @@ extends Node
 @export_file("*.tscn") var combat_phase_scene_path := "res://scenes/combat_phase/combat_phase.tscn"
 
 var next_boss_index: int = 0
+var current_head_part: HeadResource
+var current_atk_part: AtkResource
+var current_def_part: DefResource
+var current_torso_part: TorsoResource
 
 
 func can_repair_parts() -> bool:
@@ -15,6 +19,29 @@ func can_repair_parts() -> bool:
 
 func mark_drawing_phase_completed() -> void:
 	has_completed_drawing_phase = true
+
+
+func set_current_part(part: PartResource) -> void:
+	if part is HeadResource:
+		current_head_part = part
+	elif part is AtkResource:
+		current_atk_part = part
+	elif part is DefResource:
+		current_def_part = part
+	elif part is TorsoResource:
+		current_torso_part = part
+	else:
+		push_error("Cannot store an unknown player part type.")
+
+
+func get_current_parts() -> Array[PartResource]:
+	var parts: Array[PartResource] = [
+		current_head_part,
+		current_atk_part,
+		current_def_part,
+		current_torso_part,
+	]
+	return parts
 
 
 ## Replaces the current scene with the drawing phase scene.
