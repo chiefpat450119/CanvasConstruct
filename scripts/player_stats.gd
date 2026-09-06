@@ -1,3 +1,4 @@
+class_name PlayerStats
 extends Node
 
 @export var curr_num_pixeles: int = 10
@@ -7,18 +8,37 @@ extends Node
 @export var weapon: Resource
 var _weapon_damage_multiplier: float = 0
 
-@export var head: Resource
+@export var head: DamagableComponent
 var _head_cooldown_multiplier: float = 0
 
-@export var shield: Resource
+@export var shield: DamagableComponent
 var _shield_defense_multiplier: float = 0
 
-@export var torso: Resource
+@export var torso: DamagableComponent
 var _torso_chance_multiplier: float = 0
+
+@export var attack: DamagableComponent
+
+
+func take_damage(pixel_count: int) -> void:
+	if pixel_count <= 0:
+		return
+
+	var available_parts: Array[DamagableComponent] = []
+	var body_parts: Array[DamagableComponent] = [head, shield, torso, attack]
+	for body_part: DamagableComponent in body_parts:
+		if body_part != null and body_part.can_receive_damage():
+			available_parts.append(body_part)
+
+	if available_parts.is_empty():
+		return
+
+	var damaged_part: DamagableComponent = available_parts.pick_random()
+	curr_num_pixeles = maxi(0, curr_num_pixeles - damaged_part.damage_pixels(pixel_count))
 
 
 func get_weapon_damage() -> float:
-	var base_weapon_damage = 0	# TODO: Get this from weapon object
+	var base_weapon_damage: float = 0.0	# TODO: Get this from weapon object
 	return base_weapon_damage * _weapon_damage_multiplier
 
 func set_weapon_damage_multiplier(damage_multiplier) -> void:
