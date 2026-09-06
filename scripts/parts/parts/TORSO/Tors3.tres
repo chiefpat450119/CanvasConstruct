@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TorsoResource" format=3 uid="uid://coxmggtge8rba"]
 
 [ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_ff5v8"]
-[ext_resource type="Texture2D" uid="uid://dps5waru861ju" path="res://scripts/parts/parts/TORSO/LOP TORSO3.png" id="2_ff5v8"]
+[ext_resource type="Texture2D" uid="uid://c37at3qiere8u" path="res://scripts/parts/parts/TORSO/LOP TORSO3 orange.png" id="2_ff5v8"]
 [ext_resource type="Script" uid="uid://db3smkhmbb6ft" path="res://scripts/parts/torso_resource.gd" id="3_o7u4k"]
 
 [resource]
