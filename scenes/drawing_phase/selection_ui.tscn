@@ -107,7 +107,7 @@ defense_ui = NodePath("Defense")
 weapon_ui = NodePath("Weapon")
 fight_button = NodePath("Fight Button")
 
-[node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
+[node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -123,6 +123,9 @@ script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
 similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
 
 [node name="Button" type="Button" parent="Head" unique_id=4433000]
 texture_filter = 1
@@ -240,17 +243,23 @@ vertical_alignment = 1
 
 [node name="Lock" type="TextureRect" parent="Head" unique_id=495862793]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
+modulate = Color(0.15, 0.15, 0.15, 1)
+visible = false
 
-[node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
+[node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -266,6 +275,9 @@ script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
 similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
 
 [node name="Button" type="Button" parent="Defense" unique_id=1170251323]
 texture_filter = 1
@@ -381,7 +393,25 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
+[node name="Lock" type="TextureRect" parent="Defense"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+modulate = Color(0.15, 0.15, 0.15, 1)
+visible = false
+
+[node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -400,6 +430,9 @@ script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
 similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
 
 [node name="Button" type="Button" parent="Weapon" unique_id=339328040]
 texture_filter = 1
@@ -518,7 +551,25 @@ label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "similarity_label")]
+[node name="Lock" type="TextureRect" parent="Weapon"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+modulate = Color(0.15, 0.15, 0.15, 1)
+visible = false
+
+[node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -537,6 +588,9 @@ script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
 similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
 
 [node name="Button" type="Button" parent="Torso" unique_id=1447804980]
 texture_filter = 1
@@ -651,6 +705,24 @@ text = "100%"
 label_settings = ExtResource("6_r2dvy")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="Torso"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+modulate = Color(0.15, 0.15, 0.15, 1)
+visible = false
 
 [node name="Fight Button" type="TextureButton" parent="." unique_id=197246086]
 layout_mode = 1

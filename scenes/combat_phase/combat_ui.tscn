@@ -87,6 +87,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="CombatUI" type="CanvasLayer" unique_id=1513656037 node_paths=PackedStringArray("attack_button", "defend_button", "player_health_bar", "boss_health_bar")]
+layer = -1
 script = ExtResource("1_lmxbf")
 attack_button = NodePath("Control/Buttons/Attack Button")
 defend_button = NodePath("Control/Buttons/Defend Button")
