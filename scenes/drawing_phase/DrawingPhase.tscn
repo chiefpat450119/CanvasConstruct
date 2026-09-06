@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://daeurpw1imnls"]
-
-[ext_resource type="Script" uid="uid://4ri4gcwug6e8" path="res://scenes/drawing_phase/drawing_phase_manager.gd" id="1_sxoxa"]
-
-[node name="DrawingPhase" type="Node2D" unique_id=398326497]
-position = Vector2(-1, 0)
-script = ExtResource("1_sxoxa")
