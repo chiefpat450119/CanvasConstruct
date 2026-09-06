@@ -23,7 +23,7 @@ script = ExtResource("3_damage")
 visuals = NodePath("..")
 
 [node name="Head" parent="." unique_id=1734064390 instance=ExtResource("1_wr5hl")]
-position = Vector2(0, 12)
+position = Vector2(0, -13)
 
 [node name="HeadDamageComponent" type="Node" parent="Head" unique_id=417024503 node_paths=PackedStringArray("visuals")]
 script = ExtResource("3_damage")
