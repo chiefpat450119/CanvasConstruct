@@ -42,6 +42,7 @@ func mark_drawing_phase_completed() -> void:
 
 
 func reset_run() -> void:
+	AudioManager.play_build_music()
 	has_completed_drawing_phase = false
 	next_boss_index = 0
 	current_head_part = null
@@ -112,6 +113,7 @@ func switch_to_cutscene() -> void:
 	await _transition_to_scene(cutscene_scene_path)
 
 func switch_to_drawing_phase() -> void:
+	AudioManager.play_build_music()
 	await _transition_to_scene(drawing_phase_scene_path)
 
 
@@ -124,7 +126,7 @@ func switch_to_combat_phase() -> void:
 		)
 		UITransition.finish()
 		return
-
+	AudioManager.play_combat_music()
 	var combat_phase := get_tree().current_scene as CombatPhaseManager
 	if combat_phase == null:
 		push_error("Combat scene root is not a CombatPhaseManager")
