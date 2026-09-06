@@ -6,4 +6,4 @@
 script = ExtResource("1_attack")
 damage = 15
 move_id = &"chomp"
-windup = 1.5
+windup = 2.0

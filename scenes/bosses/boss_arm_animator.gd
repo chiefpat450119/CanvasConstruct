@@ -47,7 +47,7 @@ func _wind_up_base_attack() -> void:
 	animation_player.play("orc_lift_axe")
 
 func _swing_left_arm() -> void:
-	animation_player.queue("orc_swing_axe")
+	animation_player.play("orc_swing_axe")
 	animation_player.queue("orc_idle")
 
 
