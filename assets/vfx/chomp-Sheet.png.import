@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbbmanr3mwmom"
-path="res://.godot/imported/chomp-Sheet.png-750917b22ba7c3ebeec8c976efb3d361.ctex"
+path="res://.godot/imported/chomp-Sheet.png-cc8dcdf03aa278300d8f597553d7aca0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/vfx/chomp-Sheet.png"
-dest_files=["res://.godot/imported/chomp-Sheet.png-750917b22ba7c3ebeec8c976efb3d361.ctex"]
+source_file="res://assets/VFX/chomp-Sheet.png"
+dest_files=["res://.godot/imported/chomp-Sheet.png-cc8dcdf03aa278300d8f597553d7aca0.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bs0rg7qeq6se"
-path="res://.godot/imported/deeno shield-Sheet.png-5382cdef28dc9985438bc2f5ad6e3a38.ctex"
+path="res://.godot/imported/deeno shield-Sheet.png-7f92ee47ffbd362ee9ab7b4b20af80ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/vfx/deeno shield-Sheet.png"
-dest_files=["res://.godot/imported/deeno shield-Sheet.png-5382cdef28dc9985438bc2f5ad6e3a38.ctex"]
+source_file="res://assets/VFX/deeno shield-Sheet.png"
+dest_files=["res://.godot/imported/deeno shield-Sheet.png-7f92ee47ffbd362ee9ab7b4b20af80ee.ctex"]
 
 [params]
 
