@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://qj8v1l31nkj6" path="res://assets/bosses/gork/gork hand right.png" id="8_ciya6"]
 [ext_resource type="Texture2D" uid="uid://djri7phhp2pa7" path="res://assets/bosses/gork/gork arm left cut.png" id="9_6idyj"]
 [ext_resource type="Texture2D" uid="uid://ruy3sm128gax" path="res://assets/bosses/gork/gork hand left.png" id="10_efkk5"]
+[ext_resource type="Texture2D" uid="uid://b8b4bxxp6wbkk" path="res://assets/VFX/charging-Sheet.png" id="11_4r2tt"]
+[ext_resource type="Texture2D" uid="uid://dukffusfyc2m3" path="res://assets/VFX/slash-Sheet.png" id="12_ciya6"]
 
 [sub_resource type="Animation" id="Animation_awobs"]
 length = 0.001
@@ -946,16 +948,67 @@ _data = {
 &"orc_swing_axe_special": SubResource("Animation_pr0nl")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o6pke"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6idyj"]
+atlas = ExtResource("12_ciya6")
+region = Rect2(0, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efkk5"]
+atlas = ExtResource("12_ciya6")
+region = Rect2(30, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr0nl"]
+atlas = ExtResource("12_ciya6")
+region = Rect2(60, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_figio"]
+atlas = ExtResource("12_ciya6")
+region = Rect2(90, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwugb"]
+atlas = ExtResource("12_ciya6")
+region = Rect2(120, 0, 30, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6idyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efkk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr0nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_figio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwugb")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 24.0
+}]
+
 [node name="OrcBoss" type="Node2D" unique_id=378128887]
 script = ExtResource("4_first_boss")
 moves = Array[ExtResource("2_8mkl3")]([ExtResource("6_base_attack"), ExtResource("7_special_attack")])
 
-[node name="BossArmAnimator" type="Node" parent="." unique_id=1869743769 node_paths=PackedStringArray("boss", "left_arm", "right_arm", "animation_player")]
+[node name="BossArmAnimator" type="Node" parent="." unique_id=1869743769 node_paths=PackedStringArray("boss", "left_arm", "right_arm", "animation_player", "charge_particles", "swing_VFX")]
 script = ExtResource("5_arm_animator")
 boss = NodePath("..")
 left_arm = NodePath("../LeftArm")
 right_arm = NodePath("../RightArm")
 animation_player = NodePath("../AnimationPlayer")
+charge_particles = NodePath("../Charge Particles")
+swing_VFX = NodePath("../Swing VFX")
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1954537377]
 texture_filter = 1
@@ -989,3 +1042,25 @@ offset = Vector2(2, -7)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1249296957]
 libraries/ = SubResource("AnimationLibrary_ciya6")
+
+[node name="Charge Particles" type="CPUParticles2D" parent="." unique_id=788828791]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_o6pke")
+position = Vector2(0, -26)
+emitting = false
+amount = 2
+texture = ExtResource("11_4r2tt")
+emission_shape = 3
+emission_rect_extents = Vector2(15, 1)
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Swing VFX" type="AnimatedSprite2D" parent="." unique_id=1717426023]
+texture_filter = 1
+position = Vector2(-84, -17)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+frame = 4
+frame_progress = 1.0
