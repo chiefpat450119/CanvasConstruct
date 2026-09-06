@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://dwplekdaggb5"]
+
+[ext_resource type="Script" uid="uid://bwngggxjc32pn" path="res://scenes/drawing_phase/drawing_ui.gd" id="1_s7vdd"]
+[ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="2_63o16"]
+[ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="3_mvmjb"]
+[ext_resource type="Script" uid="uid://wruokad4nqnb" path="res://scripts/grid_lines.gd" id="4_t2x1o"]
+[ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="6_mvmjb"]
+[ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="7_agvlj"]
+[ext_resource type="Script" uid="uid://clq5r8xjv2n7m" path="res://scenes/drawing_phase/drawing_ui_anim.gd" id="7_drawing_anim"]
+[ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="8_77x44"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="9_vxr02"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2x1o"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.03529412, 0.03529412, 0.03529412, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.92941177, 0.49803922, 0.80784315, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ek0"]
+content_margin_top = 10.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 10
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey50j"]
+font = ExtResource("6_mvmjb")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_uwk22"]
+font = ExtResource("6_mvmjb")
+font_size = 72
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_content_frame"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.96254605, 0.96254593, 0.96254593, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 10
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42j7w"]
+load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54aae.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_t2x1o"]
+font = ExtResource("6_mvmjb")
+font_size = 32
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w5bij"]
+load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc26e.ctex"
+
+[node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid_frame", "reference_art_frame", "drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button", "ui_anim")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s7vdd")
+drawing_grid_frame = NodePath("Drawing Grid Frame")
+reference_art_frame = NodePath("Reference Image Frame")
+drawing_grid = NodePath("Drawing Grid Frame/Drawing Grid")
+reference_art = NodePath("Reference Image Frame/Reference Image")
+reference_art_grid_lines = NodePath("Reference Image Frame/Reference Image/Grid Lines")
+timer_label = NodePath("Timer/Label")
+finish_button = NodePath("Finish Button")
+ui_anim = NodePath("DrawingUIAnim")
+
+[node name="Drawing Grid Frame" type="PanelContainer" parent="." unique_id=58162763]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 312.0
+offset_right = 337.0
+offset_bottom = 336.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_t2x1o")
+
+[node name="Drawing Grid" type="GridContainer" parent="Drawing Grid Frame" unique_id=251566916 node_paths=PackedStringArray("grid")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+script = ExtResource("2_63o16")
+grid = NodePath(".")
+cell_texture = ExtResource("3_mvmjb")
+
+[node name="Timer" type="Label" parent="." unique_id=456408500]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 82.0
+offset_right = 60.0
+offset_bottom = 223.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_o1ek0")
+text = "Time"
+label_settings = SubResource("LabelSettings_ey50j")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Timer" unique_id=1264149902]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.5
+offset_top = 35.0
+offset_right = 37.5
+offset_bottom = 130.0
+grow_horizontal = 2
+text = "30"
+label_settings = SubResource("LabelSettings_uwk22")
+horizontal_alignment = 1
+
+[node name="Reference Image Frame" type="PanelContainer" parent="." unique_id=431344068]
+layout_mode = 0
+offset_left = 835.0
+offset_top = 49.0
+offset_right = 1042.0
+offset_bottom = 621.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_content_frame")
+
+[node name="Reference Image" type="TextureRect" parent="Reference Image Frame" unique_id=1581316438]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_42j7w")
+expand_mode = 1
+
+[node name="Grid Lines" type="Control" parent="Reference Image Frame/Reference Image" unique_id=1873141673]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_t2x1o")
+
+[node name="ColorRect" type="ColorRect" parent="Reference Image Frame/Reference Image" unique_id=732323307]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03610091, 0.03610091, 0.03610091, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=31174071]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1487165075]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -24.0
+offset_right = 183.0
+offset_bottom = 19.0
+grow_vertical = 2
+text = "Drawing Phase"
+label_settings = SubResource("LabelSettings_t2x1o")
+
+[node name="DrawingUIAnim" type="Node" parent="." unique_id=10217759 node_paths=PackedStringArray("phase_banner", "timer", "drawing_grid", "reference_art", "finish_button")]
+script = ExtResource("7_drawing_anim")
+phase_banner = NodePath("../ColorRect")
+timer = NodePath("../Timer")
+drawing_grid = NodePath("../Drawing Grid Frame")
+reference_art = NodePath("../Reference Image Frame")
+finish_button = NodePath("")
+play_on_ready = false
+
+[node name="Finish Button" type="TextureButton" parent="." unique_id=1988163918]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -81.0
+offset_right = 102.022705
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("7_agvlj")
+texture_hover = SubResource("CompressedTexture2D_w5bij")
+texture_focused = SubResource("CompressedTexture2D_w5bij")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Finish Button" unique_id=784412987]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.51135
+offset_top = -24.0
+offset_right = 64.48865
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "FINISH"
+label_settings = ExtResource("8_77x44")
+
+[node name="InteractionEffects" type="Node" parent="Finish Button" unique_id=1152520146 node_paths=PackedStringArray("target_control")]
+script = ExtResource("9_vxr02")
+target_control = NodePath("..")
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"

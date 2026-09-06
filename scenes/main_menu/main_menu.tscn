@@ -2,32 +2,17 @@
 
 [ext_resource type="Script" uid="uid://djhq78c0wf0vl" path="res://scenes/main_menu/main_menu.gd" id="1_fsom3"]
 [ext_resource type="Texture2D" uid="uid://df2uu25ktdk6e" path="res://assets/UI/main_menu/MAIN_LOGO.png" id="2_0ebjn"]
-[ext_resource type="PackedScene" uid="uid://d3ko0q7uix0mk" path="res://scenes/test/scrolling_background.tscn" id="4_wem23"]
+[ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="2_ob46e"]
+[ext_resource type="Texture2D" uid="uid://df6i3ydlgjwqs" path="res://assets/UI/utils/button_background.png" id="3_uqeha"]
+[ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="4_5seab"]
+[ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="4_wem23"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="5_3ovsr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c35f"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="LabelSettings" id="LabelSettings_uqeha"]
+font = ExtResource("4_wem23")
+font_size = 48
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsom3"]
-bg_color = Color(0, 0.3948369, 0.6325011, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ebjn"]
-bg_color = Color(2.0407439e-05, 0.58216786, 0.9142944, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fsom3"]
-
-[node name="MainMenu" type="Control" unique_id=897672444]
+[node name="MainMenu" type="Control" unique_id=897672444 node_paths=PackedStringArray("start", "tutorial")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,9 +20,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fsom3")
+start = NodePath("VBoxContainer/Start")
+tutorial = NodePath("VBoxContainer/Tutorial")
 
-[node name="ScrollingBackground" parent="." unique_id=482453548 instance=ExtResource("4_wem23")]
+[node name="UiBackground" parent="." unique_id=1544384068 instance=ExtResource("2_ob46e")]
+z_index = -5
 layout_mode = 1
+metadata/_edit_group_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=502310290]
 layout_mode = 1
@@ -46,45 +35,70 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -163.5
-offset_top = 61.0
-offset_right = 163.5
-offset_bottom = 249.0
+offset_left = -144.0
+offset_top = 19.0
+offset_right = 147.00061
+offset_bottom = 215.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 20
 
-[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1216723448]
+[node name="Start" type="TextureButton" parent="VBoxContainer" unique_id=1307722484]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_1c35f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
-text = "Start"
+texture_normal = ExtResource("3_uqeha")
 
-[node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1543310843]
+[node name="Label" type="Label" parent="VBoxContainer/Start" unique_id=1522136818]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 125.5
+offset_top = 32.5
+offset_right = -125.5
+offset_bottom = -32.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY"
+label_settings = ExtResource("4_5seab")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionEffects" type="Node" parent="VBoxContainer/Start" unique_id=1907038243 node_paths=PackedStringArray("target_control")]
+script = ExtResource("5_3ovsr")
+target_control = NodePath("..")
+
+[node name="Tutorial" type="TextureButton" parent="VBoxContainer" unique_id=2094143936]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_1c35f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fsom3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0ebjn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fsom3")
-text = "How to Play"
+texture_normal = ExtResource("3_uqeha")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tutorial" unique_id=251902960]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 19.5
+offset_right = -35.0
+offset_bottom = -19.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "TUTORIAL"
+label_settings = SubResource("LabelSettings_uqeha")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionEffects2" type="Node" parent="VBoxContainer/Tutorial" unique_id=143949556 node_paths=PackedStringArray("target_control")]
+script = ExtResource("5_3ovsr")
+target_control = NodePath("..")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2111576268]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -308.0
-offset_top = 86.0
-offset_right = 308.0
-offset_bottom = 319.0
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 265.0
+offset_top = 54.0
+offset_right = -271.0
+offset_bottom = -361.0
 grow_horizontal = 2
 texture = ExtResource("2_0ebjn")
-
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_pressed"]

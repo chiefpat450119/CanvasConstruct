@@ -1,5 +1,15 @@
 extends Control
 
+
+@export var start: BaseButton
+@export var tutorial: BaseButton
+
+
+func _ready():
+	start.pressed.connect(_on_start_pressed)
+	tutorial.pressed.connect(_on_tutorial_pressed)
+
+
 func _on_start_pressed() -> void:
 	GameStateManagerInstance.switch_to_cutscene()
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q7kf4wsl783c"
-path="res://.godot/imported/scrolling_background.png-59e2ef575867798adab7c8178f25ec2c.ctex"
+uid="uid://cjxuqo6m3xpa5"
+path="res://.godot/imported/LOCK.png-edaef1bcdd9cba9bf663d889051d2ca7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scrolling_background.png"
-dest_files=["res://.godot/imported/scrolling_background.png-59e2ef575867798adab7c8178f25ec2c.ctex"]
+source_file="res://assets/UI/build_phase/LOCK.png"
+dest_files=["res://.godot/imported/LOCK.png-edaef1bcdd9cba9bf663d889051d2ca7.ctex"]
 
 [params]
 

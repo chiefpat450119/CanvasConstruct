@@ -1,9 +1,9 @@
 class_name PlayerStats
 extends Node
 
-@export var curr_num_pixeles: int = 100
-@export var max_num_pixeles: int = 100
-@export var death_threshold: float = 0.5
+var curr_num_pixeles: int = 0
+var max_num_pixeles: int = 0
+@export var death_threshold: float = 0.25
 
 var weapon_part: AtkResource
 var _weapon_damage_multiplier: float = 0
@@ -28,6 +28,16 @@ func init_parts(weapon: AtkResource, head: HeadResource, defense: DefResource, t
 	head_part = head
 	defense_part = defense
 	torso_part = torso
+
+
+func initialize_pixel_health(parts: Array[PlayerPart]) -> void:
+	max_num_pixeles = 0
+	for part in parts:
+		if part != null:
+			max_num_pixeles += part.get_reference_pixel_count()
+
+	var completion := PlayerPart.get_total_completion(parts)
+	curr_num_pixeles = roundi(max_num_pixeles * completion)
 
 func set_multipliers(weapon_multiplier: float, head_multiplier: float, defense_multiplier: float, torso_multiplier: float) -> void:
 	_weapon_damage_multiplier = weapon_multiplier

@@ -1,0 +1,938 @@
+[gd_scene format=3 uid="uid://dkjj515rpafsk"]
+
+[ext_resource type="Script" uid="uid://dx37n32wlkmo2" path="res://scenes/drawing_phase/selection_ui.gd" id="1_wwyqb"]
+[ext_resource type="Texture2D" uid="uid://duitaui6xsh0" path="res://assets/UI/build_phase/COMP_HEAD_LABLE.png" id="2_pmq32"]
+[ext_resource type="Texture2D" uid="uid://dq4rcpcu2pirn" path="res://assets/UI/build_phase/COMP_HEAD_ICON.png" id="3_1g0n4"]
+[ext_resource type="Texture2D" uid="uid://b54d53spdo1xg" path="res://assets/UI/build_phase/XPERC_COMP_ICON.png" id="4_r2dvy"]
+[ext_resource type="LabelSettings" uid="uid://dverhrljleb0m" path="res://assets/UI/fonts/small_info.tres" id="5_1g0n4"]
+[ext_resource type="Texture2D" uid="uid://dnxydv8supesu" path="res://assets/UI/build_phase/COMP_TORSO_LABLE.png" id="5_g14as"]
+[ext_resource type="Texture2D" uid="uid://bsx4nlus1sar" path="res://assets/UI/build_phase/COMP_TORSO_ICON.png" id="6_dckcs"]
+[ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="6_r2dvy"]
+[ext_resource type="Texture2D" uid="uid://d21qcuxgwad7g" path="res://assets/UI/build_phase/COMP_DEFENSE_LABLE.png" id="7_3glp3"]
+[ext_resource type="Texture2D" uid="uid://cjxuqo6m3xpa5" path="res://assets/UI/build_phase/LOCK.png" id="7_773tf"]
+[ext_resource type="Texture2D" uid="uid://c71kyhnkf6qtd" path="res://assets/UI/build_phase/COMP_DEFENSE_ICON.png" id="8_773tf"]
+[ext_resource type="Texture2D" uid="uid://b3fmmtpsftnu7" path="res://assets/UI/build_phase/COMP_ATTACK_LABLE.png" id="9_5l06c"]
+[ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="10_cmnqg"]
+[ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="11_8t5x5"]
+[ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="12_pmq32"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="15_g14as"]
+[ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="16_dckcs"]
+[ext_resource type="Script" uid="uid://dj2a6looo4068" path="res://scenes/drawing_phase/selection_ui_anim.gd" id="17_selection_anim"]
+[ext_resource type="Script" uid="uid://cadwc52d0c3ei" path="res://scenes/drawing_phase/part_ui.gd" id="18_part_ui"]
+[ext_resource type="Texture2D" uid="uid://de03mfq7o405b" path="res://assets/UI/build_phase/TOTAL_COMPLETION_UI_FRONT.png" id="20_cmnqg"]
+[ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="21_8t5x5"]
+[ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="22_gj7ov"]
+[ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="23_d64h6"]
+[ext_resource type="Script" path="res://scenes/drawing_phase/total_progress_bar.gd" id="24_total_progress"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.5914206, 0.88408834, 0.6249393, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1olcv"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.30588236, 0.45882353, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vcty"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.999999, 0.3494257, 0.42538223, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtoy8"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.92863256, 0.7722927, 0.4892547, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dnu3j"]
+load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc26e.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_g14as"]
+font = ExtResource("16_dckcs")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8t5x5"]
+bg_color = Color(0.5921569, 0.88235295, 0.62352943, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_khfc7"]
+shader = ExtResource("23_d64h6")
+shader_parameter/color = Vector4(1, 0, 0, 1)
+
+[node name="Selection UI" type="Control" unique_id=984169342 node_paths=PackedStringArray("head_ui", "torso_ui", "defense_ui", "weapon_ui", "total_progress_bar", "fight_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wwyqb")
+head_ui = NodePath("Head")
+torso_ui = NodePath("Torso")
+defense_ui = NodePath("Defense")
+weapon_ui = NodePath("Weapon")
+total_progress_bar = NodePath("TextureRect")
+fight_button = NodePath("Fight Button")
+
+[node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.00003
+offset_top = 120.599976
+offset_right = 106.00012
+offset_bottom = 334.60013
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
+similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
+
+[node name="Button" type="Button" parent="Head" unique_id=4433000]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_884ma")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_884ma")
+theme_override_styles/hover = SubResource("StyleBoxFlat_884ma")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_884ma")
+theme_override_styles/focus = SubResource("StyleBoxFlat_884ma")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="Head" unique_id=32125894]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -8.487525
+offset_top = -19.162643
+offset_right = 217.51248
+offset_bottom = 10.837357
+grow_vertical = 0
+texture = ExtResource("2_pmq32")
+
+[node name="Name" type="Label" parent="Head/Description Bar" unique_id=409166103]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 34.999996
+offset_top = -11.249985
+offset_right = 132.0
+offset_bottom = 11.750015
+grow_vertical = 2
+text = "COOLDOWN"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Head/Description Bar" unique_id=2050933390]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -11.249985
+offset_right = 10.999985
+offset_bottom = 11.750015
+grow_horizontal = 0
+grow_vertical = 2
+text = "2s"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Head" unique_id=1585837726]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -39.737507
+offset_top = -45.412674
+offset_right = 36.262493
+offset_bottom = 29.587326
+grow_vertical = 0
+rotation = 0.12217305
+scale = Vector2(0.73, 0.73)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_1g0n4")
+
+[node name="Completion Number" type="TextureRect" parent="Head" unique_id=670605572]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 32.923096
+offset_bottom = 40.0
+grow_horizontal = 0
+rotation = -0.08726646
+texture = ExtResource("4_r2dvy")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="Head/Completion Number" unique_id=770317910]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.49955
+offset_top = -20.4
+offset_right = 38.50045
+offset_bottom = 21.599998
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.06981317
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 30
+text = "0%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="Head" unique_id=495862793]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 204.00002
+offset_top = -63.400055
+offset_right = 413.99988
+offset_bottom = 146.59998
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
+similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
+
+[node name="Button" type="Button" parent="Defense" unique_id=1170251323]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.4375076
+offset_top = -1.0874938
+offset_right = -0.4375
+offset_bottom = -1.0874939
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1olcv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1olcv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1olcv")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1olcv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1olcv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="Defense" unique_id=850731017]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -12.937511
+offset_top = -18.587524
+offset_right = 221.92918
+offset_bottom = 11.662476
+grow_vertical = 0
+texture = ExtResource("7_3glp3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Defense/Description Bar" unique_id=1208603819]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 9.999999
+offset_top = -10.124992
+offset_right = 164.0
+offset_bottom = 12.875008
+grow_vertical = 2
+text = "DEFENSE"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Defense/Description Bar" unique_id=966869381]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -86.116714
+offset_top = -10.749992
+offset_right = 10.8832855
+offset_bottom = 12.250008
+grow_horizontal = 0
+grow_vertical = 2
+text = "17"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Defense" unique_id=1912988376]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -32.93751
+offset_top = -48.587524
+offset_right = 43.06249
+offset_bottom = 26.412476
+grow_vertical = 0
+rotation = 0.05235988
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("8_773tf")
+
+[node name="Completion Number" type="TextureRect" parent="Defense" unique_id=1023037194]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.43741
+offset_top = -29.837498
+offset_right = 45.485687
+offset_bottom = 34.162502
+grow_horizontal = 0
+rotation = 0.06981317
+texture = ExtResource("4_r2dvy")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="Defense/Completion Number" unique_id=193395337]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -21.0
+offset_right = 30.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "0%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="Defense" unique_id=79138719]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = -137.40002
+offset_right = -194.99976
+offset_bottom = 232.60022
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
+similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
+
+[node name="Button" type="Button" parent="Weapon" unique_id=339328040]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.29998776
+offset_top = 1.574993
+offset_right = 0.2999878
+offset_bottom = 1.5749817
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 90
+theme_override_styles/normal = SubResource("StyleBoxFlat_8vcty")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8vcty")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8vcty")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8vcty")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8vcty")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="Weapon" unique_id=1000592703]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.799986
+offset_top = -7.175293
+offset_right = -28.400269
+offset_bottom = 12.824707
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("9_5l06c")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="Weapon/Description Bar" unique_id=930637934]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -24.999998
+offset_top = -11.249985
+offset_right = 129.0
+offset_bottom = 11.750015
+grow_vertical = 2
+text = "ATTACK"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Weapon/Description Bar" unique_id=280887043]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.55002
+offset_top = -11.249985
+offset_right = 20.449982
+offset_bottom = 11.750015
+grow_horizontal = 0
+grow_vertical = 2
+text = "10"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Weapon" unique_id=304133776]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -38.449997
+offset_top = -40.925262
+offset_right = 37.550003
+offset_bottom = 34.074738
+grow_vertical = 0
+rotation = -0.10471976
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("10_cmnqg")
+
+[node name="Completion Number" type="TextureRect" parent="Weapon" unique_id=1045125215]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.450226
+offset_top = -18.42501
+offset_right = 38.47287
+offset_bottom = 45.57499
+grow_horizontal = 0
+rotation = -0.05235988
+texture = ExtResource("4_r2dvy")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="Weapon/Completion Number" unique_id=228026654]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -21.0
+offset_right = 30.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "0%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="Weapon" unique_id=123235610]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -309.40002
+offset_right = 168.00085
+offset_bottom = -45.400146
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("18_part_ui")
+select_button = NodePath("Button")
+preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
+similarity_label = NodePath("Completion Number/Number")
+description_bar = NodePath("Description Bar")
+icon = NodePath("Icon")
+lock = NodePath("Lock")
+
+[node name="Button" type="Button" parent="Torso" unique_id=1447804980]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 250
+theme_override_styles/normal = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rtoy8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rtoy8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="Torso" unique_id=2011803175]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -148.23746
+offset_top = -11.062378
+offset_right = 103.7616
+offset_bottom = 11.437622
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_g14as")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Torso/Description Bar" unique_id=1876846260]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 168.74994
+offset_top = -9.999985
+offset_right = 322.74994
+offset_bottom = 13.000015
+grow_vertical = 2
+text = "DODGE CHANCE"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Torso/Description Bar" unique_id=818802874]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -233.74988
+offset_top = -9.999985
+offset_right = -136.74988
+offset_bottom = 13.000015
+grow_horizontal = 0
+grow_vertical = 2
+text = "25%"
+label_settings = ExtResource("5_1g0n4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Torso" unique_id=115690135]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -35.73748
+offset_top = -39.812378
+offset_right = 40.26252
+offset_bottom = 35.187622
+grow_vertical = 0
+rotation = -0.08726646
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_dckcs")
+
+[node name="Completion Number" type="TextureRect" parent="Torso" unique_id=1937484971]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.488342
+offset_top = -32.062492
+offset_right = 53.434753
+offset_bottom = 31.937508
+grow_horizontal = 0
+rotation = 0.08726646
+texture = ExtResource("4_r2dvy")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="Torso/Completion Number" unique_id=1899758065]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.927818
+offset_top = -20.847527
+offset_right = 29.072182
+offset_bottom = 21.152473
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "0%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="Torso" unique_id=2146588545]
+visible = false
+modulate = Color(0.15, 0.15, 0.15, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = -20.0
+offset_right = -62.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_773tf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Fight Button" type="TextureButton" parent="." unique_id=197246086]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -229.0
+offset_top = -83.0
+offset_right = -23.977295
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("11_8t5x5")
+texture_hover = SubResource("CompressedTexture2D_dnu3j")
+texture_focused = SubResource("CompressedTexture2D_dnu3j")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Fight Button" unique_id=1144196817]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.51135
+offset_top = -24.0
+offset_right = 64.48865
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "FIGHT"
+label_settings = ExtResource("12_pmq32")
+
+[node name="InteractionEffects" type="Node" parent="Fight Button" unique_id=1766561997 node_paths=PackedStringArray("target_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("..")
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects" type="Node" parent="." unique_id=1017043264 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Head")
+input_control = NodePath("../Head/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects2" type="Node" parent="." unique_id=763934923 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Torso")
+input_control = NodePath("../Torso/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects3" type="Node" parent="." unique_id=1415109799 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Defense")
+input_control = NodePath("../Defense/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="InteractionEffects4" type="Node" parent="." unique_id=340750853 node_paths=PackedStringArray("target_control", "input_control")]
+script = ExtResource("15_g14as")
+target_control = NodePath("../Weapon")
+input_control = NodePath("../Weapon/Button")
+center_pivot = false
+hover_scale = Vector2(1.1, 1.1)
+press_scale = Vector2(1.15, 1.15)
+press_rotation_degrees = 0.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1164133124]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=675382783]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -24.0
+offset_right = 183.0
+offset_bottom = 19.0
+grow_vertical = 2
+text = "Build Phase"
+label_settings = SubResource("LabelSettings_g14as")
+
+[node name="SelectionUIAnim" type="Node" parent="." unique_id=1208700181 node_paths=PackedStringArray("phase_banner", "head", "defense", "weapon", "torso", "fight_button")]
+script = ExtResource("17_selection_anim")
+phase_banner = NodePath("../ColorRect")
+head = NodePath("../Head")
+defense = NodePath("../Defense")
+weapon = NodePath("../Weapon")
+torso = NodePath("../Torso")
+fight_button = NodePath("../Fight Button")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=397398642 node_paths=PackedStringArray("progress_bar", "percentage_label")]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 102.0
+offset_right = 393.84268
+offset_bottom = 224.0
+texture = ExtResource("20_cmnqg")
+expand_mode = 1
+script = ExtResource("24_total_progress")
+progress_bar = NodePath("ProgressBar")
+percentage_label = NodePath("ProgressBar/Label")
+
+[node name="ProgressBar" type="ProgressBar" parent="TextureRect" unique_id=971651153]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.92134
+offset_top = -31.0
+offset_right = 156.07866
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("21_8t5x5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8t5x5")
+value = 25.0
+show_percentage = false
+
+[node name="UiBackground" parent="TextureRect/ProgressBar" unique_id=1544384068 instance=ExtResource("22_gj7ov")]
+material = SubResource("ShaderMaterial_khfc7")
+layout_mode = 1
+offset_right = -302.40216
+offset_bottom = -38.021736
+scale = Vector2(7.36, 7.36)
+
+[node name="Label" type="Label" parent="TextureRect/ProgressBar" unique_id=1077859034]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -16.5
+offset_right = 38.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "100%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=570425385]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.92134
+offset_top = -32.0
+offset_right = 46.07866
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "<25% = LOSE"
+label_settings = ExtResource("5_1g0n4")
+
+[editable path="TextureRect/ProgressBar/UiBackground"]
