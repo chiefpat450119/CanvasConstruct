@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://bna2mm0mkpj4f"]
+
+[ext_resource type="Script" uid="uid://c8p4m2r7xv6qa" path="res://scenes/drawing_phase/repair_or_upgrade_ui.gd" id="1_nscei"]
+[ext_resource type="Texture2D" uid="uid://drvck8u3q6ryt" path="res://assets/UI/repair_or_ugprade/UPG_REP_BACK.png" id="2_ynk2g"]
+[ext_resource type="Texture2D" uid="uid://csb0k7ba7gjqs" path="res://assets/UI/repair_or_ugprade/REPAIR_BUTTON.png" id="3_73di2"]
+[ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="4_nxdrc"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="5_2s534"]
+[ext_resource type="Texture2D" uid="uid://dwfw2lqyke260" path="res://assets/UI/repair_or_ugprade/UPGRADE_BUTTON.png" id="5_c6yot"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6yot"]
+font = ExtResource("4_nxdrc")
+font_size = 64
+
+[node name="Repair or Upgrade UI" type="Control" unique_id=105352 node_paths=PackedStringArray("repair_button", "upgrade_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nscei")
+repair_button = NodePath("TextureRect/Repair")
+upgrade_button = NodePath("TextureRect/Upgrade")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=152824103]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -208.72565
+offset_right = 185.0
+offset_bottom = 208.72565
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ynk2g")
+expand_mode = 1
+
+[node name="Repair" type="TextureButton" parent="TextureRect" unique_id=1281774100]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -269.0
+offset_top = 29.725647
+offset_right = 269.0
+offset_bottom = 183.72565
+grow_horizontal = 2
+scale = Vector2(0.57, 0.57)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_73di2")
+
+[node name="Label" type="Label" parent="TextureRect/Repair" unique_id=225919574]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 49.701782
+offset_top = -54.19299
+offset_right = 300.70178
+offset_bottom = 40.807007
+grow_vertical = 2
+text = "REPAIR"
+label_settings = SubResource("LabelSettings_c6yot")
+
+[node name="InteractionEffects" type="Node" parent="TextureRect/Repair" unique_id=616515597 node_paths=PackedStringArray("target_control")]
+script = ExtResource("5_2s534")
+target_control = NodePath("..")
+center_pivot = false
+hover_scale = Vector2(1.06, 1.06)
+press_scale = Vector2(1.1, 1.1)
+press_rotation_degrees = -2.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+release_rotation_degrees = 1.0
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="Upgrade" type="TextureButton" parent="TextureRect" unique_id=1139539970]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -269.0
+offset_top = 275.72565
+offset_right = 269.0
+offset_bottom = 429.72565
+grow_horizontal = 2
+scale = Vector2(0.57, 0.57)
+pivot_offset_ratio = Vector2(0.5, 0)
+texture_normal = ExtResource("5_c6yot")
+
+[node name="InteractionEffects2" type="Node" parent="TextureRect/Upgrade" unique_id=1425446379 node_paths=PackedStringArray("target_control")]
+script = ExtResource("5_2s534")
+target_control = NodePath("..")
+center_pivot = false
+hover_scale = Vector2(1.06, 1.06)
+press_scale = Vector2(1.1, 1.1)
+press_rotation_degrees = -2.0
+shake_while_pressed = false
+release_scale = Vector2(0.95, 0.95)
+release_rotation_degrees = 1.0
+metadata/_custom_type_script = "uid://ru5wvowvdt2c"
+
+[node name="Label" type="Label" parent="TextureRect/Upgrade" unique_id=1963701067]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 49.701782
+offset_top = -52.438602
+offset_right = 350.70178
+offset_bottom = 42.5614
+grow_vertical = 2
+text = "UPGRADE"
+label_settings = SubResource("LabelSettings_c6yot")

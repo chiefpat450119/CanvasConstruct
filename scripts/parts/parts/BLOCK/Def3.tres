@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DefResource" format=3 uid="uid://do5ktc446exw5"]
 
 [ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_5olup"]
-[ext_resource type="Texture2D" uid="uid://dsrakebgjlnmp" path="res://scripts/parts/parts/BLOCK/LOP SHIELD1.png" id="2_8y7n0"]
+[ext_resource type="Texture2D" uid="uid://cmgncem7p1kci" path="res://scripts/parts/parts/BLOCK/LOP SHIELD3.png" id="2_5olup"]
 [ext_resource type="Script" uid="uid://du7qxf02c2l8q" path="res://scripts/parts/def_resource.gd" id="3_83auw"]
 
 [resource]
 script = ExtResource("3_83auw")
 defense = 8.0
-reference_image = ExtResource("2_8y7n0")
+reference_image = ExtResource("2_5olup")
 metadata/_custom_type_script = "uid://du7qxf02c2l8q"

@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://cou6xdw5adavm" path="res://scenes/player/player_renderer.gd" id="1_gfjak"]
 [ext_resource type="Script" uid="uid://c264i12wdak6h" path="res://scenes/player/player.gd" id="1_pn6s4"]
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="1_wr5hl"]
+[ext_resource type="AudioStream" uid="uid://b6ficgi6c8hca" path="res://assets/SFX/attack_sfx.mp3" id="2_7oing"]
 [ext_resource type="Script" uid="uid://bcatuhjh26740" path="res://scripts/player_stats.gd" id="2_stats"]
+[ext_resource type="AudioStream" uid="uid://d2uojo6xo477g" path="res://assets/SFX/damage_sfx.mp3" id="3_5stf6"]
 [ext_resource type="Script" uid="uid://nvftkgkx11in" path="res://scripts/damagable_component.gd" id="3_damage"]
+[ext_resource type="AudioStream" uid="uid://mouvy0w35cms" path="res://assets/SFX/death_sfx.wav" id="4_180ig"]
+[ext_resource type="AudioStream" uid="uid://bhfmsrba4vene" path="res://assets/SFX/defend_sfx.wav" id="5_20koh"]
 [ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_v42im"]
 [ext_resource type="Resource" uid="uid://cdtuyou11qgur" path="res://scripts/parts/parts/HEAD/Head.tres" id="6_pn6s4"]
 [ext_resource type="Resource" uid="uid://d0r0iiyncgqvm" path="res://scripts/parts/parts/WEAPONS/Weapon3.tres" id="7_7oing"]
@@ -13,6 +17,10 @@
 [node name="Player" type="Node2D" unique_id=1535422581 node_paths=PackedStringArray("player_stats")]
 script = ExtResource("1_pn6s4")
 player_stats = NodePath("PlayerStats")
+attack_sfx = ExtResource("2_7oing")
+damage_sfx = ExtResource("3_5stf6")
+death_sfx = ExtResource("4_180ig")
+defend_sfx = ExtResource("5_20koh")
 
 [node name="Torso" parent="." unique_id=1844036065 instance=ExtResource("1_wr5hl")]
 

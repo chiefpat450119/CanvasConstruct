@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/damage_fragment/damage_fragment.gd" id="1_fragment"]
+
+[node name="DamageFragment" type="Node2D" node_paths=PackedStringArray("fragment_sprite")]
+texture_filter = 1
+z_index = 10
+script = ExtResource("1_fragment")
+fragment_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

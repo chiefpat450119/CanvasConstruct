@@ -7,4 +7,4 @@ script = ExtResource("1_attack")
 damage = 40
 move_id = &"special_attack"
 cooldown = 3.5
-windup = 3.0
+windup = 2.0

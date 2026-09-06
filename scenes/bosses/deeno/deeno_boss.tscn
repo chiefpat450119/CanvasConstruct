@@ -1,0 +1,834 @@
+[gd_scene format=3 uid="uid://dd6b127nd3xy6"]
+
+[ext_resource type="Texture2D" uid="uid://bb4rgsxsje030" path="res://assets/deeno/deeno headless.png" id="1_3cxa4"]
+[ext_resource type="Script" uid="uid://svmdxm43u824" path="res://scenes/bosses/deeno/deeno_boss.gd" id="1_5tdhq"]
+[ext_resource type="Texture2D" uid="uid://bybm3c1kil2db" path="res://assets/deeno/deeno lower head.png" id="1_0425l"]
+[ext_resource type="Script" uid="uid://4dpromrssh0o" path="res://scenes/bosses/boss_move.gd" id="1_boss_move"]
+[ext_resource type="Texture2D" uid="uid://nrm1ye66hvx3" path="res://assets/deeno/deeno upper head.png" id="2_3cxa4"]
+[ext_resource type="Resource" uid="uid://ba1fxvg2wd27v" path="res://resources/bosses/deeno_chomp.tres" id="3_chomp"]
+[ext_resource type="Resource" uid="uid://cpmq12qcr0g6u" path="res://resources/bosses/deeno_block.tres" id="4_block"]
+[ext_resource type="Resource" uid="uid://5joflu5mnkj4" path="res://resources/bosses/deeno_special_attack.tres" id="5_special"]
+[ext_resource type="Script" uid="uid://dj5vff2rof6t" path="res://scenes/bosses/deeno/deeno_animator.gd" id="6_fa0wu"]
+[ext_resource type="Texture2D" uid="uid://b8b4bxxp6wbkk" path="res://assets/VFX/charging-Sheet.png" id="10_6rt0r"]
+[ext_resource type="Texture2D" uid="uid://bs0rg7qeq6se" path="res://assets/VFX/deeno shield-Sheet.png" id="11_fa0wu"]
+[ext_resource type="Texture2D" uid="uid://cbbmanr3mwmom" path="res://assets/VFX/chomp-Sheet.png" id="12_6rt0r"]
+
+[sub_resource type="Animation" id="Animation_6rt0r"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dino Art/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dino Art/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(22, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dino Art/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dino Art/Body/Head:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dino Art/Body/Head:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-22, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dino Art/Body/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dino Art/Body/Head/Jaw:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dino Art/Body/Head/Jaw:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dino Art/Body/Head/Jaw:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_7htmu"]
+resource_name = "deeno_chomp"
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dino Art/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.098, 0.167, 0, 0, -10, -0.098, 0.167, 0.86, 0, 1, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.20000002, 1.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dino Art/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(19.999998, -0.098, 0.167, 0, 0, 21.000002, -0.098, 0.167, 0.86, 0, 22, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.20000002, 1.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dino Art/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.18839923, -0.098, 0.167, 0, 0, -0.5221395, -0.098, 0.167, 0.86, 0, 0, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dino Art/Body/Head:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-1.9608107, -0.098, 0.167, 0, 0, -3.6560483, -0.098, 0.167, 0.86, 0, -1, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dino Art/Body/Head:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-21.752132, -0.098, 0.167, 0, 0, -21.717121, -0.098, 0.167, 0.86, 0, -22, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dino Art/Body/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.05627948, -0.098, 0.167, 0, 0, 0.01641494, -0.098, 0.167, 0.86, 0, 0, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dino Art/Body/Head/Jaw:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-1.6499646, -0.098, 0.167, 0, 0, -1.843709, -0.098, 0.167, 0.86, 0, -4, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dino Art/Body/Head/Jaw:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(4.824693, -0.098, 0.167, 0, 0, 1.2652044, -0.098, 0.167, 0.86, 0, 4, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dino Art/Body/Head/Jaw:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.69993055, -0.098, 0.167, 0, 0, -0.1171841, -0.098, 0.167, 0.86, 0, 0, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+
+[sub_resource type="Animation" id="Animation_eo0yp"]
+resource_name = "deeno_chomp_special"
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dino Art/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0, 0),
+"points": PackedFloat32Array(0, -0.013, 0.167, 0.005, 0, -12, -0.015, 0, 0.035, 0, -30, -0.04, 0, 0, 0, -30, 0, -0.032, 0.26666665, 0.616457, 1, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.06666667, 0.20000002, 0.3, 1.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dino Art/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0, 2, 0),
+"points": PackedFloat32Array(19.999998, -0.098, 0.167, 0, 0, 11.999998, -0.02, 0, 0.045, 0, 15, -0.04, 0, 0, 0, 15, 0, -0.032, 0.16666666, 0.09809399, 12.000002, -0.06560469, -0.41809085, 0.118, 0.752, 22, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.06666666, 0.20000002, 0.3, 0.7314866, 1.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dino Art/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0, 0),
+"points": PackedFloat32Array(-0.18839923, -0.013, 0.167, 0.005, 0, -0.49424282, 0, 0, 0.005, 0, -0.6376052, -0.04, 0, 0, 0, -0.6376052, 0, -0.032, 0.167, 0.075, 0, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.06666667, 0.20000002, 0.3, 1.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dino Art/Body/Head:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-1.9608107, -0.098, 0.167, 0, 0, -3.6560483, -0.098, 0.167, 0.86, 0, -1, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dino Art/Body/Head:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-21.752132, -0.098, 0.167, 0, 0, -21.717121, -0.098, 0.167, 0.86, 0, -22, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dino Art/Body/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.05627948, -0.098, 0.167, 0, 0, 0.01641494, -0.098, 0.167, 0.86, 0, 0, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dino Art/Body/Head/Jaw:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-1.6499646, -0.098, 0.167, 0, 0, -1.843709, -0.098, 0.167, 0.86, 0, -4, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dino Art/Body/Head/Jaw:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(4.824693, -0.098, 0.167, 0, 0, 1.2652044, -0.098, 0.167, 0.86, 0, 4, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dino Art/Body/Head/Jaw:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.69993055, -0.098, 0.167, 0, 0, -0.1171841, -0.098, 0.167, 0.86, 0, 0, -0.405, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.13333334, 1.5)
+}
+
+[sub_resource type="Animation" id="Animation_fa0wu"]
+resource_name = "deeno_idle"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dino Art/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.73, 0, 0.67, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dino Art/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(22, -0.73, 0, 0.67, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dino Art/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.73, 0, 0.67, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dino Art/Body/Head:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-1, -0.73, 0, 0.67, 0, -5, -0.415, 0, 0.67, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dino Art/Body/Head:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-22, -0.73, 0, 0.67, 0, -20.000002, -0.73, 0, 0.67, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dino Art/Body/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.73, 0, 0.67, 0, -0.18459143, -0.415, 0, 0.67, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dino Art/Body/Head/Jaw:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-4, -0.3, 0, 0.36, 0, -2.8837476, -0.3, 0, 0.36, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dino Art/Body/Head/Jaw:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(4, -0.3, 0, 0.36, 0, 4.547969, -0.3, 0, 0.36, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dino Art/Body/Head/Jaw:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, -0.3, 0, 0.36, 0, -0.2739601, -0.3, 0, 0.36, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+
+[sub_resource type="Animation" id="Animation_jqrxt"]
+resource_name = "deeno_jaw_open"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dino Art/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.89, 0, 0.365, 0, 0, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dino Art/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(22, -0.89, 0, 0.365, 0, 19.999998, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dino Art/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.89, 0, 0.365, 0, -0.18839923, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dino Art/Body/Head:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1, -0.89, 0, 0.365, 0, -1.9608107, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 1.7666667)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dino Art/Body/Head:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-22, -0.89, 0, 0.365, 0, -21.752132, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 1.7666667)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dino Art/Body/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.89, 0, 0.365, 0, 0.05627948, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 1.7666667)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dino Art/Body/Head/Jaw:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(-4, -0.89, 0, 0.365, 0, -1.6499646, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dino Art/Body/Head/Jaw:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(4, -0.89, 0, 0.365, 0, 4.824693, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dino Art/Body/Head/Jaw:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, -0.89, 0, 0.365, 0, -0.69993055, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="Animation" id="Animation_asgj6"]
+resource_name = "deeno_jaw_open_special"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dino Art/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.89, 0, 0.365, 0, 0, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dino Art/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(22, -0.89, 0, 0.365, 0, 19.999998, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dino Art/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.89, 0, 0.365, 0, -0.18839923, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dino Art/Body/Head:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1, -0.89, 0, 0.365, 0, -1.9608107, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 1.7666667)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Dino Art/Body/Head:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-22, -0.89, 0, 0.365, 0, -21.752132, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 1.7666667)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Dino Art/Body/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.89, 0, 0.365, 0, 0.05627948, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 1.7666667)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Dino Art/Body/Head/Jaw:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(-4, -0.89, 0, 0.365, 0, -1.6499646, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Dino Art/Body/Head/Jaw:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(4, -0.89, 0, 0.365, 0, 4.824693, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dino Art/Body/Head/Jaw:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, -0.89, 0, 0.365, 0, -0.69993055, -0.89, 0, 0.365, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6rt0r"]
+_data = {
+&"RESET": SubResource("Animation_6rt0r"),
+&"deeno_chomp": SubResource("Animation_7htmu"),
+&"deeno_chomp_special": SubResource("Animation_eo0yp"),
+&"deeno_idle": SubResource("Animation_fa0wu"),
+&"deeno_jaw_open": SubResource("Animation_jqrxt"),
+&"deeno_jaw_open_special": SubResource("Animation_asgj6")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eo0yp"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rt0r"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7htmu"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(32, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqrxt"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo0yp"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asgj6"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(128, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm30e"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(160, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47lmi"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(192, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x1sv"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(224, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw784"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(256, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ms1h"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(288, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5q5q"]
+atlas = ExtResource("11_fa0wu")
+region = Rect2(320, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om8tl"]
+atlas = ExtResource("12_6rt0r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g25ww"]
+atlas = ExtResource("12_6rt0r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp04p"]
+atlas = ExtResource("12_6rt0r")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8tfo"]
+atlas = ExtResource("12_6rt0r")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_asgj6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rt0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7htmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqrxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo0yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asgj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm30e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47lmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x1sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw784")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ms1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5q5q")
+}],
+"loop": 1,
+"name": &"block",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_om8tl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g25ww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp04p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8tfo")
+}],
+"loop": 0,
+"name": &"chomp",
+"speed": 12.0
+}]
+
+[node name="Deeno" type="Node2D" unique_id=939628542 node_paths=PackedStringArray("_body")]
+script = ExtResource("1_5tdhq")
+_body = NodePath("Dino Art/Body")
+health = 200
+moves = Array[ExtResource("1_boss_move")]([ExtResource("3_chomp"), ExtResource("4_block"), ExtResource("5_special")])
+
+[node name="Deeno Animator" type="Node" parent="." unique_id=1482372946 node_paths=PackedStringArray("boss", "animation_player", "charge_particles", "chomp_VFX", "block_VFX")]
+script = ExtResource("6_fa0wu")
+boss = NodePath("..")
+animation_player = NodePath("../Dino Art/AnimationPlayer")
+charge_particles = NodePath("../Dino Art/Charge Particles")
+chomp_VFX = NodePath("../Dino Art/Chomp VFX")
+block_VFX = NodePath("../Dino Art/Block VFX")
+
+[node name="Dino Art" type="Node2D" parent="." unique_id=1177535423]
+position = Vector2(0, -22)
+
+[node name="Body" type="Sprite2D" parent="Dino Art" unique_id=1758785597]
+texture_filter = 1
+position = Vector2(1, 22)
+texture = ExtResource("1_3cxa4")
+
+[node name="Head" type="Sprite2D" parent="Dino Art/Body" unique_id=698893268]
+texture_filter = 1
+position = Vector2(-1, -22)
+texture = ExtResource("2_3cxa4")
+
+[node name="Jaw" type="Sprite2D" parent="Dino Art/Body/Head" unique_id=1266226774]
+texture_filter = 1
+position = Vector2(-12, -1)
+texture = ExtResource("1_0425l")
+offset = Vector2(-7.31, -5.205)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dino Art" unique_id=722269560]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_6rt0r")
+
+[node name="Charge Particles" type="CPUParticles2D" parent="Dino Art" unique_id=1788706613]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_eo0yp")
+position = Vector2(0, -14)
+emitting = false
+amount = 2
+texture = ExtResource("10_6rt0r")
+emission_shape = 3
+emission_rect_extents = Vector2(15, 1)
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Chomp VFX" type="AnimatedSprite2D" parent="Dino Art" unique_id=773830703]
+texture_filter = 1
+position = Vector2(-84, 3)
+sprite_frames = SubResource("SpriteFrames_asgj6")
+animation = &"chomp"
+frame = 3
+frame_progress = 1.0
+
+[node name="Block VFX" type="AnimatedSprite2D" parent="Dino Art" unique_id=899592915]
+visible = false
+texture_filter = 1
+position = Vector2(-41, 20)
+sprite_frames = SubResource("SpriteFrames_asgj6")
+animation = &"block"
+frame_progress = 0.8171424

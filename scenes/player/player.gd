@@ -10,6 +10,12 @@ signal died
 @export_range(0.0, 10.0, 0.1, "or_greater") var attack_cooldown: float = 0.5
 @export_range(0.0, 10.0, 0.1, "or_greater") var defend_cooldown: float = 1.0
 
+@export_group("SFX")
+@export var attack_sfx: AudioStream
+@export var damage_sfx: AudioStream
+@export var death_sfx: AudioStream
+@export var defend_sfx: AudioStream
+
 const DEFENSE_DURATION := 1.0
 
 var is_defending := false
@@ -23,8 +29,6 @@ var _shield_rest_position: Vector2
 func _ready() -> void:
 	_weapon_rest_position = $Attack.position
 	_shield_rest_position = $Def.position
-	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
-	_check_for_death()
 
 
 func _process(delta: float) -> void:
@@ -50,6 +54,7 @@ func attack(target: BossBase) -> void:
 	_attack_cooldown_timer = maxf(attack_cooldown, player_stats.get_head_cooldown())
 	action_started.emit(&"attack")
 	_play_attack_animation()
+	AudioManager.play_SFX(attack_sfx, -10)
 	target.take_damage(player_stats.get_weapon_damage())
 
 
@@ -60,6 +65,7 @@ func defend() -> void:
 	is_defending = true
 	_defense_timer = DEFENSE_DURATION
 	action_started.emit(&"defend")
+	AudioManager.play_SFX(defend_sfx, -10)
 	_play_defend_animation()
 
 
@@ -69,6 +75,7 @@ func take_damage(amount: int) -> void:
 		damage = maxi(0, damage - roundi(player_stats.get_shield_defense()))
 
 	player_stats.take_damage(damage)
+	AudioManager.play_SFX(damage_sfx, -10)
 	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
 	_check_for_death()
 
@@ -93,6 +100,9 @@ func initialize_from_parts(
 	var weapon_resource := weapon_part.reference_part as AtkResource
 	var defense_resource := defense_part.reference_part as DefResource
 	var torso_resource := torso_part.reference_part as TorsoResource
+	if player_stats == null:
+		push_error("Player requires PlayerStats.")
+		return
 	if renderer == null or head_resource == null or weapon_resource == null or defense_resource == null or torso_resource == null:
 		push_error("Player parts do not match the expected resource types.")
 		return
@@ -114,11 +124,20 @@ func initialize_from_parts(
 		torso_resource.create_runtime_instance() as TorsoResource
 	)
 	player_stats.set_multipliers(
-		_get_similarity(weapon_part),
-		_get_cooldown_multiplier(head_part),
-		_get_similarity(defense_part),
-		_get_similarity(torso_part)
+		weapon_part.get_stat_multiplier(),
+		head_part.get_stat_multiplier(),
+		defense_part.get_stat_multiplier(),
+		torso_part.get_stat_multiplier()
 	)
+	var parts: Array[PlayerPart] = [
+		head_part,
+		weapon_part,
+		defense_part,
+		torso_part,
+	]
+	player_stats.initialize_pixel_health(parts)
+	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
+	_check_for_death()
 
 
 func get_part_drawings() -> Array[Image]:
@@ -130,14 +149,6 @@ func get_part_drawings() -> Array[Image]:
 	]
 
 
-func _get_similarity(part: PlayerPart) -> float:
-	return clampf(TextureCompare.compare(part.drawing, part.reference_part.reference_image), 0.0, 1.0)
-
-
-func _get_cooldown_multiplier(part: PlayerPart) -> float:
-	return 2.0 - _get_similarity(part)
-
-
 func _check_for_death() -> void:
 	if is_dead or player_stats == null or not player_stats.is_dead():
 		return
@@ -145,6 +156,7 @@ func _check_for_death() -> void:
 	is_dead = true
 	is_defending = false
 	print("Player died.")
+	AudioManager.play_SFX(death_sfx, -10)
 	died.emit()
 
 

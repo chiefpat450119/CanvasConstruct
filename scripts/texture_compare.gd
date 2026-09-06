@@ -1,6 +1,6 @@
 class_name TextureCompare
 
-static func _count_visible_pixels(image: Image) -> int:
+static func count_visible_pixels(image: Image) -> int:
 	var count := 0
 
 	for i in range(image.get_width()):
@@ -21,7 +21,7 @@ static func compare(drawing: Image, reference: Texture2D) -> float:
 	var total_pixel_count: int = (
 		reference_image.get_width() * reference_image.get_height()
 	)
-	var required_pixel_count := _count_visible_pixels(reference_image)
+	var required_pixel_count := count_visible_pixels(reference_image)
 	var empty_pixel_count := total_pixel_count - required_pixel_count
 	var correctly_filled_pixel_count := 0
 	var incorrectly_filled_pixel_count := 0

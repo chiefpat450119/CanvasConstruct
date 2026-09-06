@@ -2,7 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://dl5g7ah28pwdl" path="res://assets/UI/battle_phase/COMP_ATTACK_ICON.png" id="1_e4x4p"]
 [ext_resource type="Script" uid="uid://i63x718ytbjn" path="res://scenes/combat_phase/combat_ui.gd" id="1_lmxbf"]
+[ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="2_5e1av"]
 [ext_resource type="Texture2D" uid="uid://bptfgjs57p6o1" path="res://assets/UI/battle_phase/COMP_DEFENSE_ICON.png" id="2_lmxbf"]
+[ext_resource type="Texture2D" uid="uid://tbnc0acwnsjh" path="res://assets/UI/battle_phase/backdrop.png" id="2_vfj6x"]
+[ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="4_o6co2"]
+[ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="6_vxmlv"]
+[ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="7_anrlg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7ptn"]
 bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
@@ -44,36 +49,51 @@ corner_radius_bottom_left = 15
 corner_detail = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bh36c"]
+resource_local_to_scene = true
 bg_color = Color(0.3106171, 0.31061712, 0.310617, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gl5gy"]
-bg_color = Color(0, 1, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+bg_color = Color(0.23833978, 0.9307158, 0.44831204, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rui3a"]
-bg_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwk22"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 60.0
+expand_margin_top = 5.0
+expand_margin_right = 60.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfj6x"]
+shader = ExtResource("7_anrlg")
+shader_parameter/color = Vector4(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6co2"]
+bg_color = Color(0.8910867, 0.28966767, 0.3440138, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="CombatUI" type="CanvasLayer" unique_id=1513656037 node_paths=PackedStringArray("attack_button", "defend_button", "player_health_bar", "boss_health_bar")]
+layer = -1
 script = ExtResource("1_lmxbf")
 attack_button = NodePath("Control/Buttons/Attack Button")
 defend_button = NodePath("Control/Buttons/Defend Button")
@@ -87,6 +107,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UiBackground" parent="Control" unique_id=1544384068 instance=ExtResource("2_5e1av")]
+layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1151142263]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vfj6x")
 
 [node name="Buttons" type="HBoxContainer" parent="Control" unique_id=2085455874]
 layout_mode = 1
@@ -133,39 +166,81 @@ vertical_icon_alignment = 0
 
 [node name="Health Bars" type="HBoxContainer" parent="Control" unique_id=1284611411]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 122.0
-offset_top = -236.0
-offset_right = -122.0
-offset_bottom = -198.0
+offset_left = 84.0
+offset_top = 65.0
+offset_right = -92.0
+offset_bottom = 106.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/separation = 150
 alignment = 1
 
 [node name="Player Health Bar" type="ProgressBar" parent="Control/Health Bars" unique_id=207801158]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4_o6co2")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/background = SubResource("StyleBoxFlat_bh36c")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gl5gy")
-value = 80.0
+value = 100.0
 rounded = true
+
+[node name="Label" type="Label" parent="Control/Health Bars/Player Health Bar" unique_id=1191736809]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = 11.0
+offset_right = 30.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uwk22")
+text = "YOU"
+label_settings = ExtResource("6_vxmlv")
+
+[node name="UiBackground" parent="Control/Health Bars/Player Health Bar" unique_id=1084556991 instance=ExtResource("2_5e1av")]
+material = SubResource("ShaderMaterial_vfj6x")
+layout_mode = 1
+offset_right = -399.00543
+offset_bottom = -35.429348
+scale = Vector2(7.36, 7.36)
 
 [node name="Boss Health Bar" type="ProgressBar" parent="Control/Health Bars" unique_id=766660065]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4_o6co2")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/background = SubResource("StyleBoxFlat_bh36c")
-theme_override_styles/fill = SubResource("StyleBoxFlat_rui3a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o6co2")
 value = 80.0
 rounded = true
+
+[node name="Label2" type="Label" parent="Control/Health Bars/Boss Health Bar" unique_id=1270638385]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.5
+offset_top = 10.0
+offset_right = 30.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uwk22")
+text = "BIG BAD BOSS"
+label_settings = ExtResource("6_vxmlv")
+
+[editable path="Control/Health Bars/Player Health Bar/UiBackground"]
