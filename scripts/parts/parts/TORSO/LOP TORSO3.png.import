@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b60gyemxyqhry"
-path="res://.godot/imported/LOP SHIELD3.png-18af89bd9393effe613093f344da3193.ctex"
+uid="uid://dps5waru861ju"
+path="res://.godot/imported/LOP TORSO3.png-0d9cf71ceda637c075f7f75c72c79f3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/components/shield/LOP SHIELD3.png"
-dest_files=["res://.godot/imported/LOP SHIELD3.png-18af89bd9393effe613093f344da3193.ctex"]
+source_file="res://scripts/parts/parts/TORSO/LOP TORSO3.png"
+dest_files=["res://.godot/imported/LOP TORSO3.png-0d9cf71ceda637c075f7f75c72c79f3d.ctex"]
 
 [params]
 

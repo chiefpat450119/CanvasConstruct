@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://dx37n32wlkmo2" path="res://scenes/drawing_phase/selection_ui.gd" id="3_selection"]
 [ext_resource type="Texture2D" uid="uid://dq4rcpcu2pirn" path="res://assets/UI/build_phase/COMP_HEAD_ICON.png" id="4_ct7ox"]
 [ext_resource type="Script" uid="uid://db3smkhmbb6ft" path="res://scripts/parts/torso_resource.gd" id="4_lsrqs"]
-[ext_resource type="Texture2D" uid="uid://cteaab7d4wmyk" path="res://assets/components/weapons/LOP WEAPON1.png" id="4_o71rv"]
 [ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_gxu5u"]
 [ext_resource type="Texture2D" uid="uid://b54d53spdo1xg" path="res://assets/UI/build_phase/XPERC_COMP_ICON.png" id="5_s5jpx"]
 [ext_resource type="Script" uid="uid://sy0a0f1hqyk2" path="res://scripts/parts/atk_resource.gd" id="6_42j7w"]
@@ -236,6 +235,9 @@ expand_margin_left = 20.0
 expand_margin_top = 5.0
 expand_margin_right = 20.0
 expand_margin_bottom = 5.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42j7w"]
+load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54aae.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nscei"]
 bg_color = Color(0, 0.6689455, 0.7972163, 1)
@@ -906,7 +908,7 @@ horizontal_alignment = 1
 [node name="Reference Image" type="TextureRect" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=1881189463]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("4_o71rv")
+texture = SubResource("CompressedTexture2D_42j7w")
 expand_mode = 3
 
 [node name="Grid Lines" type="Control" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer/Reference Image" unique_id=1537448247]
