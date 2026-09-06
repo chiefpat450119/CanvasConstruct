@@ -21,6 +21,6 @@ func get_image_from_drawing() -> Image:
 	
 	return img
 
-## Formats UI so that the drawing grid matches reference art
+## Formats UI with drawing grid that matches reference art
 func init_drawing_UI():
 	drawing_grid.init(reference_art.texture.get_width(), reference_art.texture.get_height())
