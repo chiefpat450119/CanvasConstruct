@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DefendMove" format=3 uid="uid://ce5qwmueu3ueb"]
+
+[ext_resource type="Script" uid="uid://djcowdc0pgven" path="res://scenes/bosses/defend_move.gd" id="1_defend"]
+
+[resource]
+script = ExtResource("1_defend")
+defense_duration = 2.0
+thorns_damage = 3.0
+move_id = &"block"
+cooldown = 2.0
