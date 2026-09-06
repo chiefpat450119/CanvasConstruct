@@ -11,8 +11,8 @@ enum PartCategory {
 @export var has_completed_drawing_phase: bool = false
 @export var boss_scenes: Array[PackedScene] = [
 	preload("res://scenes/bosses/orc_boss.tscn"),
-	preload("res://scenes/bosses/orc_boss.tscn"),
-	preload("res://scenes/bosses/orc_boss.tscn"),
+	preload("res://scenes/bosses/deeno/deeno_boss.tscn"),
+	preload("res://scenes/bosses/bear/bear.tscn"),
 ]
 @export_file("*.tscn") var drawing_phase_scene_path := "res://scenes/drawing_phase/drawing_phase.tscn"
 @export_file("*.tscn") var combat_phase_scene_path := "res://scenes/combat_phase/combat_phase.tscn"

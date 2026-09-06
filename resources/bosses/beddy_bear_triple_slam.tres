@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TripleSlamMove" format=3 uid="uid://c5lom6s8bx64u"]
+
+[ext_resource type="Script" uid="uid://cc4vub0fl3b1v" path="res://scenes/bosses/bear/triple_slam_move.gd" id="1_triple"]
+
+[resource]
+script = ExtResource("1_triple")
+damage = 20
+move_id = &"triple_slam"
+cooldown = 2.5
+windup = 3.0

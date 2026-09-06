@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://bcs4xexdbns6j"]
+
+[ext_resource type="Script" uid="uid://mvlgk5b7q7x6" path="res://scenes/bosses/bear/beddy_bear_boss.gd" id="1_boss"]
+[ext_resource type="Script" uid="uid://cw8viul0yx754" path="res://scenes/bosses/bear/beddy_bear_animator.gd" id="2_animator"]
+[ext_resource type="Texture2D" uid="uid://byb0e7sh1857b" path="res://assets/bosses/bear/beddy bear full body.png" id="3_body"]
+[ext_resource type="Script" uid="uid://4dpromrssh0o" path="res://scenes/bosses/boss_move.gd" id="3_move"]
+[ext_resource type="Resource" uid="uid://bnjnec4i1ppc3" path="res://resources/bosses/beddy_bear_jump_slam.tres" id="4_jump"]
+[ext_resource type="Resource" uid="uid://ce5qwmueu3ueb" path="res://resources/bosses/beddy_bear_block.tres" id="5_block"]
+[ext_resource type="Resource" uid="uid://c5lom6s8bx64u" path="res://resources/bosses/beddy_bear_triple_slam.tres" id="6_triple"]
+[ext_resource type="Texture2D" uid="uid://b8b4bxxp6wbkk" path="res://assets/VFX/charging-Sheet.png" id="7_charge"]
+[ext_resource type="Texture2D" uid="uid://b5cni34k3y2d4" path="res://assets/VFX/beddy bear hit fx-Sheet.png" id="8_hit"]
+[ext_resource type="Texture2D" uid="uid://c800xvl7xsxif" path="res://assets/VFX/beddy shield-Sheet.png" id="9_shield"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_charge"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.06, 1.06), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_idle"]
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_jump_slam"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.57, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -34), Vector2(0, 5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.57, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.12, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_triple_slam"]
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, -18), Vector2(-10, 3), Vector2(10, -18), Vector2(10, 3), Vector2(0, -18), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bear"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"bear_charge": SubResource("Animation_charge"),
+&"bear_idle": SubResource("Animation_idle"),
+&"bear_jump_slam": SubResource("Animation_jump_slam"),
+&"bear_triple_slam": SubResource("Animation_triple_slam")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_charge"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Bear" type="Node2D" unique_id=749735870]
+script = ExtResource("1_boss")
+health = 250
+moves = Array[ExtResource("3_move")]([ExtResource("4_jump"), ExtResource("5_block"), ExtResource("6_triple")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2082788780]
+texture_filter = 1
+texture = ExtResource("3_body")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=699760140]
+libraries/ = SubResource("AnimationLibrary_bear")
+
+[node name="BeddyBearAnimator" type="Node" parent="." unique_id=1570723953 node_paths=PackedStringArray("boss", "animation_player", "charge_particles", "hit_vfx", "shield_vfx")]
+script = ExtResource("2_animator")
+boss = NodePath("..")
+animation_player = NodePath("../AnimationPlayer")
+charge_particles = NodePath("../Charge Particles")
+hit_vfx = [NodePath("../Hit VFX 1"), NodePath("../Hit VFX 2"), NodePath("../Hit VFX 3")]
+shield_vfx = NodePath("../Shield VFX")
+
+[node name="Charge Particles" type="CPUParticles2D" parent="." unique_id=844542121]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_charge")
+position = Vector2(0, -50)
+emitting = false
+amount = 2
+texture = ExtResource("7_charge")
+emission_shape = 3
+emission_rect_extents = Vector2(20, 1)
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+anim_speed_min = 10.0
+anim_speed_max = 10.0
+
+[node name="Hit VFX 1" type="Sprite2D" parent="." unique_id=1914828567]
+visible = false
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_hit")
+hframes = 4
+
+[node name="Hit VFX 2" type="Sprite2D" parent="." unique_id=1637429496]
+visible = false
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_hit")
+hframes = 4
+
+[node name="Hit VFX 3" type="Sprite2D" parent="." unique_id=832687918]
+visible = false
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_hit")
+hframes = 4
+
+[node name="Shield VFX" type="Sprite2D" parent="." unique_id=1893439212]
+visible = false
+z_index = 2
+texture_filter = 1
+position = Vector2(-54, 3)
+texture = ExtResource("9_shield")
+hframes = 11
