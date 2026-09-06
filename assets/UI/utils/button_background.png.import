@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q7kf4wsl783c"
-path="res://.godot/imported/scrolling_background.png-59e2ef575867798adab7c8178f25ec2c.ctex"
+uid="uid://df6i3ydlgjwqs"
+path="res://.godot/imported/button_background.png-8269a4cf83226b7dd33c2c8c1ff5d658.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scrolling_background.png"
-dest_files=["res://.godot/imported/scrolling_background.png-59e2ef575867798adab7c8178f25ec2c.ctex"]
+source_file="res://assets/UI/utils/button_background.png"
+dest_files=["res://.godot/imported/button_background.png-8269a4cf83226b7dd33c2c8c1ff5d658.ctex"]
 
 [params]
 
