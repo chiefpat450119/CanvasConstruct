@@ -123,10 +123,10 @@ func initialize_from_parts(
 		torso_resource.create_runtime_instance() as TorsoResource
 	)
 	player_stats.set_multipliers(
-		_get_similarity(weapon_part),
-		_get_cooldown_multiplier(head_part),
-		_get_similarity(defense_part),
-		_get_similarity(torso_part)
+		weapon_part.get_stat_multiplier(),
+		head_part.get_stat_multiplier(),
+		defense_part.get_stat_multiplier(),
+		torso_part.get_stat_multiplier()
 	)
 
 
@@ -137,14 +137,6 @@ func get_part_drawings() -> Array[Image]:
 		$Def.get_image(),
 		$Torso.get_image(),
 	]
-
-
-func _get_similarity(part: PlayerPart) -> float:
-	return clampf(TextureCompare.compare(part.drawing, part.reference_part.reference_image), 0.0, 1.0)
-
-
-func _get_cooldown_multiplier(part: PlayerPart) -> float:
-	return 2.0 - _get_similarity(part)
 
 
 func _check_for_death() -> void:

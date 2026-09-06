@@ -12,6 +12,7 @@ const PERFECT_COMPLETION_BADGE := preload(
 
 @export var select_button: Button
 @export var preview: Button
+@export var stat_value_label: Label
 @export var similarity_label: Label
 @export var description_bar: TextureRect
 @export var icon: TextureRect
@@ -36,6 +37,41 @@ func set_preview(texture: Texture2D) -> void:
 
 	preview.icon = texture
 	preview.visible = texture != null
+
+
+func set_reference_part(
+	reference_part: PartResource,
+	stat_multiplier: float = 1.0
+) -> void:
+	if stat_value_label == null:
+		return
+
+	if reference_part is HeadResource:
+		var head_part := reference_part as HeadResource
+		stat_value_label.text = "%ss" % _format_number(
+			head_part.cooldown_seconds * stat_multiplier
+		)
+	elif reference_part is TorsoResource:
+		var torso_part := reference_part as TorsoResource
+		stat_value_label.text = "%d%%" % roundi(
+			clampf(
+				torso_part.damage_avoidance_chance * stat_multiplier,
+				0.0,
+				1.0
+			) * 100.0
+		)
+	elif reference_part is DefResource:
+		var defense_part := reference_part as DefResource
+		stat_value_label.text = _format_number(
+			defense_part.defense * stat_multiplier
+		)
+	elif reference_part is AtkResource:
+		var attack_part := reference_part as AtkResource
+		stat_value_label.text = _format_number(
+			attack_part.attack_damage * stat_multiplier
+		)
+	else:
+		stat_value_label.text = ""
 
 
 func set_similarity(similarity: float) -> void:
@@ -67,3 +103,10 @@ func disable() -> void:
 func _set_disabled_modulate(control: CanvasItem) -> void:
 	if control != null:
 		control.modulate = Color(0.5, 0.5, 0.5, 1.0)
+
+
+func _format_number(value: float) -> String:
+	var formatted := "%.2f" % value
+	while formatted.ends_with("0"):
+		formatted = formatted.left(-1)
+	return formatted.trim_suffix(".")

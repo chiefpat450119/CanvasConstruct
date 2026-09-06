@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_puar8")
-cooldown_seconds = 2.0
+cooldown_seconds = 0.5
 display_name = "Head"
 reference_image = ExtResource("2_jovy7")
 metadata/_custom_type_script = "uid://bvmtfut1xm1d8"

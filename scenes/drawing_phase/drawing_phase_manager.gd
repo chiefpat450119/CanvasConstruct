@@ -72,27 +72,49 @@ func _initialize_part_previews() -> void:
 	var torso_category := GameStateManager.PartCategory.TORSO
 	var defense_category := GameStateManager.PartCategory.DEFENSE
 	var weapon_category := GameStateManager.PartCategory.WEAPON
+	var next_head_part := _get_next_part(head_category)
+	var next_torso_part := _get_next_part(torso_category)
+	var next_defense_part := _get_next_part(defense_category)
+	var next_weapon_part := _get_next_part(weapon_category)
 
-	selection_ui.set_part_previews(
-		_get_preview_texture(
-			GameStateManagerInstance.current_head_part,
-			_get_next_part(head_category)
-		),
-		_get_preview_texture(
-			GameStateManagerInstance.current_torso_part,
-			_get_next_part(torso_category)
-		),
-		_get_preview_texture(
-			GameStateManagerInstance.current_def_part,
-			_get_next_part(defense_category)
-		),
-		_get_preview_texture(
-			GameStateManagerInstance.current_atk_part,
-			_get_next_part(weapon_category)
-		)
+	_initialize_part_preview(
+		head_category,
+		GameStateManagerInstance.current_head_part,
+		next_head_part
+	)
+	_initialize_part_preview(
+		torso_category,
+		GameStateManagerInstance.current_torso_part,
+		next_torso_part
+	)
+	_initialize_part_preview(
+		defense_category,
+		GameStateManagerInstance.current_def_part,
+		next_defense_part
+	)
+	_initialize_part_preview(
+		weapon_category,
+		GameStateManagerInstance.current_atk_part,
+		next_weapon_part
 	)
 	selection_ui.set_fight_button_visible(
 		GameStateManagerInstance.has_all_player_parts()
+	)
+
+
+func _initialize_part_preview(
+	category: GameStateManager.PartCategory,
+	current_part: PlayerPart,
+	fallback_part: PartResource
+) -> void:
+	selection_ui.set_part_preview(
+		category,
+		_get_preview_texture(current_part, fallback_part)
+	)
+	selection_ui.set_part_reference(
+		category,
+		_get_display_reference(current_part, fallback_part),
+		current_part.get_stat_multiplier() if current_part != null else 1.0
 	)
 
 
@@ -106,6 +128,15 @@ func _get_preview_texture(current_part: PlayerPart, fallback_part: PartResource)
 		return fallback_part.reference_image
 
 	return null
+
+
+func _get_display_reference(
+	current_part: PlayerPart,
+	fallback_part: PartResource
+) -> PartResource:
+	if current_part != null and current_part.reference_part != null:
+		return current_part.reference_part
+	return fallback_part
 
 
 func _has_current_part(category: GameStateManager.PartCategory) -> bool:
@@ -193,13 +224,9 @@ func _on_drawing_finished() -> void:
 		return
 	_drawing_timer.stop()
 	var drawing := drawing_ui.stop_drawing()
-	var similarity := TextureCompare.compare(
-		drawing,
-		_active_reference_part.reference_image
-	)
-	GameStateManagerInstance.set_current_part(
-		PlayerPart.new(_active_reference_part, drawing)
-	)
+	var completed_part := PlayerPart.new(_active_reference_part, drawing)
+	var similarity := completed_part.get_similarity()
+	GameStateManagerInstance.set_current_part(completed_part)
 	_active_reference_part = null
 	_initialize_part_previews()
 	selection_ui.set_part_similarity(_selected_category, similarity)
@@ -215,21 +242,9 @@ func _update_total_completion() -> void:
 	var current_parts := GameStateManagerInstance.get_current_parts()
 	var total_similarity := 0.0
 	for part in current_parts:
-		if (
-			part == null
-			or not is_instance_valid(part.drawing)
-			or part.reference_part == null
-			or part.reference_part.reference_image == null
-		):
+		if part == null:
 			continue
-		total_similarity += clampf(
-			TextureCompare.compare(
-				part.drawing,
-				part.reference_part.reference_image
-			),
-			0.0,
-			1.0
-		)
+		total_similarity += part.get_similarity()
 
 	var part_count := current_parts.size()
 	selection_ui.set_total_completion(

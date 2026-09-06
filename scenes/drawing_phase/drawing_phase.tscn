@@ -4,11 +4,15 @@
 [ext_resource type="Script" uid="uid://bvmtfut1xm1d8" path="res://scripts/parts/head_resource.gd" id="2_s5jpx"]
 [ext_resource type="Resource" uid="uid://cdtuyou11qgur" path="res://scripts/parts/parts/HEAD/Head.tres" id="3_kpsfv"]
 [ext_resource type="Script" uid="uid://db3smkhmbb6ft" path="res://scripts/parts/torso_resource.gd" id="4_lsrqs"]
+[ext_resource type="Resource" uid="uid://mhedkt1qj58t" path="res://scripts/parts/parts/HEAD/Head2.tres" id="4_nscei"]
+[ext_resource type="Resource" uid="uid://cxomfvm3ixkio" path="res://scripts/parts/parts/HEAD/Head3.tres" id="5_5k7db"]
 [ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_gxu5u"]
 [ext_resource type="Script" uid="uid://sy0a0f1hqyk2" path="res://scripts/parts/atk_resource.gd" id="6_42j7w"]
 [ext_resource type="Resource" uid="uid://d1unxddwo7k2p" path="res://scripts/parts/parts/WEAPONS/Weapon1.tres" id="7_q0n2y"]
+[ext_resource type="Resource" uid="uid://10n8k2eosbvy" path="res://scripts/parts/parts/TORSO/Tors2.tres" id="8_ct7ox"]
 [ext_resource type="Resource" uid="uid://ckw44nbxhilmb" path="res://scripts/parts/parts/WEAPONS/Weapon2.tres" id="8_m3kao"]
 [ext_resource type="Resource" uid="uid://d0r0iiyncgqvm" path="res://scripts/parts/parts/WEAPONS/Weapon3.tres" id="9_a2c3f"]
+[ext_resource type="Resource" uid="uid://coxmggtge8rba" path="res://scripts/parts/parts/TORSO/Tors3.tres" id="9_s5jpx"]
 [ext_resource type="Script" uid="uid://du7qxf02c2l8q" path="res://scripts/parts/def_resource.gd" id="10_oa1ag"]
 [ext_resource type="Resource" uid="uid://b7gfhkcgvyxsf" path="res://scripts/parts/parts/BLOCK/Def1.tres" id="11_884ma"]
 [ext_resource type="Resource" uid="uid://toayjue0da24" path="res://scripts/parts/parts/BLOCK/Def2.tres" id="12_wsftw"]
@@ -23,8 +27,8 @@ script = ExtResource("1_2tvul")
 selection_ui = NodePath("CanvasLayer/Selection UI")
 repair_or_upgrade_ui = NodePath("CanvasLayer/Repair or Upgrade UI")
 drawing_ui = NodePath("CanvasLayer/Drawing UI")
-head_parts = Array[ExtResource("2_s5jpx")]([ExtResource("3_kpsfv")])
-torso_parts = Array[ExtResource("4_lsrqs")]([ExtResource("5_gxu5u")])
+head_parts = Array[ExtResource("2_s5jpx")]([ExtResource("3_kpsfv"), ExtResource("4_nscei"), ExtResource("5_5k7db")])
+torso_parts = Array[ExtResource("4_lsrqs")]([ExtResource("5_gxu5u"), ExtResource("8_ct7ox"), ExtResource("9_s5jpx")])
 atk_parts = Array[ExtResource("6_42j7w")]([ExtResource("7_q0n2y"), ExtResource("8_m3kao"), ExtResource("9_a2c3f")])
 def_parts = Array[ExtResource("10_oa1ag")]([ExtResource("11_884ma"), ExtResource("12_wsftw"), ExtResource("13_6v5j0")])
 head_drawing_time = 30.0

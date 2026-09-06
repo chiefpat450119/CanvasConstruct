@@ -28,16 +28,23 @@ func _ready() -> void:
 	_connect_action_button(fight_button, drawing_phase_manager.fight)
 
 
-func set_part_previews(
-	head_texture: Texture2D,
-	torso_texture: Texture2D,
-	defense_texture: Texture2D,
-	weapon_texture: Texture2D
+func set_part_preview(
+	category: GameStateManager.PartCategory,
+	texture: Texture2D
 ) -> void:
-	_set_part_preview(head_ui, head_texture)
-	_set_part_preview(torso_ui, torso_texture)
-	_set_part_preview(defense_ui, defense_texture)
-	_set_part_preview(weapon_ui, weapon_texture)
+	var part := _get_part_ui(category)
+	if part != null:
+		part.set_preview(texture)
+
+
+func set_part_reference(
+	category: GameStateManager.PartCategory,
+	reference_part: PartResource,
+	stat_multiplier: float = 1.0
+) -> void:
+	var part := _get_part_ui(category)
+	if part != null:
+		part.set_reference_part(reference_part, stat_multiplier)
 
 
 func set_fight_button_visible(is_visible: bool) -> void:
@@ -90,8 +97,3 @@ func _connect_part(
 func _connect_action_button(button: BaseButton, action: Callable) -> void:
 	if button != null:
 		button.pressed.connect(action)
-
-
-func _set_part_preview(part: PartUI, texture: Texture2D) -> void:
-	if part != null:
-		part.set_preview(texture)

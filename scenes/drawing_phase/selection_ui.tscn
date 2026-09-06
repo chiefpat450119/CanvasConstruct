@@ -124,7 +124,7 @@ weapon_ui = NodePath("Weapon")
 total_progress_bar = NodePath("TextureRect")
 fight_button = NodePath("Fight Button")
 
-[node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
+[node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -139,6 +139,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
 similarity_label = NodePath("Completion Number/Number")
 description_bar = NodePath("Description Bar")
 icon = NodePath("Icon")
@@ -203,7 +204,7 @@ offset_right = 10.999985
 offset_bottom = 11.750015
 grow_horizontal = 0
 grow_vertical = 2
-text = "1.2s"
+text = "2s"
 label_settings = ExtResource("5_1g0n4")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -276,7 +277,7 @@ texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
+[node name="Defense" type="Control" parent="." unique_id=1355314869 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -291,6 +292,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
 similarity_label = NodePath("Completion Number/Number")
 description_bar = NodePath("Description Bar")
 icon = NodePath("Icon")
@@ -358,7 +360,7 @@ offset_right = 10.8832855
 offset_bottom = 12.250008
 grow_horizontal = 0
 grow_vertical = 2
-text = "5"
+text = "17"
 label_settings = ExtResource("5_1g0n4")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -428,7 +430,7 @@ texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
+[node name="Weapon" type="Control" parent="." unique_id=1356265695 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -446,6 +448,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
 similarity_label = NodePath("Completion Number/Number")
 description_bar = NodePath("Description Bar")
 icon = NodePath("Icon")
@@ -586,7 +589,7 @@ texture = ExtResource("7_773tf")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
+[node name="Torso" type="Control" parent="." unique_id=2135995782 node_paths=PackedStringArray("select_button", "preview", "stat_value_label", "similarity_label", "description_bar", "icon", "lock")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -604,6 +607,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("18_part_ui")
 select_button = NodePath("Button")
 preview = NodePath("Button")
+stat_value_label = NodePath("Description Bar/Number")
 similarity_label = NodePath("Completion Number/Number")
 description_bar = NodePath("Description Bar")
 icon = NodePath("Icon")
@@ -670,7 +674,7 @@ offset_right = -136.74988
 offset_bottom = 13.000015
 grow_horizontal = 0
 grow_vertical = 2
-text = "60%"
+text = "25%"
 label_settings = ExtResource("5_1g0n4")
 horizontal_alignment = 1
 vertical_alignment = 1
