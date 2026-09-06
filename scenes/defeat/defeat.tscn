@@ -1,8 +1,23 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://eggf2avfhgyn"]
 
-[ext_resource type="Script" path="res://scenes/defeat/defeat.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://c48trpsj4hl8j" path="res://scenes/defeat/defeat.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://d3lnrwcs3yub8" path="res://assets/UI/winloss/LOSE_BUTTON.png" id="2_1f8du"]
+[ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="2_eq47o"]
+[ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="3_1f8du"]
+[ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="3_g21tw"]
+[ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="4_eq47o"]
+[ext_resource type="Texture2D" uid="uid://qk8krg7vkti6" path="res://assets/UI/winloss/LOSE_ICON.png" id="5_1f8du"]
 
-[node name="Defeat" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ei3t7"]
+shader = ExtResource("3_g21tw")
+shader_parameter/color = Vector4(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1f8du"]
+font = ExtResource("3_1f8du")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="Defeat" type="Control" unique_id=1874406829]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,36 +26,51 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.4
-anchor_right = 0.5
-anchor_bottom = 0.4
-offset_left = -180.0
-offset_top = -30.0
-offset_right = 180.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "DEFEAT"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="UiBackground" parent="." unique_id=1544384068 instance=ExtResource("2_eq47o")]
+material = SubResource("ShaderMaterial_ei3t7")
+layout_mode = 0
+anchors_preset = 0
 
-[node name="MainMenuButton" type="Button" parent="."]
+[node name="Tutorial" type="TextureButton" parent="." unique_id=1186654965]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 458.0
+offset_right = 718.0
+offset_bottom = 546.0
+texture_normal = ExtResource("2_1f8du")
+
+[node name="Label" type="Label" parent="Tutorial" unique_id=538078429]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.55
-anchor_right = 0.5
-anchor_bottom = 0.55
-offset_left = -100.0
-offset_top = -25.0
-offset_right = 100.0
-offset_bottom = 25.0
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 19.5
+offset_right = -35.0
+offset_bottom = -19.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Main Menu"
+label_settings = SubResource("LabelSettings_1f8du")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_pressed"]
+[node name="InteractionEffects2" type="Node" parent="Tutorial" unique_id=518147978 node_paths=PackedStringArray("target_control")]
+script = ExtResource("4_eq47o")
+target_control = NodePath("..")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1322451276]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -355.0
+offset_top = 57.0
+offset_right = 347.0
+offset_bottom = 338.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_1f8du")
+
+[connection signal="pressed" from="Tutorial" to="." method="_on_main_menu_pressed"]
