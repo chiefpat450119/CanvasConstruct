@@ -196,7 +196,7 @@ func _play_release() -> void:
 		_scaled(release_scale),
 		release_duration
 	)
-	scale_pop.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	scale_pop.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 	var rotation_pop := _active_tween.tween_property(
 		target_control,

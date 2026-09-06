@@ -112,15 +112,27 @@ func switch_to_cutscene() -> void:
 	get_tree().change_scene_to_file(cutscene_scene_path)
 
 func switch_to_drawing_phase() -> void:
-	get_tree().change_scene_to_file(drawing_phase_scene_path)
+	await _transition_to_scene(drawing_phase_scene_path)
 
 
 func switch_to_combat_phase() -> void:
-	var scene_tree := get_tree()
-	scene_tree.change_scene_to_file(combat_phase_scene_path)
-	await scene_tree.scene_changed
-	var combat_phase := scene_tree.current_scene as CombatPhaseManager
+	var result := await _change_scene_while_covered(combat_phase_scene_path)
+	if result != OK:
+		push_error(
+			"Could not change scene to %s: %s"
+			% [combat_phase_scene_path, error_string(result)]
+		)
+		UITransition.finish()
+		return
+
+	var combat_phase := get_tree().current_scene as CombatPhaseManager
+	if combat_phase == null:
+		push_error("Combat scene root is not a CombatPhaseManager")
+		UITransition.finish()
+		return
+
 	initialize_combat_phase(combat_phase)
+	UITransition.finish()
 
 
 func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
@@ -140,10 +152,32 @@ func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
 func _on_combat_victory(combat_phase_manager: CombatPhaseManager) -> void:
 	update_current_part_drawings(combat_phase_manager.get_player_drawings())
 	if next_boss_index >= 3:
-		get_tree().change_scene_to_file(victory_scene_path)
+		_transition_to_scene(victory_scene_path)
 	else:
 		switch_to_drawing_phase()
 
 
 func _on_combat_defeat() -> void:
-	get_tree().change_scene_to_file(defeat_scene_path)
+	_transition_to_scene(defeat_scene_path)
+
+
+func _transition_to_scene(scene_path: String) -> void:
+	var result := await _change_scene_while_covered(scene_path)
+	if result != OK:
+		push_error(
+			"Could not change scene to %s: %s"
+			% [scene_path, error_string(result)]
+		)
+	UITransition.finish()
+
+
+func _change_scene_while_covered(scene_path: String) -> Error:
+	await UITransition.start()
+
+	var scene_tree := get_tree()
+	var result := scene_tree.change_scene_to_file(scene_path)
+	if result != OK:
+		return result
+
+	await scene_tree.scene_changed
+	return OK
