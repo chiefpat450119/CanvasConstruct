@@ -7,6 +7,7 @@ const CELL_SIZE : int = 16
 const PAINTED_META : StringName = &"is_painted"
 var active_colour : Color = Color(1,0,0)
 var is_painting : bool = false
+var is_erasing : bool = false
 
 @export var grid : GridContainer
 @export var cell_texture : Texture2D
@@ -34,6 +35,22 @@ func _process(delta: float) -> void:
 	# Stop painting
 	if Input.is_action_just_released("M1"):
 		is_painting = false
+	
+	# Start erasing
+	if Input.is_action_pressed("M2"):
+		is_erasing = true
+	
+		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
+		# Check if there is a cell under the mouse and if cell has already been erased
+		if cell_under_mouse and (
+			cell_under_mouse.get_meta(PAINTED_META, false)
+		):
+			cell_under_mouse.modulate = Color.WHITE
+			cell_under_mouse.set_meta(PAINTED_META, false)
+	
+	# Stop erasing
+	if Input.is_action_just_released("M2"):
+		is_erasing = false
 
 ## Initialize the drawing grid with given width and height
 func init(width : int, height: int):
