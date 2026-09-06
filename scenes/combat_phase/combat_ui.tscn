@@ -102,8 +102,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UiBackground" parent="Control" unique_id=1544384068 instance=ExtResource("2_5e1av")]
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
 
 [node name="Buttons" type="HBoxContainer" parent="Control" unique_id=2085455874]
 layout_mode = 1
