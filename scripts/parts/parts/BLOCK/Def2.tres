@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DefResource" format=3 uid="uid://toayjue0da24"]
+
+[ext_resource type="Script" uid="uid://ce1xh2yisvgmu" path="res://scripts/parts/part_mechanic.gd" id="1_68orw"]
+[ext_resource type="Texture2D" uid="uid://dsrakebgjlnmp" path="res://scripts/parts/parts/BLOCK/LOP SHIELD1.png" id="2_2ul6d"]
+[ext_resource type="Script" uid="uid://du7qxf02c2l8q" path="res://scripts/parts/def_resource.gd" id="3_fwkoi"]
+
+[resource]
+script = ExtResource("3_fwkoi")
+defense = 8.0
+reference_image = ExtResource("2_2ul6d")
+metadata/_custom_type_script = "uid://du7qxf02c2l8q"
