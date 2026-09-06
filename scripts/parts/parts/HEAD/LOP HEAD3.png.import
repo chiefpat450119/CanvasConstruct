@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7cdux5i3sxub"
-path="res://.godot/imported/LOP HEAD3.png-4fd8ac9780812daa4da4054211ff104a.ctex"
+path="res://.godot/imported/LOP HEAD3.png-7d71a0c85fc363f2280662e69cd727e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/components/head/LOP HEAD3.png"
-dest_files=["res://.godot/imported/LOP HEAD3.png-4fd8ac9780812daa4da4054211ff104a.ctex"]
+source_file="res://scripts/parts/parts/HEAD/LOP HEAD3.png"
+dest_files=["res://.godot/imported/LOP HEAD3.png-7d71a0c85fc363f2280662e69cd727e5.ctex"]
 
 [params]
 

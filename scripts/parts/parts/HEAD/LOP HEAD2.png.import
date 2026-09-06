@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkkmrtg3b6wp3"
-path="res://.godot/imported/LOP TORSO.png-9630cf1671839056e9ea3c5bb7edbf25.ctex"
+uid="uid://ch72uuipglyxc"
+path="res://.godot/imported/LOP HEAD2.png-76d1fb4f5e9db9e12f95b38fac723aa9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/components/torso/LOP TORSO.png"
-dest_files=["res://.godot/imported/LOP TORSO.png-9630cf1671839056e9ea3c5bb7edbf25.ctex"]
+source_file="res://scripts/parts/parts/HEAD/LOP HEAD2.png"
+dest_files=["res://.godot/imported/LOP HEAD2.png-76d1fb4f5e9db9e12f95b38fac723aa9.ctex"]
 
 [params]
 
