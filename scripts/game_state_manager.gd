@@ -109,7 +109,7 @@ func get_current_parts() -> Array[PlayerPart]:
 	return parts
 
 func switch_to_cutscene() -> void:
-	get_tree().change_scene_to_file(cutscene_scene_path)
+	await _transition_to_scene(cutscene_scene_path)
 
 func switch_to_drawing_phase() -> void:
 	await _transition_to_scene(drawing_phase_scene_path)
