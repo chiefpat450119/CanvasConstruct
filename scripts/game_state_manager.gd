@@ -11,13 +11,14 @@ enum PartCategory {
 @export var has_completed_drawing_phase: bool = false
 @export var boss_scenes: Array[PackedScene] = [
 	preload("res://scenes/bosses/orc_boss.tscn"),
-	preload("res://scenes/bosses/orc_boss.tscn"),
-	preload("res://scenes/bosses/orc_boss.tscn"),
+	preload("res://scenes/bosses/deeno/deeno_boss.tscn"),
+	preload("res://scenes/bosses/bear/bear.tscn"),
 ]
 @export_file("*.tscn") var drawing_phase_scene_path := "res://scenes/drawing_phase/drawing_phase.tscn"
 @export_file("*.tscn") var combat_phase_scene_path := "res://scenes/combat_phase/combat_phase.tscn"
 @export_file("*.tscn") var victory_scene_path := "res://scenes/victory/victory.tscn"
 @export_file("*.tscn") var defeat_scene_path := "res://scenes/defeat/defeat.tscn"
+@export_file("*.tscn") var cutscene_scene_path := "res://scenes/intro_cutscene/intro_cutscene.tscn"
 
 var next_boss_index: int = 0
 var current_head_part: PlayerPart = null
@@ -41,6 +42,7 @@ func mark_drawing_phase_completed() -> void:
 
 
 func reset_run() -> void:
+	AudioManager.play_build_music()
 	has_completed_drawing_phase = false
 	next_boss_index = 0
 	current_head_part = null
@@ -107,17 +109,32 @@ func get_current_parts() -> Array[PlayerPart]:
 	]
 	return parts
 
+func switch_to_cutscene() -> void:
+	await _transition_to_scene(cutscene_scene_path)
 
 func switch_to_drawing_phase() -> void:
-	get_tree().change_scene_to_file(drawing_phase_scene_path)
+	AudioManager.play_build_music()
+	await _transition_to_scene(drawing_phase_scene_path)
 
 
 func switch_to_combat_phase() -> void:
-	var scene_tree := get_tree()
-	scene_tree.change_scene_to_file(combat_phase_scene_path)
-	await scene_tree.scene_changed
-	var combat_phase := scene_tree.current_scene as CombatPhaseManager
+	var result := await _change_scene_while_covered(combat_phase_scene_path)
+	if result != OK:
+		push_error(
+			"Could not change scene to %s: %s"
+			% [combat_phase_scene_path, error_string(result)]
+		)
+		UITransition.finish()
+		return
+	AudioManager.play_combat_music()
+	var combat_phase := get_tree().current_scene as CombatPhaseManager
+	if combat_phase == null:
+		push_error("Combat scene root is not a CombatPhaseManager")
+		UITransition.finish()
+		return
+
 	initialize_combat_phase(combat_phase)
+	UITransition.finish()
 
 
 func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
@@ -137,10 +154,32 @@ func initialize_combat_phase(combat_phase_manager: CombatPhaseManager) -> void:
 func _on_combat_victory(combat_phase_manager: CombatPhaseManager) -> void:
 	update_current_part_drawings(combat_phase_manager.get_player_drawings())
 	if next_boss_index >= 3:
-		get_tree().change_scene_to_file(victory_scene_path)
+		_transition_to_scene(victory_scene_path)
 	else:
 		switch_to_drawing_phase()
 
 
 func _on_combat_defeat() -> void:
-	get_tree().change_scene_to_file(defeat_scene_path)
+	_transition_to_scene(defeat_scene_path)
+
+
+func _transition_to_scene(scene_path: String) -> void:
+	var result := await _change_scene_while_covered(scene_path)
+	if result != OK:
+		push_error(
+			"Could not change scene to %s: %s"
+			% [scene_path, error_string(result)]
+		)
+	UITransition.finish()
+
+
+func _change_scene_while_covered(scene_path: String) -> Error:
+	await UITransition.start()
+
+	var scene_tree := get_tree()
+	var result := scene_tree.change_scene_to_file(scene_path)
+	if result != OK:
+		return result
+
+	await scene_tree.scene_changed
+	return OK

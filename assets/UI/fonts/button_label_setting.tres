@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://6sil1txvwq0a"]
+
+[ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="1_pekk2"]
+
+[resource]
+font = ExtResource("1_pekk2")
+font_size = 48

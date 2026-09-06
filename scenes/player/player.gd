@@ -28,8 +28,6 @@ var _shield_rest_position: Vector2
 func _ready() -> void:
 	_weapon_rest_position = $Attack.position
 	_shield_rest_position = $Def.position
-	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
-	_check_for_death()
 
 
 func _process(delta: float) -> void:
@@ -60,6 +58,8 @@ func attack(target: BossBase) -> void:
 
 
 func defend() -> void:
+	if is_defending:
+		return
 	if is_dead or _defend_cooldown_timer > 0.0 or player_stats == null:
 		return
 
@@ -100,6 +100,9 @@ func initialize_from_parts(
 	var weapon_resource := weapon_part.reference_part as AtkResource
 	var defense_resource := defense_part.reference_part as DefResource
 	var torso_resource := torso_part.reference_part as TorsoResource
+	if player_stats == null:
+		push_error("Player requires PlayerStats.")
+		return
 	if renderer == null or head_resource == null or weapon_resource == null or defense_resource == null or torso_resource == null:
 		push_error("Player parts do not match the expected resource types.")
 		return
@@ -121,11 +124,20 @@ func initialize_from_parts(
 		torso_resource.create_runtime_instance() as TorsoResource
 	)
 	player_stats.set_multipliers(
-		_get_similarity(weapon_part),
-		_get_cooldown_multiplier(head_part),
-		_get_similarity(defense_part),
-		_get_similarity(torso_part)
+		weapon_part.get_stat_multiplier(),
+		head_part.get_stat_multiplier(),
+		defense_part.get_stat_multiplier(),
+		torso_part.get_stat_multiplier()
 	)
+	var parts: Array[PlayerPart] = [
+		head_part,
+		weapon_part,
+		defense_part,
+		torso_part,
+	]
+	player_stats.initialize_pixel_health(parts)
+	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
+	_check_for_death()
 
 
 func get_part_drawings() -> Array[Image]:
@@ -135,14 +147,6 @@ func get_part_drawings() -> Array[Image]:
 		$Def.get_image(),
 		$Torso.get_image(),
 	]
-
-
-func _get_similarity(part: PlayerPart) -> float:
-	return clampf(TextureCompare.compare(part.drawing, part.reference_part.reference_image), 0.0, 1.0)
-
-
-func _get_cooldown_multiplier(part: PlayerPart) -> float:
-	return 2.0 - _get_similarity(part)
 
 
 func _check_for_death() -> void:

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://tqct11ym7dh2"]
+
+[ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="1_background"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_background"]
+shader = ExtResource("1_background")
+
+[node name="UiBackground" type="ColorRect" unique_id=1544384068]
+material = SubResource("ShaderMaterial_background")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

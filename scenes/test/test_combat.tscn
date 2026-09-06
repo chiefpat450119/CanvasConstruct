@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dty1pdgxikmir" path="res://scenes/combat_phase/combat_phase.tscn" id="1_e0f5m"]
 [ext_resource type="Script" uid="uid://bxsxbuerqnt7k" path="res://scenes/test/test_combat.gd" id="1_test"]
 [ext_resource type="Resource" uid="uid://cdtuyou11qgur" path="res://scripts/parts/parts/HEAD/Head.tres" id="2_head"]
-[ext_resource type="PackedScene" uid="uid://dd6b127nd3xy6" path="res://scenes/bosses/deeno/deeno_boss.tscn" id="2_y7kx6"]
+[ext_resource type="PackedScene" uid="uid://bcs4xexdbns6j" path="res://scenes/bosses/bear/bear.tscn" id="2_y7kx6"]
 [ext_resource type="Resource" uid="uid://d0r0iiyncgqvm" path="res://scripts/parts/parts/WEAPONS/Weapon3.tres" id="3_weapon"]
 [ext_resource type="Resource" uid="uid://b7gfhkcgvyxsf" path="res://scripts/parts/parts/BLOCK/Def1.tres" id="4_defense"]
 [ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_torso"]
