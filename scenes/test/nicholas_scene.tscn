@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dgsnsndroae37" path="res://scenes/test/nicholas_test.gd" id="1_4hql7"]
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="2_035bn"]
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="3_wx6tj"]
+[ext_resource type="Shader" uid="uid://dwt6b6aofqy1b" path="res://assets/shaders/scrolling_background.gdshader" id="3_yv1o6"]
+[ext_resource type="Texture2D" uid="uid://q7kf4wsl783c" path="res://assets/scrolling_background.png" id="4_66pva"]
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="4_yv1o6"]
 [ext_resource type="Texture2D" uid="uid://cteaab7d4wmyk" path="res://assets/components/weapons/LOP WEAPON1.png" id="5_66pva"]
 [ext_resource type="Texture2D" uid="uid://dl5g7ah28pwdl" path="res://assets/UI/battle_phase/COMP_ATTACK_ICON.png" id="6_dm0e1"]
@@ -21,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="19_0j6rq"]
 [ext_resource type="Texture2D" uid="uid://cgdlukelhbuq6" path="res://assets/components/weapons/LOP WEAPON2.png" id="20_3y2qf"]
 [ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="21_jbit4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4v7s"]
+shader = ExtResource("3_yv1o6")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xxhv"]
 bg_color = Color(0, 0, 0, 1)
@@ -311,6 +316,17 @@ position = Vector2(830, 251)
 scale = Vector2(3, 3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1724405638]
+
+[node name="Scrolling Background" type="TextureRect" parent="CanvasLayer" unique_id=510515704]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_g4v7s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_66pva")
+stretch_mode = 1
 
 [node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=1925897617]
 visible = false

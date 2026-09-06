@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d3ko0q7uix0mk"]
+
+[ext_resource type="Shader" uid="uid://dwt6b6aofqy1b" path="res://assets/shaders/scrolling_background.gdshader" id="1_miaws"]
+[ext_resource type="Texture2D" uid="uid://q7kf4wsl783c" path="res://assets/scrolling_background.png" id="2_8jupx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8n76"]
+shader = ExtResource("1_miaws")
+
+[node name="ScrollingBackground" type="TextureRect" unique_id=482453548]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_d8n76")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8jupx")
+stretch_mode = 1
