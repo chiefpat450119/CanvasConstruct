@@ -5,7 +5,6 @@ extends Node2D
 @export var boss_spawn_position: Vector2 = Vector2.ZERO
 @export var player: Player
 @export var combat_ui: CombatUI
-@export var boss_scene: PackedScene
 
 signal victory
 signal defeat
@@ -19,9 +18,6 @@ func _ready() -> void:
 	if combat_ui != null:
 		combat_ui.attack_requested.connect(_on_attack_requested)
 		combat_ui.defend_requested.connect(_on_defend_requested)
-
-	if boss_scene != null:
-		initialize(boss_scene)
 
 func initialize(boss_scene: PackedScene) -> Error:
 	if boss_scene == null:

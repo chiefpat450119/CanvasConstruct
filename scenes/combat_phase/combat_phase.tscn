@@ -3,14 +3,12 @@
 [ext_resource type="Script" uid="uid://dv5hjoxa5kwyo" path="res://scenes/combat_phase/combat_phase_manager.gd" id="1_hc5ws"]
 [ext_resource type="PackedScene" uid="uid://cwgkgij05j6kj" path="res://scenes/combat_phase/combat_ui.tscn" id="2_hc5ws"]
 [ext_resource type="PackedScene" uid="uid://d13vu068wyaf5" path="res://scenes/player/Player.tscn" id="4_g7ptn"]
-[ext_resource type="PackedScene" uid="uid://nvh4laj4nt08" path="res://scenes/bosses/orc_boss.tscn" id="5_orc"]
 
 [node name="CombatPhase" type="Node2D" unique_id=1153913076 node_paths=PackedStringArray("boss_container", "player", "combat_ui")]
 script = ExtResource("1_hc5ws")
 boss_container = NodePath("BossContainer")
 player = NodePath("Player")
 combat_ui = NodePath("CombatUI")
-boss_scene = ExtResource("5_orc")
 
 [node name="BossContainer" type="Node2D" parent="." unique_id=126644774]
 position = Vector2(697, 258)
