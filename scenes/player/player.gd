@@ -29,8 +29,6 @@ var _shield_rest_position: Vector2
 func _ready() -> void:
 	_weapon_rest_position = $Attack.position
 	_shield_rest_position = $Def.position
-	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
-	_check_for_death()
 
 
 func _process(delta: float) -> void:
@@ -102,6 +100,9 @@ func initialize_from_parts(
 	var weapon_resource := weapon_part.reference_part as AtkResource
 	var defense_resource := defense_part.reference_part as DefResource
 	var torso_resource := torso_part.reference_part as TorsoResource
+	if player_stats == null:
+		push_error("Player requires PlayerStats.")
+		return
 	if renderer == null or head_resource == null or weapon_resource == null or defense_resource == null or torso_resource == null:
 		push_error("Player parts do not match the expected resource types.")
 		return
@@ -128,6 +129,15 @@ func initialize_from_parts(
 		defense_part.get_stat_multiplier(),
 		torso_part.get_stat_multiplier()
 	)
+	var parts: Array[PlayerPart] = [
+		head_part,
+		weapon_part,
+		defense_part,
+		torso_part,
+	]
+	player_stats.initialize_pixel_health(parts)
+	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
+	_check_for_death()
 
 
 func get_part_drawings() -> Array[Image]:

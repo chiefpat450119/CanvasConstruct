@@ -28,6 +28,27 @@ func get_similarity() -> float:
 	)
 
 
+func get_reference_pixel_count() -> int:
+	if reference_part == null or reference_part.reference_image == null:
+		return 0
+
+	return TextureCompare.count_visible_pixels(
+		reference_part.reference_image.get_image()
+	)
+
+
+static func get_total_completion(parts: Array[PlayerPart]) -> float:
+	if parts.is_empty():
+		return 0.0
+
+	var total_similarity := 0.0
+	for part in parts:
+		if part != null:
+			total_similarity += part.get_similarity()
+
+	return total_similarity / parts.size()
+
+
 func get_stat_multiplier() -> float:
 	var similarity := get_similarity()
 	if reference_part is HeadResource:

@@ -240,16 +240,7 @@ func _update_total_completion() -> void:
 		return
 
 	var current_parts := GameStateManagerInstance.get_current_parts()
-	var total_similarity := 0.0
-	for part in current_parts:
-		if part == null:
-			continue
-		total_similarity += part.get_similarity()
-
-	var part_count := current_parts.size()
-	selection_ui.set_total_completion(
-		total_similarity / part_count if part_count > 0 else 0.0
-	)
+	selection_ui.set_total_completion(PlayerPart.get_total_completion(current_parts))
 
 
 func _show_only(active_ui: CanvasItem) -> void:
