@@ -3,6 +3,13 @@ extends Control
 
 signal selected
 
+const DEFAULT_COMPLETION_BADGE := preload(
+	"res://assets/UI/build_phase/XPERC_COMP_ICON.png"
+)
+const PERFECT_COMPLETION_BADGE := preload(
+	"res://assets/UI/build_phase/100PERC_COMP_ICON.png"
+)
+
 @export var select_button: Button
 @export var preview: Button
 @export var similarity_label: Label
@@ -35,9 +42,16 @@ func set_similarity(similarity: float) -> void:
 	if similarity_label == null:
 		return
 
-	similarity_label.text = "%d%%" % roundi(
-		clampf(similarity, 0.0, 1.0) * 100.0
-	)
+	var percentage := roundi(clampf(similarity, 0.0, 1.0) * 100.0)
+	similarity_label.text = "%d%%" % percentage
+
+	var completion_badge := similarity_label.get_parent() as TextureRect
+	if completion_badge != null:
+		completion_badge.texture = (
+			PERFECT_COMPLETION_BADGE
+			if percentage == 100
+			else DEFAULT_COMPLETION_BADGE
+		)
 
 
 func disable() -> void:
