@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://nvh4laj4nt08"]
 
 [ext_resource type="Texture2D" uid="uid://2pog75maiemt" path="res://icon.svg" id="1_vq1je"]
+[ext_resource type="Script" uid="uid://4dpromrssh0o" path="res://scenes/bosses/boss_move.gd" id="2_8mkl3"]
 [ext_resource type="Texture2D" uid="uid://7neacd2vq15o" path="res://assets/arm_placeholder.png" id="2_22h0l"]
 [ext_resource type="Texture2D" uid="uid://cxcvs1y6pba4f" path="res://assets/hatchet_placeholder.png" id="3_f5os7"]
 [ext_resource type="Script" uid="uid://255brsxevtyf" path="res://scenes/bosses/orc_boss.gd" id="4_first_boss"]
 [ext_resource type="Script" uid="uid://hol6qssqc085" path="res://scenes/bosses/boss_arm_animator.gd" id="5_arm_animator"]
+[ext_resource type="Resource" path="res://resources/bosses/orc_base_attack.tres" id="6_base_attack"]
+[ext_resource type="Resource" path="res://resources/bosses/orc_special_attack.tres" id="7_special_attack"]
 
 [node name="OrcBoss" type="Node2D" unique_id=378128887]
 script = ExtResource("4_first_boss")
+moves = Array[ExtResource("2_8mkl3")]([ExtResource("6_base_attack"), ExtResource("7_special_attack")])
 
 [node name="BossArmAnimator" type="Node" parent="." unique_id=1869743769 node_paths=PackedStringArray("boss", "left_arm", "right_arm")]
 script = ExtResource("5_arm_animator")
