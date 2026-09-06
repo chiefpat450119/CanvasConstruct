@@ -2,9 +2,9 @@ extends Control
 
 @export var tutorial_images: Array
 @export var display: TextureRect
-@export var prev_button: Button
-@export var next_button: Button
-@export var back_button: Button
+@export var prev_button: TextureButton
+@export var next_button: TextureButton
+@export var back_button: TextureButton
 
 var _curr_image: int = 0
 

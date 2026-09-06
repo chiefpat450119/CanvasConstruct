@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://r20n6wg14sic"]
 
 [ext_resource type="Script" uid="uid://bfn4augafm12y" path="res://scenes/tutorial_menu/tutorial_menu.gd" id="1_ap5e0"]
+[ext_resource type="PackedScene" uid="uid://d3ko0q7uix0mk" path="res://scenes/test/scrolling_background.tscn" id="2_5inq8"]
+[ext_resource type="Texture2D" uid="uid://6h6yywvgp4ri" path="res://assets/UI/tutorial/arrow_basic_w.png" id="3_n4w0o"]
+[ext_resource type="Texture2D" uid="uid://db602ff2gee7q" path="res://assets/UI/tutorial/arrow_basic_w_disabled.png" id="4_3moh3"]
+[ext_resource type="Texture2D" uid="uid://dcs6wf8noxr15" path="res://assets/UI/tutorial/arrow_basic_e.png" id="4_ovn0x"]
+[ext_resource type="Texture2D" uid="uid://b3svw6pf0w1ya" path="res://assets/UI/tutorial/arrow_basic_w_hover.png" id="4_vfp5b"]
+[ext_resource type="Texture2D" uid="uid://dfv23jalh4bgc" path="res://assets/UI/tutorial/arrow_basic_e_disabled.png" id="5_341dy"]
+[ext_resource type="Texture2D" uid="uid://0vngl7nsgv7i" path="res://assets/UI/tutorial/arrow_basic_e_hover.png" id="7_1iah2"]
+[ext_resource type="Texture2D" uid="uid://h4c6qerhl1g5" path="res://assets/UI/tutorial/check_square_grey_cross.png" id="7_hdjf8"]
+[ext_resource type="Texture2D" uid="uid://bfidajo41aidm" path="res://assets/UI/tutorial/check_square_grey_cross_hover.png" id="8_g56xt"]
 
 [node name="TutorialMenu" type="Control" unique_id=1185766356 node_paths=PackedStringArray("display", "prev_button", "next_button", "back_button")]
 layout_mode = 3
@@ -11,20 +20,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ap5e0")
 tutorial_images = ["res://assets/tutorial_images/the_seals_three.jpg", "res://assets/tutorial_images/seal_guy.jpg", "res://assets/tutorial_images/da_baby.webp"]
-display = NodePath("TextureRect")
+display = NodePath("TutorialImage")
 prev_button = NodePath("PrevButton")
 next_button = NodePath("NextButton")
 back_button = NodePath("BackButton")
 
-[node name="BackgroundImage" type="Panel" parent="." unique_id=1976504124]
+[node name="ScrollingBackground" parent="." unique_id=482453548 instance=ExtResource("2_5inq8")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1466770142]
+[node name="TutorialImage" type="TextureRect" parent="." unique_id=1466770142]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -40,35 +44,49 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 3
 
-[node name="PrevButton" type="Button" parent="." unique_id=1627593695]
+[node name="PrevButton" type="TextureButton" parent="." unique_id=1320241053]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -103.0
-offset_right = 107.0
+offset_top = -106.0
+offset_right = 40.0
+offset_bottom = -66.0
 grow_vertical = 0
+scale = Vector2(2.6399999, 2.6399999)
 disabled = true
-text = "<-"
+texture_normal = ExtResource("3_n4w0o")
+texture_hover = ExtResource("4_vfp5b")
+texture_disabled = ExtResource("4_3moh3")
+stretch_mode = 3
 
-[node name="NextButton" type="Button" parent="." unique_id=403456211]
+[node name="NextButton" type="TextureButton" parent="." unique_id=1019881580]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -107.0
-offset_top = -103.0
+offset_left = -108.0
+offset_top = -106.0
+offset_right = -68.0
+offset_bottom = -66.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "->"
+scale = Vector2(2.6399999, 2.6399999)
+texture_normal = ExtResource("4_ovn0x")
+texture_hover = ExtResource("7_1iah2")
+texture_disabled = ExtResource("5_341dy")
+stretch_mode = 3
 
-[node name="BackButton" type="Button" parent="." unique_id=47006483]
+[node name="BackButton" type="TextureButton" parent="." unique_id=1445880644]
 layout_mode = 0
-offset_right = 107.0
-offset_bottom = 103.0
-text = "<-"
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.6399999, 2.6399999)
+texture_normal = ExtResource("7_hdjf8")
+texture_hover = ExtResource("8_g56xt")
+stretch_mode = 3
 
 [connection signal="pressed" from="PrevButton" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_pressed"]
