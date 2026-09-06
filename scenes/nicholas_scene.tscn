@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ddnn4v4rcoq6i"]
 
 [ext_resource type="Script" uid="uid://dgsnsndroae37" path="res://scenes/nicholas_test.gd" id="1_0fl8x"]
+[ext_resource type="AudioStream" uid="uid://br8fbgknljl7q" path="res://assets/SFX/test_sfx.wav" id="2_32o37"]
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="3_h2h0g"]
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="3_vyj2j"]
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/grid cell sprite.png" id="4_h2h0g"]
@@ -93,6 +94,7 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_0fl8x")
 runtime_texture = NodePath("RuntimeTexture")
 drawing_grid = NodePath("CanvasLayer/Drawing UI/MarginContainer/HBoxContainer/Drawing Grid")
+test_sfx = ExtResource("2_32o37")
 
 [node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("3_h2h0g")]
 position = Vector2(830, 251)
@@ -101,7 +103,6 @@ scale = Vector2(3, 3)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1724405638]
 
 [node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=1925897617]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

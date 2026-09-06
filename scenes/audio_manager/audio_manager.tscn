@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bfnjfh6r5eevj"]
+
+[ext_resource type="Script" uid="uid://dggme80vb75hl" path="res://scenes/audio_manager/audio_manager.gd" id="1_0wpo5"]
+[ext_resource type="PackedScene" uid="uid://bt11nw3x7vasn" path="res://scenes/audio_manager/sfx_player.tscn" id="2_32fwx"]
+
+[node name="Audio Manager" type="Node" unique_id=1917480611 node_paths=PackedStringArray("sfx_players")]
+script = ExtResource("1_0wpo5")
+sfx_player_scene = ExtResource("2_32fwx")
+sfx_players = NodePath("SFXPlayers")
+
+[node name="SFXPlayers" type="Node" parent="." unique_id=1966888353]
