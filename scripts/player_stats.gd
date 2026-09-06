@@ -3,7 +3,7 @@ extends Node
 
 @export var curr_num_pixeles: int = 100
 @export var max_num_pixeles: int = 100
-@export var death_threshold: float = 0.5
+@export var death_threshold: float = 0.25
 
 var weapon_part: AtkResource
 var _weapon_damage_multiplier: float = 0
