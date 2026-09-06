@@ -11,17 +11,17 @@ extends Node
 @export_range(0.01, 2.0, 0.01, "suffix:s") var hover_exit_duration := 0.16
 
 @export_group("Press")
-@export var press_scale := Vector2(1.10, 0.90)
-@export_range(-45.0, 45.0, 0.1, "suffix:°") var press_rotation_degrees := -2.0
+@export var press_scale := Vector2(1.2, 1.2)
+@export_range(-45.0, 45.0, 0.1, "suffix:°") var press_rotation_degrees := -4.0
 @export_range(0.01, 2.0, 0.01, "suffix:s") var press_duration := 0.08
 
 @export_group("Hold Shake")
 @export var shake_while_pressed := true
-@export_range(-45.0, 45.0, 0.1, "suffix:°") var shake_rotation_degrees := 3.0
+@export_range(-45.0, 45.0, 0.1, "suffix:°") var shake_rotation_degrees := 6.0
 @export_range(0.01, 2.0, 0.01, "suffix:s") var shake_half_cycle_duration := 0.10
 
 @export_group("Release")
-@export var release_scale := Vector2(0.95, 1.09)
+@export var release_scale := Vector2(0.8, 0.8)
 @export_range(-45.0, 45.0, 0.1, "suffix:°") var release_rotation_degrees := 3.0
 @export_range(0.01, 2.0, 0.01, "suffix:s") var release_duration := 0.10
 @export_range(0.01, 2.0, 0.01, "suffix:s") var settle_duration := 0.20

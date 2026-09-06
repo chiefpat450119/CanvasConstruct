@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://do5ktc446exw5" path="res://scripts/parts/parts/BLOCK/Def3.tres" id="13_6v5j0"]
 [ext_resource type="PackedScene" uid="uid://dkjj515rpafsk" path="res://scenes/drawing_phase/selection_ui.tscn" id="14_vgkyh"]
 [ext_resource type="PackedScene" uid="uid://dwplekdaggb5" path="res://scenes/drawing_phase/drawing_ui.tscn" id="15_ffy6i"]
+[ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="15_yrk3h"]
 [ext_resource type="PackedScene" uid="uid://bna2mm0mkpj4f" path="res://scenes/drawing_phase/repair_or_upgrade_ui.tscn" id="16_ffy6i"]
 
 [node name="DrawingPhase" type="Node2D" unique_id=166329689 node_paths=PackedStringArray("selection_ui", "repair_or_upgrade_ui", "drawing_ui")]
@@ -32,6 +33,8 @@ defense_drawing_time = 30.0
 weapon_drawing_time = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
+
+[node name="UiBackground" parent="CanvasLayer" unique_id=1544384068 instance=ExtResource("15_yrk3h")]
 
 [node name="Selection UI" parent="CanvasLayer" unique_id=984169342 node_paths=PackedStringArray("drawing_phase_manager") instance=ExtResource("14_vgkyh")]
 drawing_phase_manager = NodePath("../..")
