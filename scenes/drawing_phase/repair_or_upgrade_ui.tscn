@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bna2mm0mkpj4f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nscei"]
+bg_color = Color(0, 0.6689455, 0.7972163, 1)
+
+[node name="Repair or Upgrade UI" type="Control" unique_id=105352]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1232728854]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -170.0
+offset_right = 194.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1959851717]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -140.0
+offset_right = 149.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Repair" type="Button" parent="Panel/HBoxContainer" unique_id=1263896589]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_nscei")
+text = "REPAIR"
+
+[node name="Upgrade" type="Button" parent="Panel/HBoxContainer" unique_id=369087829]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_nscei")
+text = "UPGRADE
+"
