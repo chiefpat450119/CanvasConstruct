@@ -5,6 +5,8 @@ extends Node
 @export var left_arm: Sprite2D
 @export var right_arm: Sprite2D
 @export var animation_player : AnimationPlayer
+@export var charge_particles : CPUParticles2D
+@export var swing_VFX : AnimatedSprite2D
 
 var _left_arm_rest_rotation: float
 var _right_arm_rest_rotation: float
@@ -21,6 +23,7 @@ func _ready() -> void:
 
 
 func _on_move_started(move: BossMove) -> void:
+	charge_particles.emitting = true
 	if move.move_id == &"special_attack":
 		_wind_up_special()
 	if move.move_id == &"base_attack":
@@ -28,6 +31,8 @@ func _on_move_started(move: BossMove) -> void:
 
 
 func _on_move_executed(move: BossMove) -> void:
+	charge_particles.emitting = false
+	swing_VFX.play()
 	match move.move_id:
 		&"base_attack":
 			_swing_left_arm()
