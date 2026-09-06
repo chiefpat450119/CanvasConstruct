@@ -31,6 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://b3fmmtpsftnu7" path="res://assets/UI/build_phase/COMP_ATTACK_LABLE.png" id="13_m3kao"]
 [ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="14_a2c3f"]
 [ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="15_oa1ag"]
+[ext_resource type="Script" uid="uid://wruokad4nqnb" path="res://scripts/grid_lines.gd" id="31_oa1ag"]
+[ext_resource type="Texture2D" uid="uid://ccl8v66f53vgl" path="res://assets/UI/build_phase/grid line cell (2).png" id="33_wsftw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -926,7 +928,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 45
 text = "FIGHT"
 
-[node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=803939529 node_paths=PackedStringArray("drawing_grid", "reference_art", "timer_label")]
+[node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=803939529 node_paths=PackedStringArray("drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -936,6 +938,7 @@ grow_vertical = 2
 script = ExtResource("2_63f3k")
 drawing_grid = NodePath("MarginContainer/HBoxContainer/Drawing Grid")
 reference_art = NodePath("MarginContainer/HBoxContainer/Reference Image")
+reference_art_grid_lines = NodePath("MarginContainer/HBoxContainer/Reference Image/Grid Lines")
 timer_label = NodePath("MarginContainer/HBoxContainer/Timer")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Drawing UI" unique_id=686340685]
@@ -979,6 +982,19 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_o71rv")
 expand_mode = 3
+
+[node name="Grid Lines" type="GridContainer" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer/Reference Image" unique_id=1498434461]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("31_oa1ag")
+cell_texture = ExtResource("33_wsftw")
 
 [node name="Repair or Upgrade UI" type="Control" parent="CanvasLayer" unique_id=1778247371]
 layout_mode = 3
