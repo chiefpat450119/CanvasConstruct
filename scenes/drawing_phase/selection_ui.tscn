@@ -16,6 +16,7 @@
 [ext_resource type="LabelSettings" uid="uid://6sil1txvwq0a" path="res://assets/UI/fonts/button_label_setting.tres" id="12_pmq32"]
 [ext_resource type="Script" uid="uid://ru5wvowvdt2c" path="res://scripts/interaction_effects.gd" id="15_g14as"]
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="16_dckcs"]
+[ext_resource type="Script" path="res://scenes/drawing_phase/selection_ui_anim.gd" id="17_selection_anim"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -738,3 +739,12 @@ offset_bottom = 19.0
 grow_vertical = 2
 text = "Build Phase"
 label_settings = SubResource("LabelSettings_g14as")
+
+[node name="SelectionUIAnim" type="Node" parent="." node_paths=PackedStringArray("phase_banner", "head", "defense", "weapon", "torso", "fight_button")]
+script = ExtResource("17_selection_anim")
+phase_banner = NodePath("../ColorRect")
+head = NodePath("../Head")
+defense = NodePath("../Defense")
+weapon = NodePath("../Weapon")
+torso = NodePath("../Torso")
+fight_button = NodePath("../Fight Button")

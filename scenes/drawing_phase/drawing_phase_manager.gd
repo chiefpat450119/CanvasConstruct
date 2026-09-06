@@ -2,7 +2,7 @@ class_name DrawingPhaseManager
 extends Node
 
 @export var selection_ui: SelectionUI
-@export var repair_or_upgrade_ui: CanvasItem
+@export var repair_or_upgrade_ui: RepairOrUpgradeUI
 @export var drawing_ui: DrawingUI
 
 @export var head_parts: Array[HeadResource]

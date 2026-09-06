@@ -41,4 +41,5 @@ drawing_phase_manager = NodePath("../..")
 
 [node name="Drawing UI" parent="CanvasLayer" unique_id=315890107 instance=ExtResource("15_ffy6i")]
 
-[node name="Repair or Upgrade UI" parent="CanvasLayer" unique_id=105352 instance=ExtResource("16_ffy6i")]
+[node name="Repair or Upgrade UI" parent="CanvasLayer" unique_id=105352 node_paths=PackedStringArray("drawing_phase_manager") instance=ExtResource("16_ffy6i")]
+drawing_phase_manager = NodePath("../..")

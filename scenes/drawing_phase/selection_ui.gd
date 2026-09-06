@@ -22,8 +22,6 @@ extends Control
 @export var weapon_similarity_label: Label
 
 @export_group("Action Buttons")
-@export var repair_button: Button
-@export var upgrade_button: Button
 @export var fight_button: TextureButton
 
 
@@ -36,8 +34,6 @@ func _ready() -> void:
 	_connect_part_button(torso_button, GameStateManager.PartCategory.TORSO)
 	_connect_part_button(defense_button, GameStateManager.PartCategory.DEFENSE)
 	_connect_part_button(weapon_button, GameStateManager.PartCategory.WEAPON)
-	_connect_action_button(repair_button, drawing_phase_manager.repair_selected_part)
-	_connect_action_button(upgrade_button, drawing_phase_manager.upgrade_selected_part)
 	_connect_action_button(fight_button, drawing_phase_manager.fight)
 
 
