@@ -45,6 +45,26 @@ func set_part_previews(
 	_set_part_preview(weapon_preview, weapon_texture)
 
 
+func disable_part(category: GameStateManager.PartCategory) -> void:
+	var button := _get_part_button(category)
+	if button != null:
+		button.disabled = true
+
+
+func _get_part_button(category: GameStateManager.PartCategory) -> Button:
+	match category:
+		GameStateManager.PartCategory.HEAD:
+			return head_button
+		GameStateManager.PartCategory.TORSO:
+			return torso_button
+		GameStateManager.PartCategory.DEFENSE:
+			return defense_button
+		GameStateManager.PartCategory.WEAPON:
+			return weapon_button
+
+	return null
+
+
 func _connect_part_button(
 	button: Button,
 	category: GameStateManager.PartCategory

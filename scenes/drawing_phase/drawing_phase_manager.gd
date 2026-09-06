@@ -10,10 +10,26 @@ extends Node
 @export var atk_parts: Array[AtkResource]
 @export var def_parts: Array[DefResource]
 
+@export_group("Drawing Times")
+@export_range(0.1, 600.0, 0.1, "or_greater", "suffix:s")
+var head_drawing_time: float = 99.0
+@export_range(0.1, 600.0, 0.1, "or_greater", "suffix:s")
+var torso_drawing_time: float = 99.0
+@export_range(0.1, 600.0, 0.1, "or_greater", "suffix:s")
+var defense_drawing_time: float = 99.0
+@export_range(0.1, 600.0, 0.1, "or_greater", "suffix:s")
+var weapon_drawing_time: float = 99.0
+
 var _selected_category: GameStateManager.PartCategory
+var _drawing_timer: Timer
 
 
 func _ready() -> void:
+	_drawing_timer = Timer.new()
+	_drawing_timer.one_shot = true
+	_drawing_timer.timeout.connect(_on_drawing_timer_timeout)
+	add_child(_drawing_timer)
+
 	_initialize_part_previews()
 	_show_only(selection_ui)
 
@@ -106,9 +122,33 @@ func _start_drawing(
 		push_warning("Cannot start drawing without a reference image.")
 		return false
 
-	drawing_ui.setup_drawing(reference_part.reference_image, null, initial_drawing)
+	var drawing_time := _get_drawing_time(_selected_category)
+	if drawing_time <= 0.0:
+		push_warning("Drawing time must be greater than zero.")
+		return false
+
+	_drawing_timer.start(drawing_time)
+	drawing_ui.setup_drawing(
+		reference_part.reference_image,
+		_drawing_timer,
+		initial_drawing
+	)
 	_show_only(drawing_ui)
 	return true
+
+
+func _get_drawing_time(category: GameStateManager.PartCategory) -> float:
+	match category:
+		GameStateManager.PartCategory.HEAD:
+			return head_drawing_time
+		GameStateManager.PartCategory.TORSO:
+			return torso_drawing_time
+		GameStateManager.PartCategory.DEFENSE:
+			return defense_drawing_time
+		GameStateManager.PartCategory.WEAPON:
+			return weapon_drawing_time
+
+	return 0.0
 
 
 func _get_next_part(category: GameStateManager.PartCategory) -> PartResource:
@@ -127,6 +167,12 @@ func _get_next_part(category: GameStateManager.PartCategory) -> PartResource:
 			return atk_parts[index] if index < atk_parts.size() else null
 
 	return null
+
+
+func _on_drawing_timer_timeout() -> void:
+	drawing_ui.stop_drawing()
+	selection_ui.disable_part(_selected_category)
+	_show_only(selection_ui)
 
 
 func _show_only(active_ui: CanvasItem) -> void:
