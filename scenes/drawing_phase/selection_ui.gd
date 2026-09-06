@@ -25,10 +25,10 @@ func _ready() -> void:
 		push_error("SelectionUI needs a DrawingPhaseManager.")
 		return
 
-	_connect_part_button(head_button)
-	_connect_part_button(torso_button)
-	_connect_part_button(defense_button)
-	_connect_part_button(weapon_button)
+	_connect_part_button(head_button, DrawingPhaseManager.PartCategory.HEAD)
+	_connect_part_button(torso_button, DrawingPhaseManager.PartCategory.TORSO)
+	_connect_part_button(defense_button, DrawingPhaseManager.PartCategory.DEFENSE)
+	_connect_part_button(weapon_button, DrawingPhaseManager.PartCategory.WEAPON)
 	_connect_action_button(repair_button)
 	_connect_action_button(upgrade_button)
 
@@ -45,9 +45,12 @@ func set_part_previews(
 	_set_part_preview(weapon_preview, weapon_texture)
 
 
-func _connect_part_button(button: Button) -> void:
+func _connect_part_button(
+	button: Button,
+	category: DrawingPhaseManager.PartCategory
+) -> void:
 	if button != null:
-		button.pressed.connect(drawing_phase_manager.select_part)
+		button.pressed.connect(drawing_phase_manager.select_part.bind(category))
 
 
 func _connect_action_button(button: Button) -> void:

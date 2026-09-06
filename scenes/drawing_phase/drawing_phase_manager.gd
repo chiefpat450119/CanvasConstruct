@@ -1,6 +1,13 @@
 class_name DrawingPhaseManager
 extends Node
 
+enum PartCategory {
+	HEAD,
+	TORSO,
+	DEFENSE,
+	WEAPON,
+}
+
 @export var selection_ui: SelectionUI
 @export var repair_or_upgrade_ui: CanvasItem
 @export var drawing_ui: CanvasItem
@@ -16,7 +23,11 @@ func _ready() -> void:
 	_show_only(selection_ui)
 
 
-func select_part() -> void:
+func select_part(category: PartCategory) -> void:
+	if not _has_current_part(category):
+		_show_only(drawing_ui)
+		return
+
 	_show_only(repair_or_upgrade_ui)
 
 
@@ -56,6 +67,20 @@ func _get_preview_texture(current_part: PlayerPart, fallback_part: PartResource)
 		return fallback_part.reference_image
 
 	return null
+
+
+func _has_current_part(category: PartCategory) -> bool:
+	match category:
+		PartCategory.HEAD:
+			return GameStateManagerInstance.current_head_part != null
+		PartCategory.TORSO:
+			return GameStateManagerInstance.current_torso_part != null
+		PartCategory.DEFENSE:
+			return GameStateManagerInstance.current_def_part != null
+		PartCategory.WEAPON:
+			return GameStateManagerInstance.current_atk_part != null
+
+	return false
 
 
 func _show_only(active_ui: CanvasItem) -> void:
