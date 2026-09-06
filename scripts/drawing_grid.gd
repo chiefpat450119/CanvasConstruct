@@ -20,7 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Start painting
 	if Input.is_action_pressed("M1"):
-		_is_painting = true
+		is_painting = true
 		
 		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
 		# Check if there is a cell under the mouse and if cell already painted with active colour
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	
 	# Stop painting
 	if Input.is_action_just_released("M1"):
-		_is_painting = false
+		is_painting = false
 
 ## Initialize the drawing grid with given width and height
 func init(width : int, height: int):
