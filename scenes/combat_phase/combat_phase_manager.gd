@@ -55,6 +55,12 @@ func get_current_boss() -> Node:
 	return current_boss
 
 
+func get_player_drawings() -> Array[Image]:
+	if player == null:
+		return []
+	return player.get_part_drawings()
+
+
 func clear_boss() -> void:
 	_clear_current_boss()
 	if combat_ui != null:

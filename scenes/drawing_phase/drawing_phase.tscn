@@ -258,7 +258,7 @@ weapon_drawing_time = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736868939]
 
-[node name="Selection UI" type="Control" parent="CanvasLayer" unique_id=201594146 node_paths=PackedStringArray("drawing_phase_manager", "head_button", "torso_button", "defense_button", "weapon_button", "head_preview", "torso_preview", "defense_preview", "weapon_preview", "head_similarity_label", "torso_similarity_label", "defense_similarity_label", "weapon_similarity_label", "repair_button", "upgrade_button")]
+[node name="Selection UI" type="Control" parent="CanvasLayer" unique_id=201594146 node_paths=PackedStringArray("drawing_phase_manager", "head_button", "torso_button", "defense_button", "weapon_button", "head_preview", "torso_preview", "defense_preview", "weapon_preview", "head_similarity_label", "torso_similarity_label", "defense_similarity_label", "weapon_similarity_label", "repair_button", "upgrade_button", "fight_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -283,6 +283,7 @@ defense_similarity_label = NodePath("Defense/Completion Number/Number")
 weapon_similarity_label = NodePath("Weapon/Completion Number/Number")
 repair_button = NodePath("../Repair or Upgrade UI/Panel/HBoxContainer/Repair")
 upgrade_button = NodePath("../Repair or Upgrade UI/Panel/HBoxContainer/Upgrade")
+fight_button = NodePath("Fight Button")
 
 [node name="Head" type="Control" parent="CanvasLayer/Selection UI" unique_id=914316643]
 layout_mode = 1
@@ -926,7 +927,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 45
 text = "FIGHT"
 
-[node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=803939529 node_paths=PackedStringArray("drawing_grid", "reference_art", "timer_label")]
+[node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=803939529 node_paths=PackedStringArray("drawing_grid", "reference_art", "timer_label", "finish_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -937,6 +938,7 @@ script = ExtResource("2_63f3k")
 drawing_grid = NodePath("MarginContainer/HBoxContainer/Drawing Grid")
 reference_art = NodePath("MarginContainer/HBoxContainer/Reference Image")
 timer_label = NodePath("MarginContainer/HBoxContainer/Timer")
+finish_button = NodePath("Finish Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Drawing UI" unique_id=686340685]
 layout_mode = 1
@@ -979,6 +981,14 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_o71rv")
 expand_mode = 3
+
+[node name="Finish Button" type="Button" parent="CanvasLayer/Drawing UI" unique_id=1881189464]
+layout_mode = 0
+offset_left = 925.0
+offset_top = 567.0
+offset_right = 1125.0
+offset_bottom = 627.0
+text = "Finish"
 
 [node name="Repair or Upgrade UI" type="Control" parent="CanvasLayer" unique_id=1778247371]
 layout_mode = 3

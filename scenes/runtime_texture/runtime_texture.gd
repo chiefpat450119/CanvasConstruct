@@ -47,6 +47,10 @@ func get_pixel(x: int, y: int) -> Color:
 func get_texture() -> Texture2D:
 	return _texture
 
+
+func get_image() -> Image:
+	return _img.duplicate()
+
 func _update_visible_pixels(points: Array[Vector2i], color: Color) -> void:
 	if color.a == 0.0:
 		for point in points:
