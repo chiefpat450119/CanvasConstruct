@@ -1,175 +1,21 @@
 [gd_scene format=3 uid="uid://dty1pdgxikmir"]
 
 [ext_resource type="Script" uid="uid://dv5hjoxa5kwyo" path="res://scenes/combat_phase/combat_phase_manager.gd" id="1_hc5ws"]
-[ext_resource type="Texture2D" uid="uid://dl5g7ah28pwdl" path="res://assets/UI/battle_phase/COMP_ATTACK_ICON.png" id="1_vkp4b"]
-[ext_resource type="Texture2D" uid="uid://bptfgjs57p6o1" path="res://assets/UI/battle_phase/COMP_DEFENSE_ICON.png" id="2_hc5ws"]
+[ext_resource type="PackedScene" uid="uid://cwgkgij05j6kj" path="res://scenes/combat_phase/combat_ui.tscn" id="2_hc5ws"]
 [ext_resource type="PackedScene" uid="uid://d13vu068wyaf5" path="res://scenes/player/Player.tscn" id="4_g7ptn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7ptn"]
-bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-corner_detail = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ot056"]
-bg_color = Color(0.021434635, 0.021434637, 0.021434627, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-corner_detail = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3w2q"]
-bg_color = Color(0.10747974, 0.10747973, 0.107479684, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-corner_detail = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bh36c"]
-bg_color = Color(0.3106171, 0.31061712, 0.310617, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gl5gy"]
-bg_color = Color(0, 1, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rui3a"]
-bg_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[node name="CombatPhase" type="Node2D" unique_id=1153913076 node_paths=PackedStringArray("boss_container")]
+[node name="CombatPhase" type="Node2D" unique_id=1153913076 node_paths=PackedStringArray("boss_container", "player", "combat_ui")]
 script = ExtResource("1_hc5ws")
 boss_container = NodePath("BossContainer")
+player = NodePath("Player")
+combat_ui = NodePath("CombatUI")
 
 [node name="BossContainer" type="Node2D" parent="." unique_id=126644774]
+position = Vector2(697, 258)
+scale = Vector2(0.4, 0.4)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1664569087]
-
-[node name="Combat UI" type="Control" parent="CanvasLayer" unique_id=1615599267]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/Combat UI" unique_id=1599177177]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -43.0
-offset_top = -138.0
-offset_right = 43.0
-offset_bottom = -25.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 20
-
-[node name="Attack Button" type="Button" parent="CanvasLayer/Combat UI/Buttons" unique_id=906116703]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("StyleBoxFlat_g7ptn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ot056")
-theme_override_styles/hover = SubResource("StyleBoxFlat_h3w2q")
-text = "V"
-icon = ExtResource("1_vkp4b")
-icon_alignment = 1
-vertical_icon_alignment = 0
-
-[node name="Defend Button" type="Button" parent="CanvasLayer/Combat UI/Buttons" unique_id=740149726]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("StyleBoxFlat_g7ptn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ot056")
-theme_override_styles/hover = SubResource("StyleBoxFlat_h3w2q")
-text = "B"
-icon = ExtResource("2_hc5ws")
-icon_alignment = 1
-vertical_icon_alignment = 0
-
-[node name="Health Bars" type="HBoxContainer" parent="CanvasLayer/Combat UI" unique_id=305722852]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 122.0
-offset_top = -236.0
-offset_right = -122.0
-offset_bottom = -198.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 150
-alignment = 1
-
-[node name="Player Health Bar" type="ProgressBar" parent="CanvasLayer/Combat UI/Health Bars" unique_id=569433063]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 20
-theme_override_styles/background = SubResource("StyleBoxFlat_bh36c")
-theme_override_styles/fill = SubResource("StyleBoxFlat_gl5gy")
-value = 80.0
-rounded = true
-
-[node name="Boss Health Bar" type="ProgressBar" parent="CanvasLayer/Combat UI/Health Bars" unique_id=132401874]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 20
-theme_override_styles/background = SubResource("StyleBoxFlat_bh36c")
-theme_override_styles/fill = SubResource("StyleBoxFlat_rui3a")
-value = 80.0
-rounded = true
+[node name="CombatUI" parent="." unique_id=1513656037 instance=ExtResource("2_hc5ws")]
 
 [node name="Player" parent="." unique_id=1535422581 instance=ExtResource("4_g7ptn")]
+position = Vector2(298, 303.99997)
+scale = Vector2(5, 5)

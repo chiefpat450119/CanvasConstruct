@@ -6,10 +6,15 @@ signal move_executed(move: BossMove)
 signal move_finished(move: BossMove)
 signal defense_started(duration: float)
 signal defense_finished
+signal health_changed(current: int, maximum: int)
+signal died
 
 @export var health: int = 100
 @export var moves: Array[BossMove] = []
-@export var target: PlayerStats
+
+var target: Player
+var _max_health: int
+var is_dead := false
 
 var _current_move: BossMove
 var _move_timer: float = 0.0
@@ -22,10 +27,20 @@ var is_defending: bool:
 
 
 func _ready() -> void:
-	pass
+	_max_health = health
+	health_changed.emit(health, _max_health)
 
+
+func set_target(player: Player) -> void:
+	target = player
 
 func _process(delta: float) -> void:
+	if is_dead or not is_instance_valid(target) or target.is_dead:
+		_current_move = null
+		_move_timer = 0.0
+		_is_winding_up = false
+		return
+
 	if _defense_timer > 0.0:
 		_defense_timer = maxf(0.0, _defense_timer - delta)
 		if _defense_timer == 0.0:
@@ -52,21 +67,43 @@ func choose_next_move() -> BossMove:
 
 
 func execute_attack(move: AttackMove) -> void:
+	if is_dead or not is_instance_valid(target) or target.is_dead:
+		return
+
 	move_executed.emit(move)
 	deal_damage_to_target(move.damage)
 
 
 func start_defending(duration: float) -> void:
+	if is_dead:
+		return
+
 	_defense_timer = maxf(0.0, duration)
 	defense_started.emit(_defense_timer)
 
 
 func deal_damage_to_target(amount: int) -> void:
-	if amount <= 0 or not is_instance_valid(target):
+	if amount <= 0 or not is_instance_valid(target) or target.is_dead:
 		push_warning("BossBase: No valid target to deal damage to.")
 		return
 
 	target.take_damage(amount)
+
+
+func take_damage(amount: float) -> void:
+	if amount <= 0.0 or health <= 0:
+		return
+
+	health = maxi(0, health - roundi(amount))
+	health_changed.emit(health, _max_health)
+	if health == 0 and not is_dead:
+		is_dead = true
+		_current_move = null
+		_move_timer = 0.0
+		_is_winding_up = false
+		_defense_timer = 0.0
+		print("Boss died.")
+		died.emit()
 
 
 func _start_next_move() -> void:

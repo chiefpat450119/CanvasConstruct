@@ -1,8 +1,8 @@
 class_name PlayerStats
 extends Node
 
-@export var curr_num_pixeles: int = 10
-@export var max_num_pixeles: int = 10
+@export var curr_num_pixeles: int = 100
+@export var max_num_pixeles: int = 100
 @export var death_threshold: float = 0.5
 
 var weapon_part: AtkResource
@@ -36,29 +36,45 @@ func set_multipliers(weapon_multiplier: float, head_multiplier: float, defense_m
 	_torso_chance_multiplier = torso_multiplier
 
 func get_weapon_damage() -> float:
-	var base_weapon_damage: float = weapon_part.get_damage()
-	return base_weapon_damage * _weapon_damage_multiplier
+	if weapon_part == null:
+		return 0.0
+	var base_weapon_damage: float = weapon_part.attack_damage
+	return weapon_part.modify_attack_damage(base_weapon_damage * _weapon_damage_multiplier)
 	
 func get_head_cooldown() -> float:
-	var base_head_cooldown = head_part.get_cooldown()
-	return base_head_cooldown * _head_cooldown_multiplier
+	if head_part == null:
+		return 0.0
+	return head_part.modify_cooldown(
+		head_part.cooldown_seconds * _head_cooldown_multiplier
+	)
 	
 func get_shield_defense() -> float:
-	var base_shield_defense = defense_part.get_defense()
-	return base_shield_defense * _shield_defense_multiplier
+	if defense_part == null:
+		return 0.0
+	var base_shield_defense: float = defense_part.defense
+	return defense_part.modify_defense(base_shield_defense * _shield_defense_multiplier)
 	
 
 func get_torso_chance() -> float:
-	var base_torso_chance = torso_part.get_torso_chance()
-	return base_torso_chance * _torso_chance_multiplier
+	if torso_part == null:
+		return 0.0
+	return clampf(
+		torso_part.damage_avoidance_chance * _torso_chance_multiplier,
+		0.0,
+		1.0
+	)
 	
 	
 func is_dead() -> bool:
-	return curr_num_pixeles < (max_num_pixeles * death_threshold)
+	return curr_num_pixeles <= (max_num_pixeles * death_threshold)
 
-func take_damage(pixel_count: int) -> void:
+func take_damage(pixel_count: int) -> int:
 	if pixel_count <= 0:
-		return
+		return 0
+
+	if randf() < get_torso_chance():
+		print("Player dodged the attack.")
+		return 0
 
 	var available_parts: Array[DamagableComponent] = []
 	var body_parts: Array[DamagableComponent] = [head_damage_component, defense_damage_component, torso_damage_component, attack_damage_component]
@@ -67,7 +83,9 @@ func take_damage(pixel_count: int) -> void:
 			available_parts.append(body_part)
 
 	if available_parts.is_empty():
-		return
+		return 0
 
 	var damaged_part: DamagableComponent = available_parts.pick_random()
-	curr_num_pixeles = maxi(0, curr_num_pixeles - damaged_part.damage_pixels(pixel_count))
+	var removed_pixels := damaged_part.damage_pixels(pixel_count)
+	curr_num_pixeles = maxi(0, curr_num_pixeles - removed_pixels)
+	return removed_pixels
