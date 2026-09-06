@@ -101,6 +101,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [node name="Bear" type="Node2D" unique_id=749735870]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_boss")
 health = 250
 moves = Array[ExtResource("3_move")]([ExtResource("4_jump"), ExtResource("5_block"), ExtResource("6_triple")])
