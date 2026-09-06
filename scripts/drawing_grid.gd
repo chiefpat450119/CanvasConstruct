@@ -1,8 +1,8 @@
 class_name DrawingGrid
 extends Control
 
-var grid_width : int = 16
-var grid_height : int = 16
+var _grid_width : int = 16
+var _grid_height : int = 16
 const CELL_SIZE : int = 16
 const PAINTED_META : StringName = &"is_painted"
 var active_colour : Color = Color(1,0,0)
@@ -13,14 +13,14 @@ var is_painting : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_generate_grid()
+	init(10,20)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Start painting
 	if Input.is_action_pressed("M1"):
-		is_painting = true
+		_is_painting = true
 		
 		var cell_under_mouse : TextureButton = _get_cell_at_mouse_pos(get_viewport().get_mouse_position())
 		# Check if there is a cell under the mouse and if cell already painted with active colour
@@ -33,13 +33,19 @@ func _process(delta: float) -> void:
 	
 	# Stop painting
 	if Input.is_action_just_released("M1"):
-		is_painting = false
+		_is_painting = false
+
+## Initialize the drawing grid with given width and height
+func init(width : int, height: int):
+	_grid_width = width
+	_grid_height = height
+	_generate_grid()
 
 ## Generate grid of cells
 func _generate_grid() -> void:
-	grid.columns = grid_width
+	grid.columns = _grid_width
 	
-	for i in range(grid_width * grid_height):
+	for i in range(_grid_width * _grid_height):
 		var cell = TextureButton.new()
 		
 		# Default grid cell properties
@@ -54,10 +60,10 @@ func _generate_grid() -> void:
 
 ## Get the cell at the given grid position
 func _get_cell_at_pos(x : int, y : int) -> TextureButton:
-	if x < 0 or x >= grid_width or y < 0 or y >= grid_height:
+	if x < 0 or x >= _grid_width or y < 0 or y >= _grid_height:
 		return null
 
-	var cell_index : int = y * grid_width + x
+	var cell_index : int = y * _grid_width + x
 	if cell_index >= grid.get_child_count():
 		return null
 
@@ -66,8 +72,8 @@ func _get_cell_at_pos(x : int, y : int) -> TextureButton:
 ## Get the cell under the mouse position
 func _get_cell_at_mouse_pos(mouse_pos: Vector2) -> TextureButton:
 	# Find the cell by position
-	for y in range(grid_height):
-		for x in range(grid_width):
+	for y in range(_grid_height):
+		for x in range(_grid_width):
 			var cell : TextureButton = _get_cell_at_pos(x, y)
 			if cell and cell.get_global_rect().has_point(mouse_pos):
 				return cell
@@ -83,8 +89,8 @@ func get_cell_colour(x : int, y : int) -> Color:
 
 ## Returns grid width
 func get_width() -> int:
-	return grid_width
+	return _grid_width
 
 ## Returns grid height
 func get_height() -> int:
-	return grid_height
+	return _grid_height
