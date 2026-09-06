@@ -59,7 +59,7 @@ func setup_drawing(
 
 func stop_drawing() -> Image:
 	_drawing_timer = null
-	timer_label.text = "Time\n0"
+	timer_label.text = "0"
 	return drawing_grid.get_image_from_drawing()
 
 
@@ -124,4 +124,4 @@ func _process(_delta: float) -> void:
 
 func _update_timer_label() -> void:
 	var seconds_left := ceili(maxf(_drawing_timer.time_left, 0.0))
-	timer_label.text = "Time\n%d" % seconds_left
+	timer_label.text = "%d" % seconds_left

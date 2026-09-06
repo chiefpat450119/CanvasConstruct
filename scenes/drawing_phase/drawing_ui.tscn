@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bwngggxjc32pn" path="res://scenes/drawing_phase/drawing_ui.gd" id="1_s7vdd"]
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="2_63o16"]
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="3_mvmjb"]
-[ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="4_63o16"]
 [ext_resource type="Script" uid="uid://wruokad4nqnb" path="res://scripts/grid_lines.gd" id="4_t2x1o"]
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="6_mvmjb"]
 [ext_resource type="Script" uid="uid://clq5r8xjv2n7m" path="res://scenes/drawing_phase/drawing_ui_anim.gd" id="7_drawing_anim"]
@@ -26,6 +25,7 @@ corner_radius_bottom_left = 16
 corner_detail = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ek0"]
+content_margin_top = 10.0
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -36,6 +36,14 @@ expand_margin_left = 20.0
 expand_margin_top = 5.0
 expand_margin_right = 20.0
 expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey50j"]
+font = ExtResource("6_mvmjb")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_uwk22"]
+font = ExtResource("6_mvmjb")
+font_size = 72
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_content_frame"]
 content_margin_left = 32.0
@@ -74,7 +82,7 @@ reference_art_frame = NodePath("Reference Image Frame")
 drawing_grid = NodePath("Drawing Grid Frame/Drawing Grid")
 reference_art = NodePath("Reference Image Frame/Reference Image")
 reference_art_grid_lines = NodePath("Reference Image Frame/Reference Image/Grid Lines")
-timer_label = NodePath("Timer")
+timer_label = NodePath("Timer/Label")
 finish_button = NodePath("Finish Button")
 ui_anim = NodePath("DrawingUIAnim")
 
@@ -103,19 +111,30 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -59.5
-offset_top = 90.0
-offset_right = 59.5
-offset_bottom = 231.0
+offset_left = -59.0
+offset_top = 82.0
+offset_right = 60.0
+offset_bottom = 223.0
 grow_horizontal = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_o1ek0")
-text = "Time
-99"
-label_settings = ExtResource("4_63o16")
+text = "Time"
+label_settings = SubResource("LabelSettings_ey50j")
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Timer" unique_id=1264149902]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.5
+offset_top = 35.0
+offset_right = 37.5
+offset_bottom = 130.0
+grow_horizontal = 2
+text = "30"
+label_settings = SubResource("LabelSettings_uwk22")
+horizontal_alignment = 1
 
 [node name="Reference Image Frame" type="PanelContainer" parent="." unique_id=431344068]
 layout_mode = 0
