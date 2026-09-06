@@ -1,0 +1,1110 @@
+[gd_scene format=3 uid="uid://ddnn4v4rcoq6i"]
+
+[ext_resource type="Script" uid="uid://dgsnsndroae37" path="res://scenes/test/nicholas_test.gd" id="1_4hql7"]
+[ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="2_035bn"]
+[ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="3_wx6tj"]
+[ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/UI/build_phase/grid cell sprite.png" id="4_yv1o6"]
+[ext_resource type="Texture2D" uid="uid://cteaab7d4wmyk" path="res://assets/components/weapons/LOP WEAPON1.png" id="5_66pva"]
+[ext_resource type="Texture2D" uid="uid://dl5g7ah28pwdl" path="res://assets/UI/battle_phase/COMP_ATTACK_ICON.png" id="6_dm0e1"]
+[ext_resource type="Texture2D" uid="uid://bptfgjs57p6o1" path="res://assets/UI/battle_phase/COMP_DEFENSE_ICON.png" id="7_3ff7k"]
+[ext_resource type="Texture2D" uid="uid://duitaui6xsh0" path="res://assets/UI/build_phase/COMP_HEAD_LABLE.png" id="8_770y6"]
+[ext_resource type="Texture2D" uid="uid://dbqgkpk6o0nxq" path="res://assets/components/head/LOP HEAD.png" id="9_x8ife"]
+[ext_resource type="Texture2D" uid="uid://dq4rcpcu2pirn" path="res://assets/UI/build_phase/COMP_HEAD_ICON.png" id="10_mhutt"]
+[ext_resource type="Texture2D" uid="uid://b54d53spdo1xg" path="res://assets/UI/build_phase/XPERC_COMP_ICON.png" id="11_e3e77"]
+[ext_resource type="Texture2D" uid="uid://dnxydv8supesu" path="res://assets/UI/build_phase/COMP_TORSO_LABLE.png" id="12_0xtyx"]
+[ext_resource type="Texture2D" uid="uid://bsx4nlus1sar" path="res://assets/UI/build_phase/COMP_TORSO_ICON.png" id="13_k65im"]
+[ext_resource type="Texture2D" uid="uid://dkkmrtg3b6wp3" path="res://assets/components/torso/LOP TORSO.png" id="14_7dgph"]
+[ext_resource type="Texture2D" uid="uid://d21qcuxgwad7g" path="res://assets/UI/build_phase/COMP_DEFENSE_LABLE.png" id="15_fxh5h"]
+[ext_resource type="Texture2D" uid="uid://c71kyhnkf6qtd" path="res://assets/UI/build_phase/COMP_DEFENSE_ICON.png" id="16_sob6o"]
+[ext_resource type="Texture2D" uid="uid://b7y8te67i8r57" path="res://assets/components/shield/LOP SHIELD2.png" id="17_w8iiy"]
+[ext_resource type="Texture2D" uid="uid://b3fmmtpsftnu7" path="res://assets/UI/build_phase/COMP_ATTACK_LABLE.png" id="18_jjt08"]
+[ext_resource type="Texture2D" uid="uid://cgoxh4k8xk0oc" path="res://assets/UI/build_phase/COMP_ATTACK_ICON.png" id="19_0j6rq"]
+[ext_resource type="Texture2D" uid="uid://cgdlukelhbuq6" path="res://assets/components/weapons/LOP WEAPON2.png" id="20_3y2qf"]
+[ext_resource type="Texture2D" uid="uid://unfnj3x8bwvc" path="res://assets/UI/build_phase/FIGHT_ICON.png" id="21_jbit4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xxhv"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 10
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sp8tx"]
+bg_color = Color(0.021434635, 0.021434637, 0.021434627, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyw70"]
+bg_color = Color(0.10747974, 0.10747973, 0.107479684, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.3106171, 0.31061712, 0.310617, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57qmd"]
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32o37"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.5914206, 0.88408834, 0.6249393, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m627"]
+bg_color = Color(0.51323295, 0.5132329, 0.5132331, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.24660805, 0.45237035, 0.27422205, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nael"]
+bg_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.36586943, 0.6341606, 0.4003034, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4dnf"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.92863256, 0.7722927, 0.4892547, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jh42k"]
+bg_color = Color(0.55295557, 0.5529556, 0.5529553, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.48041707, 0.36485556, 0.14213854, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6goyf"]
+bg_color = Color(0.728822, 0.728822, 0.728822, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.70804226, 0.54935855, 0.24353063, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxun6"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.30588236, 0.45882353, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnbfb"]
+bg_color = Color(0.48178947, 0.48178947, 0.48178947, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.08422955, 7.27737e-05, 0.6886082, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deifj"]
+bg_color = Color(0.7792914, 0.7792914, 0.7792913, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.16604036, 0.24520129, 0.9999774, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic7jx"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.999999, 0.3494257, 0.42538223, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hql7"]
+bg_color = Color(0.572988, 0.57298833, 0.5729883, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.6701418, 0, 0.19170591, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_035bn"]
+bg_color = Color(0.74558026, 0.7455802, 0.7455802, 1)
+border_width_left = 30
+border_width_top = 30
+border_width_right = 30
+border_width_bottom = 30
+border_color = Color(0.9006578, 0, 0.26945406, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4hql7"]
+load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc26e.ctex"
+
+[node name="NicholasScene" type="Node" unique_id=888442273 node_paths=PackedStringArray("runtime_texture", "drawing_grid")]
+script = ExtResource("1_4hql7")
+runtime_texture = NodePath("RuntimeTexture")
+drawing_grid = NodePath("CanvasLayer/Drawing UI/MarginContainer/HBoxContainer/Drawing Grid")
+
+[node name="RuntimeTexture" parent="." unique_id=1844036065 instance=ExtResource("2_035bn")]
+position = Vector2(830, 251)
+scale = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1724405638]
+
+[node name="Drawing UI" type="Control" parent="CanvasLayer" unique_id=1925897617]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Drawing UI" unique_id=126367997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Drawing UI/MarginContainer" unique_id=959018345]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Drawing Grid" type="GridContainer" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=1004079852 node_paths=PackedStringArray("grid")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+script = ExtResource("3_wx6tj")
+grid = NodePath(".")
+cell_texture = ExtResource("4_yv1o6")
+
+[node name="Timer" type="Label" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=585109228]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xxhv")
+text = "Time
+99"
+horizontal_alignment = 1
+
+[node name="Reference Image" type="TextureRect" parent="CanvasLayer/Drawing UI/MarginContainer/HBoxContainer" unique_id=1657027300]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_66pva")
+expand_mode = 3
+
+[node name="Combat UI" type="Control" parent="CanvasLayer" unique_id=548971773]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/Combat UI" unique_id=1125356505]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -138.0
+offset_right = 43.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="Attack Button" type="Button" parent="CanvasLayer/Combat UI/Buttons" unique_id=1044923507]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_yf5fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sp8tx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kyw70")
+text = "V"
+icon = ExtResource("6_dm0e1")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Defend Button" type="Button" parent="CanvasLayer/Combat UI/Buttons" unique_id=1355680752]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_yf5fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sp8tx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kyw70")
+text = "B"
+icon = ExtResource("7_3ff7k")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Health Bars" type="HBoxContainer" parent="CanvasLayer/Combat UI" unique_id=123145626]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 122.0
+offset_top = -236.0
+offset_right = -122.0
+offset_bottom = -198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="Player Health Bar" type="ProgressBar" parent="CanvasLayer/Combat UI/Health Bars" unique_id=521182749]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_57qmd")
+value = 80.0
+rounded = true
+
+[node name="Boss Health Bar" type="ProgressBar" parent="CanvasLayer/Combat UI/Health Bars" unique_id=1135869129]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_32o37")
+value = 80.0
+rounded = true
+
+[node name="Build UI" type="Control" parent="CanvasLayer" unique_id=1991768620]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Head" type="Control" parent="CanvasLayer/Build UI" unique_id=116126775]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -266.0
+offset_right = 107.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Build UI/Head" unique_id=1453824767]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_d0u6y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0m627")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nael")
+icon = ExtResource("9_x8ife")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="CanvasLayer/Build UI/Head" unique_id=1580546076]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -25.0
+offset_right = 214.93335
+offset_bottom = 3.0
+grow_vertical = 0
+texture = ExtResource("8_770y6")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="CanvasLayer/Build UI/Head/Description Bar" unique_id=1646301235]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.466675
+offset_top = -11.5
+offset_right = 26.533325
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "COOLDOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Head/Description Bar" unique_id=1969196664]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.533325
+offset_top = -12.0
+offset_right = 118.533325
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1.2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Art" type="TextureRect" parent="CanvasLayer/Build UI/Head" unique_id=182028175]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -62.0
+offset_right = 62.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_x8ife")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Build UI/Head" unique_id=1787188559]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -51.0
+offset_right = 32.0
+offset_bottom = 24.0
+grow_vertical = 0
+texture = ExtResource("10_mhutt")
+
+[node name="Completion Number" type="TextureRect" parent="CanvasLayer/Build UI/Head" unique_id=398971379]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 32.923096
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("11_e3e77")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Head/Completion Number" unique_id=699620265]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -4.0
+offset_right = 30.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "83%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Build UI/Head/Completion Number" unique_id=2126888012]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -30.0
+offset_right = 37.5
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Torso" type="Control" parent="CanvasLayer/Build UI" unique_id=1343498391]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = 12.0
+offset_right = 169.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Build UI/Torso" unique_id=92923484]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 250
+theme_override_styles/normal = SubResource("StyleBoxFlat_e4dnf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jh42k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6goyf")
+icon = ExtResource("14_7dgph")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="CanvasLayer/Build UI/Torso" unique_id=839779453]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.700012
+offset_top = -16.0
+offset_right = 295.8333
+offset_bottom = 6.0
+grow_vertical = 0
+texture = ExtResource("12_0xtyx")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="CanvasLayer/Build UI/Torso/Description Bar" unique_id=1411721346]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.26666
+offset_top = -12.0
+offset_right = 50.733337
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "DODGE CHANCE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Torso/Description Bar" unique_id=733639206]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 57.733337
+offset_top = -12.0
+offset_right = 154.73334
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "60%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Build UI/Torso" unique_id=1630465803]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -44.0
+offset_right = 32.0
+offset_bottom = 31.0
+grow_vertical = 0
+texture = ExtResource("13_k65im")
+
+[node name="Art" type="TextureRect" parent="CanvasLayer/Build UI/Torso" unique_id=1537961894]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -78.0
+offset_right = 117.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_7dgph")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Completion Number" type="TextureRect" parent="CanvasLayer/Build UI/Torso" unique_id=1374369034]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 32.923096
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("11_e3e77")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Torso/Completion Number" unique_id=246260465]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -4.0
+offset_right = 30.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "83%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Build UI/Torso/Completion Number" unique_id=1602864750]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -30.0
+offset_right = 37.5
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Defense" type="Control" parent="CanvasLayer/Build UI" unique_id=1978234616]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -465.0
+offset_top = -106.0
+offset_right = -255.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Build UI/Defense" unique_id=1387433751]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_jxun6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nnbfb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_deifj")
+icon = ExtResource("17_w8iiy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="CanvasLayer/Build UI/Defense" unique_id=1240179656]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 225.8667
+offset_bottom = 7.0
+grow_vertical = 0
+texture = ExtResource("15_fxh5h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CanvasLayer/Build UI/Defense/Description Bar" unique_id=1040823970]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.43335
+offset_top = -12.0
+offset_right = 63.56665
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "DEFENSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Defense/Description Bar" unique_id=1161675668]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 31.56665
+offset_top = -12.0
+offset_right = 128.56665
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Build UI/Defense" unique_id=1873422341]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -47.0
+offset_right = 32.0
+offset_bottom = 28.0
+grow_vertical = 0
+texture = ExtResource("16_sob6o")
+
+[node name="Art" type="TextureRect" parent="CanvasLayer/Build UI/Defense" unique_id=348568877]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -116.0
+offset_right = 82.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_w8iiy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Completion Number" type="TextureRect" parent="CanvasLayer/Build UI/Defense" unique_id=1544127790]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 32.923096
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("11_e3e77")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Defense/Completion Number" unique_id=1817531354]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -4.0
+offset_right = 30.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "83%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Build UI/Defense/Completion Number" unique_id=1702226138]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -30.0
+offset_right = 37.5
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon" type="Control" parent="CanvasLayer/Build UI" unique_id=236054945]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 259.0
+offset_top = -186.0
+offset_right = 463.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Build UI/Weapon" unique_id=1088480780]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/icon_max_width = 90
+theme_override_styles/normal = SubResource("StyleBoxFlat_ic7jx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4hql7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_035bn")
+icon = ExtResource("20_3y2qf")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description Bar" type="TextureRect" parent="CanvasLayer/Build UI/Weapon" unique_id=472553567]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -17.0
+offset_right = 220.8667
+offset_bottom = 7.0
+grow_vertical = 0
+texture = ExtResource("18_jjt08")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="CanvasLayer/Build UI/Weapon/Description Bar" unique_id=1905735724]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.43335
+offset_top = -12.0
+offset_right = 55.56665
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ATTACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Weapon/Description Bar" unique_id=1247166873]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.5666504
+offset_top = -12.0
+offset_right = 101.56665
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Build UI/Weapon" unique_id=558217167]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -46.0
+offset_right = 32.0
+offset_bottom = 29.0
+grow_vertical = 0
+texture = ExtResource("19_0j6rq")
+
+[node name="Art" type="TextureRect" parent="CanvasLayer/Build UI/Weapon" unique_id=172964240]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -134.0
+offset_right = 106.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_3y2qf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Completion Number" type="TextureRect" parent="CanvasLayer/Build UI/Weapon" unique_id=864025196]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 32.923096
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("11_e3e77")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Build UI/Weapon/Completion Number" unique_id=721224310]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -4.0
+offset_right = 30.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "83%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Build UI/Weapon/Completion Number" unique_id=506219821]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -30.0
+offset_right = 37.5
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fight Button" type="TextureButton" parent="CanvasLayer/Build UI" unique_id=1828149558]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -229.0
+offset_top = -83.0
+offset_right = -23.977295
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("21_jbit4")
+texture_hover = SubResource("CompressedTexture2D_4hql7")
+texture_focused = SubResource("CompressedTexture2D_4hql7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Build UI/Fight Button" unique_id=2126785554]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -11.5
+offset_right = 23.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "FIGHT"

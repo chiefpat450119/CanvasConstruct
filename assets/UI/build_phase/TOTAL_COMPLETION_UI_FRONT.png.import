@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b13mghunbhi6s"
-path="res://.godot/imported/grid cell sprite.png-588214e6335ef410c87abe0e985a71bc.ctex"
+uid="uid://de03mfq7o405b"
+path="res://.godot/imported/TOTAL_COMPLETION_UI_FRONT.png-6112d8ff766dce7969fbf3de3d94934e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/grid cell sprite.png"
-dest_files=["res://.godot/imported/grid cell sprite.png-588214e6335ef410c87abe0e985a71bc.ctex"]
+source_file="res://assets/UI/build_phase/TOTAL_COMPLETION_UI_FRONT.png"
+dest_files=["res://.godot/imported/TOTAL_COMPLETION_UI_FRONT.png-6112d8ff766dce7969fbf3de3d94934e.ctex"]
 
 [params]
 
