@@ -9,6 +9,9 @@ extends Control
 @export var defense_ui: PartUI
 @export var weapon_ui: PartUI
 
+@export_group("Total Completion")
+@export var total_progress_bar: TotalProgressBar
+
 @export_group("Action Buttons")
 @export var fight_button: TextureButton
 
@@ -40,6 +43,11 @@ func set_part_previews(
 func set_fight_button_visible(is_visible: bool) -> void:
 	if fight_button != null:
 		fight_button.visible = is_visible
+
+
+func set_total_completion(completion: float) -> void:
+	if total_progress_bar != null:
+		total_progress_bar.set_completion(completion)
 
 
 func disable_part(category: GameStateManager.PartCategory) -> void:

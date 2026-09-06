@@ -23,6 +23,7 @@
 [ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="21_8t5x5"]
 [ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="22_gj7ov"]
 [ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="23_d64h6"]
+[ext_resource type="Script" path="res://scenes/drawing_phase/total_progress_bar.gd" id="24_total_progress"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -106,7 +107,7 @@ corner_radius_bottom_left = 8
 shader = ExtResource("23_d64h6")
 shader_parameter/color = Vector4(1, 0, 0, 1)
 
-[node name="Selection UI" type="Control" unique_id=984169342 node_paths=PackedStringArray("head_ui", "torso_ui", "defense_ui", "weapon_ui", "fight_button")]
+[node name="Selection UI" type="Control" unique_id=984169342 node_paths=PackedStringArray("head_ui", "torso_ui", "defense_ui", "weapon_ui", "total_progress_bar", "fight_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,6 +121,7 @@ head_ui = NodePath("Head")
 torso_ui = NodePath("Torso")
 defense_ui = NodePath("Defense")
 weapon_ui = NodePath("Weapon")
+total_progress_bar = NodePath("TextureRect")
 fight_button = NodePath("Fight Button")
 
 [node name="Head" type="Control" parent="." unique_id=1214120400 node_paths=PackedStringArray("select_button", "preview", "similarity_label", "description_bar", "icon", "lock")]
@@ -858,7 +860,7 @@ weapon = NodePath("../Weapon")
 torso = NodePath("../Torso")
 fight_button = NodePath("../Fight Button")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=397398642]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=397398642 node_paths=PackedStringArray("progress_bar", "percentage_label")]
 layout_mode = 0
 offset_left = 58.0
 offset_top = 102.0
@@ -866,6 +868,9 @@ offset_right = 393.84268
 offset_bottom = 224.0
 texture = ExtResource("20_cmnqg")
 expand_mode = 1
+script = ExtResource("24_total_progress")
+progress_bar = NodePath("ProgressBar")
+percentage_label = NodePath("ProgressBar/Label")
 
 [node name="ProgressBar" type="ProgressBar" parent="TextureRect" unique_id=971651153]
 layout_mode = 1
@@ -882,13 +887,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("21_8t5x5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_8t5x5")
-value = 50.0
+value = 25.0
 show_percentage = false
 
 [node name="UiBackground" parent="TextureRect/ProgressBar" unique_id=1544384068 instance=ExtResource("22_gj7ov")]
 material = SubResource("ShaderMaterial_khfc7")
 layout_mode = 1
-offset_right = -291.6685
+offset_right = -302.40216
 offset_bottom = -38.021736
 scale = Vector2(7.36, 7.36)
 
@@ -923,7 +928,7 @@ offset_right = 46.07866
 offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "<50% = LOSE"
+text = "<25% = LOSE"
 label_settings = ExtResource("5_1g0n4")
 
 [editable path="TextureRect/ProgressBar/UiBackground"]

@@ -33,6 +33,7 @@ func _ready() -> void:
 	add_child(_drawing_timer)
 
 	_initialize_part_previews()
+	_update_total_completion()
 	_show_only(selection_ui)
 
 
@@ -202,8 +203,38 @@ func _on_drawing_finished() -> void:
 	_active_reference_part = null
 	_initialize_part_previews()
 	selection_ui.set_part_similarity(_selected_category, similarity)
+	_update_total_completion()
 	selection_ui.disable_part(_selected_category)
 	_show_only(selection_ui)
+
+
+func _update_total_completion() -> void:
+	if selection_ui == null:
+		return
+
+	var current_parts := GameStateManagerInstance.get_current_parts()
+	var total_similarity := 0.0
+	for part in current_parts:
+		if (
+			part == null
+			or not is_instance_valid(part.drawing)
+			or part.reference_part == null
+			or part.reference_part.reference_image == null
+		):
+			continue
+		total_similarity += clampf(
+			TextureCompare.compare(
+				part.drawing,
+				part.reference_part.reference_image
+			),
+			0.0,
+			1.0
+		)
+
+	var part_count := current_parts.size()
+	selection_ui.set_total_completion(
+		total_similarity / part_count if part_count > 0 else 0.0
+	)
 
 
 func _show_only(active_ui: CanvasItem) -> void:
