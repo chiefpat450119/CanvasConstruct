@@ -1,11 +1,6 @@
 class_name DrawingPhaseManager
 extends Node
 
-enum DrawingAction {
-	REPAIR,
-	UPGRADE,
-}
-
 enum PartCategory {
 	HEAD,
 	ATK,
@@ -13,23 +8,8 @@ enum PartCategory {
 	TORSO,
 }
 
-signal phase_started
-signal reference_image_changed(reference_image: Texture2D)
-signal part_drawing_started(
-	reference_part: PartResource,
-	action: DrawingAction,
-	duration_seconds: float
-)
-signal part_drawing_completed(
-	drawing: Image,
-	reference_part: PartResource,
-	action: DrawingAction
-)
 signal phase_completed
 
-const DEFAULT_DRAWING_SYSTEM_SCENE := preload(
-	"res://scenes/drawing_sysem/drawing_system.tscn"
-)
 const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.HEAD,
 	PartCategory.ATK,
@@ -37,8 +17,8 @@ const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.TORSO,
 ]
 
-@export var drawing_system_scene: PackedScene = DEFAULT_DRAWING_SYSTEM_SCENE
-@export var drawing_system_parent: Node
+@export var drawing_ui: DrawingUI
+@export var selection_screen: CanvasItem
 
 @export_group("Drawing Times")
 @export_range(0.1, 120.0, 0.1, "or_greater", "suffix:s")
@@ -54,68 +34,37 @@ var _current_parts: Dictionary[PartCategory, PartResource] = {}
 var _available_upgrades: Dictionary[PartCategory, PartResource] = {}
 var _completed_categories: Dictionary[PartCategory, bool] = {}
 var _active_reference_part: PartResource
-var _active_action: DrawingAction
-var _active_drawing_system: DrawingSystem
 var _drawing_timer: Timer
 var _phase_active: bool = false
 
 
 func _ready() -> void:
 	_ensure_timer()
+	_set_drawing_screen_active(false)
 
 
 func begin_phase(
 	current_parts: Array[PartResource],
 	available_upgrades: Array[PartResource] = []
-) -> Error:
+) -> void:
 	if _phase_active:
-		return ERR_ALREADY_IN_USE
-	if drawing_system_scene == null:
-		return ERR_UNCONFIGURED
+		return
 
-	var current_parts_by_category: Dictionary[PartCategory, PartResource] = {}
-	var upgrades_by_category: Dictionary[PartCategory, PartResource] = {}
-	var current_parts_error := _map_parts_by_category(
-		current_parts,
-		current_parts_by_category,
-		false
-	)
-	if current_parts_error != OK:
-		return current_parts_error
-
-	var upgrades_error := _map_parts_by_category(
-		available_upgrades,
-		upgrades_by_category,
-		true
-	)
-	if upgrades_error != OK:
-		return upgrades_error
-
-	if current_parts_by_category.size() != PART_CATEGORIES.size():
-		return ERR_INVALID_PARAMETER
-	if not GameStateManagerInstance.can_repair_parts():
-		for category: PartCategory in PART_CATEGORIES:
-			if not upgrades_by_category.has(category):
-				return ERR_UNAVAILABLE
-
-	_current_parts = current_parts_by_category
-	_available_upgrades = upgrades_by_category
+	_current_parts = _map_parts_by_category(current_parts)
+	_available_upgrades = _map_parts_by_category(available_upgrades)
 	_completed_categories.clear()
 	_phase_active = true
-	phase_started.emit()
-	return OK
+	_set_drawing_screen_active(false)
 
 
-func start_repair(reference_part: PartResource) -> Error:
-	if not can_repair(reference_part):
-		return ERR_UNAVAILABLE
-	return _start_part_drawing(reference_part, DrawingAction.REPAIR)
+func start_repair(reference_part: PartResource) -> void:
+	if can_repair(reference_part):
+		_start_part_drawing(reference_part)
 
 
-func start_upgrade(reference_part: PartResource) -> Error:
-	if not can_upgrade(reference_part):
-		return ERR_UNAVAILABLE
-	return _start_part_drawing(reference_part, DrawingAction.UPGRADE)
+func start_upgrade(reference_part: PartResource) -> void:
+	if can_upgrade(reference_part):
+		_start_part_drawing(reference_part)
 
 
 func can_repair(reference_part: PartResource) -> bool:
@@ -140,8 +89,7 @@ func get_current_parts() -> Array[PartResource]:
 	var parts: Array[PartResource] = []
 	for category: PartCategory in PART_CATEGORIES:
 		var part := _current_parts.get(category) as PartResource
-		if part != null:
-			parts.append(part)
+		parts.append(part)
 	return parts
 
 
@@ -157,8 +105,7 @@ func get_remaining_parts() -> Array[PartResource]:
 	for category: PartCategory in PART_CATEGORIES:
 		if not _completed_categories.has(category):
 			var part := _current_parts.get(category) as PartResource
-			if part != null:
-				parts.append(part)
+			parts.append(part)
 	return parts
 
 
@@ -172,15 +119,17 @@ func is_phase_active() -> bool:
 
 
 func is_drawing_part() -> bool:
-	return _active_drawing_system != null
+	return _active_reference_part != null
 
 
 func can_leave_current_drawing() -> bool:
 	return not is_drawing_part()
 
 
-func get_active_drawing_system() -> DrawingSystem:
-	return _active_drawing_system
+func get_active_drawing_grid() -> DrawingGrid:
+	if not is_drawing_part():
+		return null
+	return drawing_ui.get_drawing_grid()
 
 
 func get_active_reference_part() -> PartResource:
@@ -194,45 +143,27 @@ func get_active_reference_image() -> Texture2D:
 
 
 func get_drawing_time_left() -> float:
-	if _drawing_timer == null or _drawing_timer.is_stopped():
+	if _drawing_timer.is_stopped():
 		return 0.0
 	return _drawing_timer.time_left
 
 
-func _start_part_drawing(
-	reference_part: PartResource,
-	action: DrawingAction
-) -> Error:
-	var instance := drawing_system_scene.instantiate()
-	if not instance is DrawingSystem:
-		instance.free()
-		return ERR_CANT_CREATE
-
+func _start_part_drawing(reference_part: PartResource) -> void:
+	var reference_image := reference_part.reference_image
 	var category := _get_part_category(reference_part)
-	var drawing_system := instance as DrawingSystem
-	var parent: Node = drawing_system_parent if drawing_system_parent != null else self
-	parent.add_child(drawing_system)
-
-	_active_reference_part = reference_part
-	_active_action = action
-	_active_drawing_system = drawing_system
-	_ensure_timer()
-
 	var duration := _get_drawing_duration(category)
+	_ensure_timer()
 	_drawing_timer.start(duration)
-	reference_image_changed.emit(reference_part.reference_image)
-	part_drawing_started.emit(reference_part, action, duration)
-	return OK
+	_set_drawing_screen_active(true)
+	drawing_ui.setup_drawing(reference_image, _drawing_timer)
+	_active_reference_part = reference_part
 
 
 func _complete_part_drawing() -> void:
-	if _active_drawing_system == null:
+	if not is_drawing_part():
 		return
 
-	var drawing := _active_drawing_system.get_image_from_drawing()
-	var reference_part := _active_reference_part
-	var action := _active_action
-	var category := _get_part_category(reference_part)
+	var category := _get_part_category(_active_reference_part)
 
 	_completed_categories[category] = true
 	var finishes_phase := _completed_categories.size() == PART_CATEGORIES.size()
@@ -240,11 +171,9 @@ func _complete_part_drawing() -> void:
 		_phase_active = false
 		GameStateManagerInstance.mark_drawing_phase_completed()
 
-	_active_drawing_system.queue_free()
-	_active_drawing_system = null
 	_active_reference_part = null
-	reference_image_changed.emit(null)
-	part_drawing_completed.emit(drawing, reference_part, action)
+	drawing_ui.stop_drawing()
+	_set_drawing_screen_active(false)
 
 	if finishes_phase:
 		phase_completed.emit()
@@ -267,22 +196,27 @@ func _ensure_timer() -> void:
 	add_child(_drawing_timer)
 
 
-func _map_parts_by_category(
-	parts: Array[PartResource],
-	destination: Dictionary[PartCategory, PartResource],
-	allow_null: bool
-) -> Error:
-	for part: PartResource in parts:
-		if part == null:
-			if allow_null:
-				continue
-			return ERR_INVALID_PARAMETER
+func _set_drawing_screen_active(is_active: bool) -> void:
+	_set_screen_enabled(drawing_ui, is_active)
+	if selection_screen != null:
+		_set_screen_enabled(selection_screen, not is_active)
 
-		var category := _get_part_category(part)
-		if category < 0 or destination.has(category):
-			return ERR_INVALID_PARAMETER
-		destination[category] = part
-	return OK
+
+func _set_screen_enabled(screen: CanvasItem, is_enabled: bool) -> void:
+	screen.visible = is_enabled
+	screen.process_mode = (
+		Node.PROCESS_MODE_INHERIT if is_enabled else Node.PROCESS_MODE_DISABLED
+	)
+
+
+func _map_parts_by_category(
+	parts: Array[PartResource]
+) -> Dictionary[PartCategory, PartResource]:
+	var parts_by_category: Dictionary[PartCategory, PartResource] = {}
+	for part: PartResource in parts:
+		if part != null:
+			parts_by_category[_get_part_category(part)] = part
+	return parts_by_category
 
 
 func _get_part_category(part: PartResource) -> PartCategory:

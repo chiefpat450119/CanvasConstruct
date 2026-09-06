@@ -2,19 +2,46 @@
 
 [ext_resource type="Script" uid="uid://cou6xdw5adavm" path="res://scenes/player/player_renderer.gd" id="1_gfjak"]
 [ext_resource type="PackedScene" uid="uid://dwak5kx44s163" path="res://scenes/runtime_texture/RuntimeTexture.tscn" id="1_wr5hl"]
+[ext_resource type="Script" uid="uid://bcatuhjh26740" path="res://scripts/player_stats.gd" id="2_stats"]
+[ext_resource type="Script" uid="uid://nvftkgkx11in" path="res://scripts/damagable_component.gd" id="3_damage"]
+[ext_resource type="Resource" uid="uid://ceu3dt3yh0lop" path="res://scripts/parts/parts/TORSO/Tors.tres" id="5_v42im"]
+[ext_resource type="Resource" uid="uid://cdtuyou11qgur" path="res://scripts/parts/parts/HEAD/Head.tres" id="6_pn6s4"]
+[ext_resource type="Resource" uid="uid://d0r0iiyncgqvm" path="res://scripts/parts/parts/WEAPONS/Weapon3.tres" id="7_7oing"]
+[ext_resource type="Resource" uid="uid://b7gfhkcgvyxsf" path="res://scripts/parts/parts/BLOCK/Def1.tres" id="8_5stf6"]
 
-[node name="Player" type="Node2D" unique_id=1535422581]
+[node name="Player" type="Node2D" unique_id=1535422581 node_paths=PackedStringArray("head_damage_component", "torso_damage_component", "attack_damage_component", "defense_damage_component")]
+script = ExtResource("2_stats")
+head_damage_component = NodePath("Head/HeadDamageComponent")
+torso_damage_component = NodePath("Torso/TorsoDamageComponent")
+attack_damage_component = NodePath("Attack/AttackDamageComponent")
+defense_damage_component = NodePath("Def/DefDamageComponent")
 
 [node name="Torso" parent="." unique_id=1844036065 instance=ExtResource("1_wr5hl")]
 
+[node name="TorsoDamageComponent" type="Node" parent="Torso" unique_id=857483314 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
+
 [node name="Head" parent="." unique_id=1734064390 instance=ExtResource("1_wr5hl")]
-position = Vector2(0, -17)
+position = Vector2(0, -13)
+
+[node name="HeadDamageComponent" type="Node" parent="Head" unique_id=417024503 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
 
 [node name="Attack" parent="." unique_id=642698415 instance=ExtResource("1_wr5hl")]
 position = Vector2(27, 0)
 
+[node name="AttackDamageComponent" type="Node" parent="Attack" unique_id=1045692071 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
+
 [node name="Def" parent="." unique_id=1321508306 instance=ExtResource("1_wr5hl")]
 position = Vector2(-25, 0)
+
+[node name="DefDamageComponent" type="Node" parent="Def" unique_id=1696931459 node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_damage")
+visuals = NodePath("..")
 
 [node name="PlayerRenderer" type="Node2D" parent="." unique_id=864508728 node_paths=PackedStringArray("torso", "head", "atk", "def")]
 script = ExtResource("1_gfjak")
@@ -22,4 +49,8 @@ torso = NodePath("../Torso")
 head = NodePath("../Head")
 atk = NodePath("../Attack")
 def = NodePath("../Def")
+example_t = ExtResource("5_v42im")
+example_h = ExtResource("6_pn6s4")
+example_a = ExtResource("7_7oing")
+example_d = ExtResource("8_5stf6")
 metadata/_custom_type_script = "uid://cou6xdw5adavm"
