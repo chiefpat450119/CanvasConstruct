@@ -6,6 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="4_63o16"]
 [ext_resource type="Script" uid="uid://wruokad4nqnb" path="res://scripts/grid_lines.gd" id="4_t2x1o"]
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="6_mvmjb"]
+[ext_resource type="Script" uid="uid://clq5r8xjv2n7m" path="res://scenes/drawing_phase/drawing_ui_anim.gd" id="7_drawing_anim"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ek0"]
 bg_color = Color(0, 0, 0, 1)
@@ -26,7 +27,7 @@ load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54
 font = ExtResource("6_mvmjb")
 font_size = 32
 
-[node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button")]
+[node name="Drawing UI" type="Control" unique_id=315890107 node_paths=PackedStringArray("drawing_grid", "reference_art", "reference_art_grid_lines", "timer_label", "finish_button", "ui_anim")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +40,7 @@ reference_art = NodePath("Reference Image")
 reference_art_grid_lines = NodePath("Reference Image/Grid Lines")
 timer_label = NodePath("Timer")
 finish_button = NodePath("Finish Button")
+ui_anim = NodePath("DrawingUIAnim")
 
 [node name="Drawing Grid" type="GridContainer" parent="." unique_id=251566916 node_paths=PackedStringArray("grid")]
 layout_mode = 0
@@ -131,3 +133,12 @@ offset_bottom = 19.0
 grow_vertical = 2
 text = "Drawing Phase"
 label_settings = SubResource("LabelSettings_t2x1o")
+
+[node name="DrawingUIAnim" type="Node" parent="." node_paths=PackedStringArray("phase_banner", "timer", "drawing_grid", "reference_art", "finish_button")]
+script = ExtResource("7_drawing_anim")
+play_on_ready = false
+phase_banner = NodePath("../ColorRect")
+timer = NodePath("../Timer")
+drawing_grid = NodePath("../Drawing Grid")
+reference_art = NodePath("../Reference Image")
+finish_button = NodePath("../Finish Button")

@@ -13,6 +13,7 @@ const CONTENT_VERTICAL_OFFSET: float = 80.0
 @export var reference_art_grid_lines : GridLines
 @export var timer_label: Label
 @export var finish_button: Button
+@export var ui_anim: DrawingUIAnim
 
 var _drawing_timer: Timer
 var _reference_image_size: Vector2
@@ -28,6 +29,10 @@ func setup_drawing(
 	drawing_timer: Timer = null,
 	initial_drawing: Image = null
 ) -> void:
+	# Restore the previous animation's cached layout before calculating a new one.
+	if ui_anim != null:
+		ui_anim.skip_to_end()
+
 	# Setup reference image
 	var reference_width := reference_image.get_width()
 	var reference_height := reference_image.get_height()
@@ -44,6 +49,10 @@ func setup_drawing(
 	_drawing_timer = drawing_timer
 	if _drawing_timer != null:
 		_update_timer_label()
+
+	# The grid and reference positions only exist after setup, so cache them now.
+	if ui_anim != null:
+		ui_anim.restart()
 
 
 func stop_drawing() -> Image:
