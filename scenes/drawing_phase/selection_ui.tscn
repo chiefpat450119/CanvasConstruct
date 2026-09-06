@@ -19,6 +19,10 @@
 [ext_resource type="FontFile" uid="uid://btnk367de58y2" path="res://assets/UI/fonts/K2D-Regular.ttf" id="16_dckcs"]
 [ext_resource type="Script" uid="uid://dj2a6looo4068" path="res://scenes/drawing_phase/selection_ui_anim.gd" id="17_selection_anim"]
 [ext_resource type="Script" uid="uid://cadwc52d0c3ei" path="res://scenes/drawing_phase/part_ui.gd" id="18_part_ui"]
+[ext_resource type="Texture2D" uid="uid://de03mfq7o405b" path="res://assets/UI/build_phase/TOTAL_COMPLETION_UI_FRONT.png" id="20_cmnqg"]
+[ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="21_8t5x5"]
+[ext_resource type="PackedScene" uid="uid://tqct11ym7dh2" path="res://scenes/ui_background/ui_background.tscn" id="22_gj7ov"]
+[ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="23_d64h6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_884ma"]
 bg_color = Color(1, 1, 1, 1)
@@ -91,6 +95,17 @@ load_path = "res://.godot/imported/FIGHT_ICON.png-43b71276b3ebbbf2233d52fc1ecfc2
 font = ExtResource("16_dckcs")
 font_size = 32
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8t5x5"]
+bg_color = Color(0.5921569, 0.88235295, 0.62352943, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_khfc7"]
+shader = ExtResource("23_d64h6")
+shader_parameter/color = Vector4(1, 0, 0, 1)
+
 [node name="Selection UI" type="Control" unique_id=984169342 node_paths=PackedStringArray("head_ui", "torso_ui", "defense_ui", "weapon_ui", "fight_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -113,9 +128,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -108.00003
-offset_top = 81.00001
+offset_top = 120.599976
 offset_right = 106.00012
-offset_bottom = 295.00015
+offset_bottom = 334.60013
 grow_horizontal = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -264,10 +279,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 204.0
-offset_top = -103.000015
+offset_left = 204.00002
+offset_top = -63.400055
 offset_right = 413.99988
-offset_bottom = 107.0
+offset_bottom = 146.59998
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -419,9 +434,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -399.0
-offset_top = -177.0
+offset_top = -137.40002
 offset_right = -194.99976
-offset_bottom = 193.00024
+offset_bottom = 232.60022
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
@@ -577,9 +592,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -170.0
-offset_top = -349.0
+offset_top = -309.40002
 offset_right = 168.00085
-offset_bottom = -85.00012
+offset_bottom = -45.400146
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.8, 0.8)
@@ -842,3 +857,73 @@ defense = NodePath("../Defense")
 weapon = NodePath("../Weapon")
 torso = NodePath("../Torso")
 fight_button = NodePath("../Fight Button")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=397398642]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 102.0
+offset_right = 393.84268
+offset_bottom = 224.0
+texture = ExtResource("20_cmnqg")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="TextureRect" unique_id=971651153]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.92134
+offset_top = -31.0
+offset_right = 156.07866
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("21_8t5x5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8t5x5")
+value = 50.0
+show_percentage = false
+
+[node name="UiBackground" parent="TextureRect/ProgressBar" unique_id=1544384068 instance=ExtResource("22_gj7ov")]
+material = SubResource("ShaderMaterial_khfc7")
+layout_mode = 1
+offset_right = -291.6685
+offset_bottom = -38.021736
+scale = Vector2(7.36, 7.36)
+
+[node name="Label" type="Label" parent="TextureRect/ProgressBar" unique_id=1077859034]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -16.5
+offset_right = 38.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "100%"
+label_settings = ExtResource("6_r2dvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=570425385]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.92134
+offset_top = -32.0
+offset_right = 46.07866
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "<50% = LOSE"
+label_settings = ExtResource("5_1g0n4")
+
+[editable path="TextureRect/ProgressBar/UiBackground"]
