@@ -27,8 +27,8 @@ signal part_drawing_completed(
 )
 signal phase_completed
 
-const DEFAULT_DRAWING_SYSTEM_SCENE := preload(
-	"res://scenes/drawing_sysem/drawing_system.tscn"
+const DEFAULT_DRAWING_GRID_SCENE := preload(
+	"res://scenes/drawing_grid/drawing_grid.tscn"
 )
 const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.HEAD,
@@ -37,8 +37,8 @@ const PART_CATEGORIES: Array[PartCategory] = [
 	PartCategory.TORSO,
 ]
 
-@export var drawing_system_scene: PackedScene = DEFAULT_DRAWING_SYSTEM_SCENE
-@export var drawing_system_parent: Node
+@export var drawing_grid_scene: PackedScene = DEFAULT_DRAWING_GRID_SCENE
+@export var drawing_grid_parent: Node
 
 @export_group("Drawing Times")
 @export_range(0.1, 120.0, 0.1, "or_greater", "suffix:s")
@@ -55,7 +55,7 @@ var _available_upgrades: Dictionary[PartCategory, PartResource] = {}
 var _completed_categories: Dictionary[PartCategory, bool] = {}
 var _active_reference_part: PartResource
 var _active_action: DrawingAction
-var _active_drawing_system: DrawingSystem
+var _active_drawing_grid: DrawingGrid
 var _drawing_timer: Timer
 var _phase_active: bool = false
 
@@ -70,7 +70,7 @@ func begin_phase(
 ) -> Error:
 	if _phase_active:
 		return ERR_ALREADY_IN_USE
-	if drawing_system_scene == null:
+	if drawing_grid_scene == null:
 		return ERR_UNCONFIGURED
 
 	var current_parts_by_category: Dictionary[PartCategory, PartResource] = {}
@@ -172,15 +172,15 @@ func is_phase_active() -> bool:
 
 
 func is_drawing_part() -> bool:
-	return _active_drawing_system != null
+	return _active_drawing_grid != null
 
 
 func can_leave_current_drawing() -> bool:
 	return not is_drawing_part()
 
 
-func get_active_drawing_system() -> DrawingSystem:
-	return _active_drawing_system
+func get_active_drawing_grid() -> DrawingGrid:
+	return _active_drawing_grid
 
 
 func get_active_reference_part() -> PartResource:
@@ -203,19 +203,29 @@ func _start_part_drawing(
 	reference_part: PartResource,
 	action: DrawingAction
 ) -> Error:
-	var instance := drawing_system_scene.instantiate()
-	if not instance is DrawingSystem:
+	var reference_image := reference_part.reference_image
+	if reference_image == null:
+		return ERR_INVALID_DATA
+
+	var reference_width := reference_image.get_width()
+	var reference_height := reference_image.get_height()
+	if reference_width <= 0 or reference_height <= 0:
+		return ERR_INVALID_DATA
+
+	var instance := drawing_grid_scene.instantiate()
+	if not instance is DrawingGrid:
 		instance.free()
 		return ERR_CANT_CREATE
 
 	var category := _get_part_category(reference_part)
-	var drawing_system := instance as DrawingSystem
-	var parent: Node = drawing_system_parent if drawing_system_parent != null else self
-	parent.add_child(drawing_system)
+	var drawing_grid := instance as DrawingGrid
+	var parent: Node = drawing_grid_parent if drawing_grid_parent != null else self
+	parent.add_child(drawing_grid)
+	drawing_grid.init(reference_width, reference_height)
 
 	_active_reference_part = reference_part
 	_active_action = action
-	_active_drawing_system = drawing_system
+	_active_drawing_grid = drawing_grid
 	_ensure_timer()
 
 	var duration := _get_drawing_duration(category)
@@ -226,10 +236,10 @@ func _start_part_drawing(
 
 
 func _complete_part_drawing() -> void:
-	if _active_drawing_system == null:
+	if _active_drawing_grid == null:
 		return
 
-	var drawing := _active_drawing_system.get_image_from_drawing()
+	var drawing := _active_drawing_grid.get_image_from_drawing()
 	var reference_part := _active_reference_part
 	var action := _active_action
 	var category := _get_part_category(reference_part)
@@ -240,8 +250,8 @@ func _complete_part_drawing() -> void:
 		_phase_active = false
 		GameStateManagerInstance.mark_drawing_phase_completed()
 
-	_active_drawing_system.queue_free()
-	_active_drawing_system = null
+	_active_drawing_grid.queue_free()
+	_active_drawing_grid = null
 	_active_reference_part = null
 	reference_image_changed.emit(null)
 	part_drawing_completed.emit(drawing, reference_part, action)
