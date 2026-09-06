@@ -4,7 +4,10 @@
 [ext_resource type="Script" uid="uid://c5maqrvbkkyss" path="res://scripts/drawing_grid.gd" id="2_ada7u"]
 [ext_resource type="Texture2D" uid="uid://b13mghunbhi6s" path="res://assets/grid cell sprite.png" id="3_dml50"]
 
-[node name="DrawingSystem" type="Control" unique_id=949485309 node_paths=PackedStringArray("drawing_grid")]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h8u3h"]
+load_path = "res://.godot/imported/LOP WEAPON1.png-aba96953268214acce58bec23ff54aae.ctex"
+
+[node name="DrawingSystem" type="Control" unique_id=949485309 node_paths=PackedStringArray("drawing_grid", "reference_art")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,20 +15,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h8u3h")
-drawing_grid = NodePath("Drawing Grid")
+drawing_grid = NodePath("HBoxContainer/Drawing Grid")
+reference_art = NodePath("HBoxContainer/Reference Art")
 
-[node name="Drawing Grid" type="Control" parent="." unique_id=1604081658 node_paths=PackedStringArray("grid")]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1087227888]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 500
+alignment = 1
+
+[node name="Drawing Grid" type="Control" parent="HBoxContainer" unique_id=1604081658 node_paths=PackedStringArray("grid")]
+layout_mode = 2
 script = ExtResource("2_ada7u")
 grid = NodePath("GridContainer")
 cell_texture = ExtResource("3_dml50")
 
-[node name="GridContainer" type="GridContainer" parent="Drawing Grid" unique_id=729141764]
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Drawing Grid" unique_id=729141764]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -40,3 +49,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 1
+
+[node name="Reference Art" type="TextureRect" parent="HBoxContainer" unique_id=57844219]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_h8u3h")
+expand_mode = 3

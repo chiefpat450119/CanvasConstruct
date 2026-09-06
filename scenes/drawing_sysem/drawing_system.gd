@@ -2,6 +2,10 @@ class_name DrawingSystem
 extends Control
 
 @export var drawing_grid : DrawingGrid
+@export var reference_art : TextureRect
+
+func _ready() -> void:
+	init_drawing_UI()
 
 ## Returns image created from player drawing
 func get_image_from_drawing() -> Image:
@@ -16,3 +20,7 @@ func get_image_from_drawing() -> Image:
 			img.set_pixel(x, y, cell_colour)
 	
 	return img
+
+## Formats UI so that the drawing grid matches reference art
+func init_drawing_UI():
+	drawing_grid.init(reference_art.texture.get_width(), reference_art.texture.get_height())
