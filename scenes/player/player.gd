@@ -12,7 +12,6 @@ signal died
 
 @export_group("SFX")
 @export var attack_sfx: AudioStream
-@export var damage_sfx: AudioStream
 @export var death_sfx: AudioStream
 @export var defend_sfx: AudioStream
 
@@ -84,7 +83,6 @@ func take_damage(amount: int) -> void:
 		damage = maxi(0, damage - roundi(player_stats.get_shield_defense()))
 
 	player_stats.take_damage(damage)
-	AudioManager.play_SFX(damage_sfx, -10)
 	health_changed.emit(player_stats.curr_num_pixeles, player_stats.max_num_pixeles)
 	_check_for_death()
 

@@ -5,6 +5,9 @@ var curr_num_pixeles: int = 0
 var max_num_pixeles: int = 0
 @export var death_threshold: float = 0.25
 
+@export var damage_sfx: AudioStream
+@export var dodge_sfx: AudioStream
+
 var weapon_part: AtkResource
 var _weapon_damage_multiplier: float = 0
 
@@ -84,8 +87,10 @@ func take_damage(pixel_count: int) -> int:
 
 	if randf() < get_torso_chance():
 		print("Player dodged the attack.")
+		AudioManager.play_SFX(dodge_sfx, -10)
 		return 0
 
+	AudioManager.play_SFX(damage_sfx, -10)
 	var available_parts: Array[DamagableComponent] = []
 	var body_parts: Array[DamagableComponent] = [head_damage_component, defense_damage_component, torso_damage_component, attack_damage_component]
 	for body_part: DamagableComponent in body_parts:

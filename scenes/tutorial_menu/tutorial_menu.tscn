@@ -1,17 +1,15 @@
 [gd_scene format=3 uid="uid://r20n6wg14sic"]
 
 [ext_resource type="Script" uid="uid://bfn4augafm12y" path="res://scenes/tutorial_menu/tutorial_menu.gd" id="1_ap5e0"]
-[ext_resource type="PackedScene" uid="uid://d3ko0q7uix0mk" path="res://scenes/test/scrolling_background.tscn" id="2_5inq8"]
-[ext_resource type="Texture2D" uid="uid://6h6yywvgp4ri" path="res://assets/UI/tutorial/arrow_basic_w.png" id="3_n4w0o"]
-[ext_resource type="Texture2D" uid="uid://db602ff2gee7q" path="res://assets/UI/tutorial/arrow_basic_w_disabled.png" id="4_3moh3"]
-[ext_resource type="Texture2D" uid="uid://dcs6wf8noxr15" path="res://assets/UI/tutorial/arrow_basic_e.png" id="4_ovn0x"]
-[ext_resource type="Texture2D" uid="uid://b3svw6pf0w1ya" path="res://assets/UI/tutorial/arrow_basic_w_hover.png" id="4_vfp5b"]
-[ext_resource type="Texture2D" uid="uid://dfv23jalh4bgc" path="res://assets/UI/tutorial/arrow_basic_e_disabled.png" id="5_341dy"]
-[ext_resource type="Texture2D" uid="uid://0vngl7nsgv7i" path="res://assets/UI/tutorial/arrow_basic_e_hover.png" id="7_1iah2"]
-[ext_resource type="Texture2D" uid="uid://h4c6qerhl1g5" path="res://assets/UI/tutorial/check_square_grey_cross.png" id="7_hdjf8"]
-[ext_resource type="Texture2D" uid="uid://bfidajo41aidm" path="res://assets/UI/tutorial/check_square_grey_cross_hover.png" id="8_g56xt"]
+[ext_resource type="Texture2D" uid="uid://b1nbvkebfrd67" path="res://assets/UI/tutorial/LEFT_BUT_TUTORIAL.png" id="3_3moh3"]
+[ext_resource type="Texture2D" uid="uid://d3u6rcn1fnnk3" path="res://assets/UI/tutorial/BACK_TUTORIAL.png" id="3_hdjf8"]
+[ext_resource type="Texture2D" uid="uid://dugjijs7slxs1" path="res://assets/UI/tutorial/RIGHT_BUT_TUTORIAL.png" id="4_hdjf8"]
+[ext_resource type="Texture2D" uid="uid://rhbqresu4qvk" path="res://assets/UI/tutorial/CANCEL_BUT_TUTORIAL.png" id="5_341dy"]
 
-[node name="TutorialMenu" type="Control" unique_id=1185766356 node_paths=PackedStringArray("display", "prev_button", "next_button", "back_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr24d"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="TutorialMenu" type="Control" unique_id=1185766356 node_paths=PackedStringArray("display", "prev_button", "next_button", "back_button", "tutorial_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,16 +17,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ap5e0")
-tutorial_images = ["res://assets/tutorial_images/the_seals_three.jpg", "res://assets/tutorial_images/seal_guy.jpg", "res://assets/tutorial_images/da_baby.webp"]
+tutorial_images = ["res://assets/tutorial_images/build_phase.png", "res://assets/tutorial_images/draw_phase.png", "res://assets/tutorial_images/boost.png", "res://assets/tutorial_images/battle_real.png", "res://assets/tutorial_images/repair.png"]
+tutorial_text = ["Pick a Part!", "Draw it Well!", "Get a Boost!", "F = Attack, J = Block", "Repair and Repeat!"]
 display = NodePath("TutorialImage")
 prev_button = NodePath("PrevButton")
 next_button = NodePath("NextButton")
 back_button = NodePath("BackButton")
+tutorial_label = NodePath("Label")
 
-[node name="ScrollingBackground" parent="." unique_id=482453548 instance=ExtResource("2_5inq8")]
+[node name="Panel" type="Panel" parent="." unique_id=834827527]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sr24d")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1577748982]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hdjf8")
+expand_mode = 2
 
 [node name="TutorialImage" type="TextureRect" parent="." unique_id=1466770142]
+custom_maximum_size = Vector2(768, 432)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,28 +53,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -384.0
-offset_top = -216.0
+offset_top = -165.0
 offset_right = 384.0
-offset_bottom = 216.0
+offset_bottom = 267.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 1
-stretch_mode = 3
+
+[node name="Label" type="Label" parent="." unique_id=528475758]
+layout_mode = 0
+offset_left = 597.0
+offset_top = 74.0
+offset_right = 1047.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 46
 
 [node name="PrevButton" type="TextureButton" parent="." unique_id=1320241053]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -106.0
-offset_right = 40.0
-offset_bottom = -66.0
+offset_top = -121.0
+offset_right = 121.0
 grow_vertical = 0
-scale = Vector2(2.6399999, 2.6399999)
 disabled = true
-texture_normal = ExtResource("3_n4w0o")
-texture_hover = ExtResource("4_vfp5b")
-texture_disabled = ExtResource("4_3moh3")
+texture_normal = ExtResource("3_3moh3")
 stretch_mode = 3
 
 [node name="NextButton" type="TextureButton" parent="." unique_id=1019881580]
@@ -67,25 +86,18 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -108.0
-offset_top = -106.0
-offset_right = -68.0
-offset_bottom = -66.0
+offset_left = -121.0
+offset_top = -121.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(2.6399999, 2.6399999)
-texture_normal = ExtResource("4_ovn0x")
-texture_hover = ExtResource("7_1iah2")
-texture_disabled = ExtResource("5_341dy")
+texture_normal = ExtResource("4_hdjf8")
 stretch_mode = 3
 
 [node name="BackButton" type="TextureButton" parent="." unique_id=1445880644]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(2.6399999, 2.6399999)
-texture_normal = ExtResource("7_hdjf8")
-texture_hover = ExtResource("8_g56xt")
+texture_normal = ExtResource("5_341dy")
 stretch_mode = 3
 
 [connection signal="pressed" from="PrevButton" to="." method="_on_prev_pressed"]
