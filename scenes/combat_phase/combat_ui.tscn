@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://tbnc0acwnsjh" path="res://assets/UI/battle_phase/backdrop.png" id="2_vfj6x"]
 [ext_resource type="FontFile" uid="uid://b3io2x6qhsia" path="res://assets/UI/fonts/Jua-Regular.ttf" id="4_o6co2"]
 [ext_resource type="LabelSettings" uid="uid://d1461unx76yrt" path="res://assets/UI/fonts/mid_info.tres" id="6_vxmlv"]
-[ext_resource type="Shader" uid="uid://gmvbgr803l4y" path="res://scenes/ui_background/ui_background.gdshader" id="7_anrlg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7ptn"]
 bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
@@ -81,9 +80,12 @@ expand_margin_top = 5.0
 expand_margin_right = 60.0
 expand_margin_bottom = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfj6x"]
-shader = ExtResource("7_anrlg")
-shader_parameter/color = Vector4(1, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vivr"]
+bg_color = Color(0.9300945, 0, 0.24035498, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6co2"]
 bg_color = Color(0.8910867, 0.28966767, 0.3440138, 1)
@@ -152,7 +154,7 @@ icon = ExtResource("1_e4x4p")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="Cooldown Overlay" type="TextureProgressBar" parent="Control/Buttons/Attack Button"]
+[node name="Cooldown Overlay" type="TextureProgressBar" parent="Control/Buttons/Attack Button" unique_id=253937931]
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
@@ -166,7 +168,6 @@ fill_mode = 4
 radial_initial_angle = 270.0
 texture_progress = ExtResource("1_e4x4p")
 tint_progress = Color(0.035, 0.035, 0.05, 0.8)
-value = 0.0
 
 [node name="Defend Button" type="Button" parent="Control/Buttons" unique_id=1849619388]
 layout_mode = 2
@@ -182,7 +183,7 @@ icon = ExtResource("2_lmxbf")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="Cooldown Overlay" type="TextureProgressBar" parent="Control/Buttons/Defend Button"]
+[node name="Cooldown Overlay" type="TextureProgressBar" parent="Control/Buttons/Defend Button" unique_id=325566790]
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
@@ -196,7 +197,6 @@ fill_mode = 4
 radial_initial_angle = 270.0
 texture_progress = ExtResource("2_lmxbf")
 tint_progress = Color(0.035, 0.035, 0.05, 0.8)
-value = 0.0
 
 [node name="Health Bars" type="HBoxContainer" parent="Control" unique_id=1284611411]
 layout_mode = 1
@@ -240,12 +240,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_uwk22")
 text = "YOU"
 label_settings = ExtResource("6_vxmlv")
 
-[node name="UiBackground" parent="Control/Health Bars/Player Health Bar" unique_id=1084556991 instance=ExtResource("2_5e1av")]
-material = SubResource("ShaderMaterial_vfj6x")
-layout_mode = 1
-offset_right = -399.00543
-offset_bottom = -35.429348
-scale = Vector2(7.36, 7.36)
+[node name="TextureRect" type="Panel" parent="Control/Health Bars/Player Health Bar" unique_id=1331831843]
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 41.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1vivr")
 
 [node name="Boss Health Bar" type="ProgressBar" parent="Control/Health Bars" unique_id=766660065]
 layout_mode = 2
@@ -276,5 +275,3 @@ grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_uwk22")
 text = "BIG BAD BOSS"
 label_settings = ExtResource("6_vxmlv")
-
-[editable path="Control/Health Bars/Player Health Bar/UiBackground"]
